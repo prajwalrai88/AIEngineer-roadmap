@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 9 — Authentication + Monitoring</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+.code{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.success{color:#34d399;}
+.note{color:#fbbf24;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Step 9 — Authentication + Monitoring</h1>
+
+<!-- OVERVIEW -->
+<div class="box">
+<h2>🧠 What you will do</h2>
+
+<ul>
+<li>Create Cognito authentication</li>
+<li>Login and get JWT token</li>
+<li>Secure your API</li>
+</ul>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Create Cognito User Pool</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>AWS Console → Search "Cognito"</li>
+<li>Click "User Pools"</li>
+<li>Click "Create user pool"</li>
+</ul>
+
+<ul>
+<li>Sign-in option → Email</li>
+<li>Click Next → Next → Create</li>
+</ul>
+
+<p class="success">✔ User pool created</p>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Create App Client</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>Open your User Pool</li>
+<li>Go to "App integration"</li>
+<li>Click "Create app client"</li>
+</ul>
+
+<ul>
+<li>App type → Public client</li>
+<li>Enable Authorization Code Grant</li>
+<li>Callback URL:
+<div class="code">https://example.com</div>
+</li>
+</ul>
+
+<p class="success">✔ App client created</p>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Get Required Details</h2>
+
+<p><b>Copy from Cognito:</b></p>
+
+<div class="code">
+User Pool ID → ap-south-1_xxxxx
+Client ID → xxxxxxxxx
+Region → ap-south-1
+</div>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Enable Hosted UI</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>User Pool → App integration</li>
+<li>Scroll to Hosted UI</li>
+</ul>
+
+<ul>
+<li>Create domain prefix:
+<div class="code">my-ai-ecosphere</div>
+</li>
+</ul>
+
+<p class="success">✔ Hosted UI enabled</p>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="box">
+<h2>🪜 Step 5 — Create User</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>User Pool → Users</li>
+<li>Click "Create user"</li>
+</ul>
+
+<ul>
+<li>Email → your email</li>
+<li>Password → set manually</li>
+</ul>
+
+</div>
+
+<!-- STEP 6 -->
+<div class="box">
+<h2>🪜 Step 6 — Login and Get Token</h2>
+
+<p><b>Construct login URL:</b></p>
+
+<div class="code">
+https://YOUR_DOMAIN.auth.ap-south-1.amazoncognito.com/login?
+client_id=YOUR_CLIENT_ID&
+response_type=token&
+scope=email+openid&
+redirect_uri=https://example.com
+</div>
+
+<p><b>Example:</b></p>
+
+<div class="code">
+https://my-ai-ecosphere.auth.ap-south-1.amazoncognito.com/login?client_id=abc123&response_type=token&scope=email+openid&redirect_uri=https://example.com
+</div>
+
+<p><b>Steps:</b></p>
+<ul>
+<li>Open URL in browser</li>
+<li>Login with your user</li>
+<li>After login, browser redirects</li>
+</ul>
+
+<p><b>IMPORTANT:</b></p>
+
+<p>Look at browser URL and find:</p>
+
+<div class="code">
+#id_token=eyJraWQiOi...
+</div>
+
+<p>Copy everything after <b>id_token=</b></p>
+
+<p class="success">✔ This is your JWT token</p>
+
+</div>
+
+<!-- TOKEN EXPIRY -->
+<div class="box">
+<h2>🧠 Token Expiry</h2>
+
+<p>
+JWT tokens expire after some time (usually ~1 hour).
+</p>
+
+<p>
+If your API starts returning 401 Unauthorized again:
+</p>
+
+<ul>
+<li>Repeat login step</li>
+<li>Copy new token</li>
+</ul>
+
+<p class="success">✔ This is expected behavior</p>
+
+</div>
+
+<!-- STEP 7 -->
+<div class="box">
+<h2>🪜 Step 7 — Configure API Gateway Auth</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>AWS Console → API Gateway</li>
+<li>Select your API</li>
+<li>Click "Authorization"</li>
+</ul>
+
+<p><b>Create authorizer:</b></p>
+
+<div class="code">
+Type → JWT
+Issuer → https://cognito-idp.ap-south-1.amazonaws.com/YOUR_POOL_ID
+Audience → YOUR_CLIENT_ID
+</div>
+
+<p><b>Attach:</b></p>
+<ul>
+<li>Go to Routes → ANY /{proxy+}</li>
+<li>Select this authorizer</li>
+</ul>
+
+</div>
+
+<!-- STEP 8 -->
+<div class="box">
+<h2>🪜 Step 8 — Test Without Token</h2>
+
+<div class="code">
+curl YOUR-INVOKE-URL/query?q=test
+</div>
+
+<p><b>Expected:</b></p>
+<div class="code">401 Unauthorized</div>
+
+</div>
+
+<!-- STEP 9 -->
+<div class="box">
+<h2>🪜 Step 9 — Test With Token</h2>
+
+<div class="code">
+curl -H "Authorization: Bearer YOUR_ID_TOKEN" YOUR-INVOKE-URL/query?q=test
+</div>
+
+<p><b>Expected:</b></p>
+<div class="code">Valid response</div>
+
+<p class="success">✔ Authentication working</p>
+
+</div>
+
+<!-- LOGGING -->
+<div class="box">
+<h2>🪜 Step 10 — Enable Logging</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>API Gateway → Stages → $default</li>
+</ul>
+
+<ul>
+<li>Enable Access Logging</li>
+<li>Enable Execution Logging</li>
+</ul>
+
+</div>
+
+<!-- VIEW LOGS -->
+<div class="box">
+<h2>🪜 Step 11 — View Logs</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>AWS Console → CloudWatch → Logs</li>
+</ul>
+
+<div class="code">
+API-Gateway-Execution-Logs
+</div>
+
+<p class="success">✔ Logs visible</p>
+
+</div>
+
+</div>
+</body>
+</html>

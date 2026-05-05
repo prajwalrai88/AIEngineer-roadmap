@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AWS AI Ecosphere — Production Grade</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Inter, Arial;
+  background:linear-gradient(135deg,#020617,#0f172a);
+  color:#e2e8f0;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:40px;
+}
+
+h1{
+  font-size:40px;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.card{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(10px);
+  padding:25px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,0.08);
+  margin-top:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.flow{
+  background:#020617;
+  padding:20px;
+  border-radius:12px;
+  margin-top:15px;
+  text-align:center;
+  font-weight:bold;
+}
+
+.highlight{
+  color:#38bdf8;
+}
+
+.badge{
+  background:#1e293b;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  margin-right:8px;
+}
+
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:14px 20px;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  color:black;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>AWS AI Ecosphere — Production Grade</h1>
+
+<div class="card">
+<h2>🚀 What is this?</h2>
+<p>
+This is an <span class="highlight">enterprise-grade evolution</span> of your AI system.
+We move from a single-server setup to a <b>scalable, secure, distributed architecture</b>.
+</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h2>🧠 Previous (Core System)</h2>
+
+<div class="flow">
+S3 → API Gateway → EC2 → RAG
+</div>
+
+<ul>
+<li>Single server</li>
+<li>Manual scaling</li>
+<li>Public access</li>
+<li>Basic reliability</li>
+</ul>
+
+<span class="badge">Good for learning</span>
+
+</div>
+
+<div class="card">
+<h2>⚡ Production System</h2>
+
+<div class="flow">
+CloudFront → API Gateway → ALB → EKS → RAG → FAISS
+</div>
+
+<ul>
+<li>Distributed system</li>
+<li>Auto scaling (Kubernetes)</li>
+<li>Private networking</li>
+<li>High availability</li>
+<li>Enterprise security</li>
+</ul>
+
+<span class="badge">Production ready</span>
+
+</div>
+
+</div>
+
+<div class="card">
+<h2>🔥 Key Upgrades</h2>
+
+<ul>
+<li>✔ Kubernetes (EKS) replaces single EC2</li>
+<li>✔ ALB handles intelligent traffic routing</li>
+<li>✔ Horizontal scaling with pods</li>
+<li>✔ CloudFront for global performance</li>
+<li>✔ IAM + Secrets for security</li>
+<li>✔ Observability (CloudWatch)</li>
+</ul>
+
+</div>
+
+<div class="card">
+<h2>🎯 What you will build</h2>
+<p>
+A system capable of handling <b>real users, traffic spikes, failures, and secure workloads</b>.
+</p>
+
+<a href="aws-prod-dashboard.html" class="btn">
+Start Production Journey →
+</a>
+</div>
+
+</div>
+
+</body>
+</html>

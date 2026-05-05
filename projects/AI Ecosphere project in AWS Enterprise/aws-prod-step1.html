@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 1 — VPC Setup</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.nav{padding:15px 30px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+.code{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+.note{color:#fbbf24;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+<div style="color:#38bdf8;font-weight:bold;">AWS AI Ecosphere</div>
+<button onclick="window.location.href='index.html'" 
+style="background:#38bdf8;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;">
+🏠 Home
+</button>
+</div>
+
+<div class="container">
+
+<h1>Step 1 — VPC Setup (Network Foundation)</h1>
+
+<!-- OVERVIEW -->
+<div class="box">
+<h2>🧠 What problem are we solving?</h2>
+
+<pre>
+No VPC → No network → Nothing runs ❌
+With VPC → Controlled network → System works ✅
+</pre>
+
+<p>
+This step creates the network where your entire system (EKS, ALB, etc.) will run.
+</p>
+
+</div>
+
+<!-- CONCEPT -->
+<div class="box">
+<h2>🧠 Key Concepts</h2>
+
+<pre>
+VPC → Your private cloud network
+Subnet → Segment inside VPC
+Public Subnet → Has internet access
+Private Subnet → Internal only
+Internet Gateway → Connects VPC to internet
+Route Table → Controls traffic flow
+</pre>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Create VPC</h2>
+
+<p><b>Where:</b> AWS Console → Search "VPC"</p>
+
+<ul>
+<li>Click <b>Create VPC</b></li>
+<li>Select <b>VPC only</b></li>
+</ul>
+
+<p><b>Fill:</b></p>
+
+<div class="code">
+Name: ai-ecosphere-vpc
+IPv4 CIDR: 10.0.0.0/16
+</div>
+
+<p class="success">✔ VPC created</p>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Create Subnets</h2>
+
+<p><b>Where:</b> VPC → Subnets → Create subnet</p>
+
+<p>Create TWO subnets:</p>
+
+<div class="code">
+Public Subnet:
+Name: public-subnet
+CIDR: 10.0.1.0/24
+
+Private Subnet:
+Name: private-subnet
+CIDR: 10.0.2.0/24
+</div>
+
+<p class="note">
+Public = internet-facing (ALB)  
+Private = backend (EKS pods)
+</p>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Create Internet Gateway</h2>
+
+<p><b>Where:</b> VPC → Internet Gateways</p>
+
+<ul>
+<li>Click <b>Create Internet Gateway</b></li>
+<li>Name → ai-ecosphere-igw</li>
+<li>Attach to your VPC</li>
+</ul>
+
+<p class="success">✔ Internet access enabled</p>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Create Route Table</h2>
+
+<p><b>Where:</b> VPC → Route Tables</p>
+
+<ul>
+<li>Create route table</li>
+<li>Name → public-route-table</li>
+<li>Associate with <b>Public Subnet</b></li>
+</ul>
+
+<p><b>Add route:</b></p>
+
+<div class="code">
+Destination: 0.0.0.0/0
+Target: Internet Gateway
+</div>
+
+<p class="success">✔ Public subnet can access internet</p>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="box">
+<h2>🪜 Step 5 — Validate Setup</h2>
+
+<p><b>Check:</b></p>
+
+<ul>
+<li>VPC exists</li>
+<li>2 subnets created</li>
+<li>IGW attached</li>
+<li>Route table linked to public subnet</li>
+</ul>
+
+<p class="success">✔ Network ready</p>
+
+</div>
+
+<!-- STEP 6 -->
+<div class="box">
+<h2>🧠 What actually happened?</h2>
+
+<pre>
+You created:
+
+✔ Network boundary (VPC)
+✔ Public access layer (subnet + IGW)
+✔ Internal network (private subnet)
+✔ Traffic routing rules
+</pre>
+
+</div>
+
+<!-- TROUBLESHOOT -->
+<div class="box">
+<h2>🧠 If something is not working</h2>
+
+<ul>
+<li>No internet:
+<div class="code">Check IGW attached</div></li>
+
+<li>Subnet not public:
+<div class="code">Check route table association</div></li>
+
+<li>Wrong CIDR:
+Ensure no overlap</li>
+</ul>
+
+</div>
+
+<!-- PRODUCTION -->
+<div class="box">
+<h2>🧠 Production Insight</h2>
+
+<pre>
+Current:
+1 public + 1 private subnet (basic)
+
+Production:
+✔ Multiple AZ subnets
+✔ NAT Gateway for private subnet internet
+✔ Security groups + NACLs
+</pre>
+
+</div>
+
+<!-- NAV -->
+<div style="text-align:center;margin-top:40px;">
+<button onclick="window.location.href='index.html'" 
+style="padding:10px 16px;border:none;border-radius:8px;background:#38bdf8;cursor:pointer;">
+🏠 Back to Dashboard
+</button>
+</div>
+
+</div>
+</body>
+</html>

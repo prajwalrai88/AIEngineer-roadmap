@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 5 — Auto Scaling</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+pre{background:#111827;padding:12px;border-radius:10px;}
+.success{color:#34d399;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Step 5 — Auto Scaling (HPA)</h1>
+
+<!-- WHY -->
+<div class="box">
+<h2>🧠 Why this step?</h2>
+
+<pre>
+More traffic → More CPU → More Pods
+</pre>
+
+<p>
+Horizontal Pod Autoscaler (HPA) automatically scales your application based on load.
+</p>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Update deployment.yaml</h2>
+
+<h3>Where</h3>
+<ul>
+<li>Open file:
+<pre>aws-ai-ecosphere-prod/deployment.yaml</pre>
+</li>
+</ul>
+
+<h3>Add inside container section</h3>
+
+<pre>
+resources:
+  requests:
+    cpu: "100m"
+  limits:
+    cpu: "500m"
+</pre>
+
+<p>
+These values allow Kubernetes to measure CPU usage.
+</p>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Apply Changes</h2>
+
+<pre>
+kubectl apply -f deployment.yaml
+</pre>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Install Metrics Server</h2>
+
+<pre>
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+</pre>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Verify Metrics</h2>
+
+<pre>
+kubectl top nodes
+</pre>
+
+<h3>Expected</h3>
+<pre>
+CPU usage visible
+</pre>
+
+<p class="success">✔ Metrics working</p>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="box">
+<h2>🪜 Step 5 — Create HPA</h2>
+
+<pre>
+kubectl autoscale deployment rag-app --cpu-percent=50 --min=2 --max=5
+</pre>
+
+</div>
+
+<!-- STEP 6 -->
+<div class="box">
+<h2>🪜 Step 6 — Check HPA</h2>
+
+<pre>
+kubectl get hpa
+</pre>
+
+<h3>Expected</h3>
+<pre>
+rag-app   2/2   50%   2   5
+</pre>
+
+</div>
+
+<!-- STEP 7 -->
+<div class="box">
+<h2>🪜 Step 7 — Simulate Load</h2>
+
+<h3>Where</h3>
+<ul>
+<li>Terminal</li>
+</ul>
+
+<pre>
+kubectl run load-test --image=busybox --restart=Never -- \
+/bin/sh -c "while true; do wget -q -O- http://rag-service; done"
+</pre>
+
+</div>
+
+<!-- STEP 8 -->
+<div class="box">
+<h2>🪜 Step 8 — Observe Scaling</h2>
+
+<pre>
+kubectl get pods -w
+</pre>
+
+<h3>Expected</h3>
+<pre>
+Pods increase as load increases
+</pre>
+
+<p class="success">✔ Auto scaling working</p>
+
+</div>
+
+<!-- STEP 9 -->
+<div class="box">
+<h2>🪜 Step 9 — Stop Load Test</h2>
+
+<pre>
+kubectl delete pod load-test
+</pre>
+
+</div>
+
+<!-- SUMMARY -->
+<div class="box">
+<h2>🧠 What happened?</h2>
+
+<pre>
+Load ↑ → CPU ↑ → HPA → More Pods → Stable system
+</pre>
+
+</div>
+
+</div>
+</body>
+</html>

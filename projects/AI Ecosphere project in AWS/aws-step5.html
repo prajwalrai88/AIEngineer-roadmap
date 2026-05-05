@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 5 — S3 Frontend Hosting</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;overflow:auto;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;font-weight:600;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="position:sticky;top:0;background:#0a0a0f;padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;font-weight:bold;">AWS AI Ecosphere</div>
+
+<div>
+<a href="aws-index.html" style="margin-right:15px;color:#34d399;">🏠 Home</a>
+<a href="aws-dashboard.html" style="color:#60a5fa;">📊 Dashboard</a>
+</div>
+</div>
+
+<!-- STEP -->
+<div style="background:#12121a;padding:10px 20px;">
+Step 5 of 10 — S3 Frontend Hosting
+</div>
+
+<div class="container">
+
+<h1>Step 5 — Host Frontend on S3</h1>
+
+<div class="box">
+<h2>🎯 What are we doing?</h2>
+<p>
+We are deploying our frontend (HTML/CSS/JS) to AWS S3 and making it publicly accessible.
+</p>
+</div>
+
+<div class="box">
+<h2>🧠 Why this matters</h2>
+<p>
+S3 allows hosting static websites cheaply and at scale without servers.  
+It is commonly used in production with CloudFront. :contentReference[oaicite:0]{index=0}
+</p>
+</div>
+
+<!-- VIDEO -->
+<div class="box">
+<h2>🎥 Learn This Concept</h2>
+
+<a href="https://www.youtube.com/watch?v=pGoeW7lc_6M" target="_blank" class="video-btn">
+▶ AWS S3 Static Website Hosting (Your Selected Tutorial)
+</a>
+
+<ul>
+<li>Create S3 bucket</li>
+<li>Upload files</li>
+<li>Enable static hosting</li>
+<li>Set permissions</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Create S3 Bucket</h2>
+
+<ul>
+<li>Go to S3 service</li>
+<li>Click "Create bucket"</li>
+<li>Name: <b>ai-ecosphere-frontend</b></li>
+</ul>
+
+<p class="warning">
+⚠ Bucket name must be globally unique
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Disable Block Public Access</h2>
+
+<ul>
+<li>Uncheck "Block all public access"</li>
+<li>Acknowledge warning</li>
+</ul>
+
+<p class="warning">
+⚠ Required to make website public
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 3 — Upload Files</h2>
+
+<ul>
+<li>Upload your frontend files</li>
+<li>Ensure file includes:</li>
+</ul>
+
+<pre>
+index.html
+styles.css
+(optional JS files)
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 4 — Enable Static Hosting</h2>
+
+<ul>
+<li>Go to "Properties"</li>
+<li>Scroll to "Static website hosting"</li>
+<li>Enable it</li>
+<li>Set:</li>
+</ul>
+
+<pre>
+Index document: index.html
+Error document: index.html
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 5 — Bucket Policy (CRITICAL)</h2>
+
+<p>
+Without this, your site will show <b>Access Denied</b>.
+</p>
+
+<pre>
+{
+ "Version": "2012-10-17",
+ "Statement": [
+  {
+   "Effect": "Allow",
+   "Principal": "*",
+   "Action": "s3:GetObject",
+   "Resource": "arn:aws:s3:::ai-ecosphere-frontend/*"
+  }
+ ]
+}
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 6 — Access Website</h2>
+
+<ul>
+<li>Go to "Properties"</li>
+<li>Copy S3 website endpoint</li>
+</ul>
+
+<pre>
+http://your-bucket-name.s3-website-region.amazonaws.com
+</pre>
+
+<p class="success">
+✔ Your frontend is live
+</p>
+
+</div>
+
+<div class="box">
+<h2>⚙️ How this fits in system</h2>
+
+<pre>
+User → S3 (Frontend) → API Gateway → EC2 → AI → Response
+</pre>
+
+</div>
+
+<div class="box">
+<h2>❌ Common Errors</h2>
+
+<ul>
+<li>Access Denied → missing bucket policy</li>
+<li>Blank page → wrong index file</li>
+<li>CSS not loading → wrong paths</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+
+<ul>
+<li>✔ Files uploaded</li>
+<li>✔ Hosting enabled</li>
+<li>✔ Public access configured</li>
+<li>✔ Website opens in browser</li>
+</ul>
+
+<p class="success">
+✔ Frontend successfully deployed on AWS
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>

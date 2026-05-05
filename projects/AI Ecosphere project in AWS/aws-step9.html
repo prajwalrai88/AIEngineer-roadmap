@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 9 — Production Setup (Project Specific)</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;}
+.success{color:#34d399;} .warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;">AWS AI Ecosphere</div>
+<div>
+<a href="aws-index.html">🏠 Home</a>
+<a href="aws-dashboard.html">📊 Dashboard</a>
+</div>
+</div>
+
+<div class="container">
+
+<h1>Step 9 — Make YOUR AI System Production Ready</h1>
+
+<div class="box">
+<h2>🎥 Learn First</h2>
+<a href="https://www.youtube.com/watch?v=3hLmDS179YE" target="_blank" class="video-btn">
+▶ FastAPI Production Deployment (Gunicorn + Nginx)
+</a>
+</div>
+
+<div class="box">
+<h2>🎯 Goal</h2>
+<p>
+Run your existing <b>RAG API (/query endpoint)</b> as a stable, always-on production service.
+</p>
+</div>
+
+---
+
+<div class="box">
+<h2>🪜 Step 1 — Install Dependencies</h2>
+
+<pre>
+pip3 install gunicorn
+sudo apt install nginx -y
+</pre>
+
+<p class="success">✔ Required tools installed</p>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🪜 Step 2 — Run Your Existing App with Gunicorn</h2>
+
+<p>Your file: <b>app.py</b></p>
+
+<pre>
+gunicorn -w 2 -k uvicorn.workers.UvicornWorker app:app --bind 127.0.0.1:8000
+</pre>
+
+<h3>🧠 Explanation</h3>
+<ul>
+<li>Runs FastAPI app in production mode</li>
+<li>2 workers = handles multiple users</li>
+<li>Binds locally (Nginx will expose it)</li>
+</ul>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🪜 Step 3 — Configure Nginx</h2>
+
+<pre>
+sudo nano /etc/nginx/sites-available/default
+</pre>
+
+<pre>
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+</pre>
+
+<pre>
+sudo systemctl restart nginx
+</pre>
+
+<h3>🧠 What this does</h3>
+<ul>
+<li>Nginx receives traffic from API Gateway</li>
+<li>Forwards to Gunicorn</li>
+<li>Improves reliability</li>
+</ul>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🪜 Step 4 — Create systemd Service</h2>
+
+<pre>
+sudo nano /etc/systemd/system/ai-app.service
+</pre>
+
+<pre>
+[Unit]
+Description=AI RAG App
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+ExecStart=/usr/bin/gunicorn -w 2 -k uvicorn.workers.UvicornWorker app:app --bind 127.0.0.1:8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+</pre>
+
+<pre>
+sudo systemctl daemon-reexec
+sudo systemctl start ai-app
+sudo systemctl enable ai-app
+</pre>
+
+<p class="success">✔ App auto-starts on reboot</p>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🪜 Step 5 — Verify API</h2>
+
+<pre>
+http://EC2-IP/query?q=What is EC2?
+</pre>
+
+<p class="success">✔ Should return AI response</p>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🪜 Step 6 — Update API Gateway</h2>
+
+<p>Ensure integration URL points to:</p>
+
+<pre>
+http://EC2-IP/query
+</pre>
+
+<p class="success">✔ Frontend → API Gateway → Nginx → FastAPI working</p>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🪜 Step 7 — Optimize RAG for Production</h2>
+
+<ul>
+<li>Limit retrieval results (k=2 or 3)</li>
+<li>Keep context small</li>
+<li>Avoid large prompts</li>
+</ul>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🧠 Final Architecture</h2>
+
+<pre>
+User → S3 → API Gateway → Nginx → Gunicorn → FastAPI (/query) → FAISS → LLM
+</pre>
+
+</div>
+
+---
+
+<div class="box">
+<h2>❌ Common Issues</h2>
+
+<ul>
+<li>502 error → Gunicorn not running</li>
+<li>No response → wrong API Gateway URL</li>
+<li>Slow response → large context</li>
+</ul>
+
+</div>
+
+---
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+
+<ul>
+<li>✔ Gunicorn running</li>
+<li>✔ Nginx working</li>
+<li>✔ systemd enabled</li>
+<li>✔ API reachable via browser</li>
+<li>✔ Frontend integrated</li>
+</ul>
+
+<p class="success">
+✔ Your AI system is now production-ready
+</p>
+
+</div>
+
+</div>
+</body>
+</html>

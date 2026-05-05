@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 5 — FastAPI Backend</title>
+
+<style>
+body{
+background:#0a0a0f;
+color:#f5f5fa;
+font-family:Arial;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px;
+}
+
+.box{
+background:#12121a;
+padding:18px;
+border-radius:12px;
+margin-top:15px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+h1{color:#8b5cf6;}
+h2{color:#34d399;}
+
+pre{
+background:#111827;
+padding:12px;
+border-radius:10px;
+overflow:auto;
+}
+
+.success{color:#34d399;}
+
+.video-btn{
+display:inline-block;
+margin-top:10px;
+padding:12px 18px;
+background:#1f2937;
+color:#34d399;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div style="
+position:sticky;
+top:0;
+background:#0a0a0f;
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+justify-content:space-between;
+">
+
+<div style="color:#8b5cf6;font-weight:bold;">
+AI Ecosphere
+</div>
+
+<div>
+<a href="index.html" style="margin-right:15px;color:#34d399;text-decoration:none;">
+🏠 Home
+</a>
+
+<a href="dashboard.html" style="color:#60a5fa;text-decoration:none;">
+📊 Dashboard
+</a>
+</div>
+
+</div>
+
+<!-- STEP INDICATOR -->
+<div style="
+background:#12121a;
+padding:10px 20px;
+border-bottom:1px solid rgba(255,255,255,.08);
+">
+Step 5 of 10 — Backend API (FastAPI)
+</div>
+
+<div class="container">
+
+<h1>Step 5 — FastAPI Backend</h1>
+
+<div class="box">
+<h2>🎯 What are we doing?</h2>
+<p>
+We are building a backend API that will handle user requests and connect to our AI pipeline.
+</p>
+</div>
+
+<div class="box">
+<h2>🧠 Why is this needed?</h2>
+<p>
+The frontend cannot directly interact with AI logic or data pipelines.  
+We need a backend to process requests, run AI logic, and return responses.
+</p>
+</div>
+
+<!-- VERIFIED VIDEO -->
+<div class="box">
+<h2>🎥 Learn This Concept</h2>
+
+<a href="https://www.youtube.com/watch?v=02dzgC_Ba70&list=PLsyeobzWxl7qF4ASwCZZDXor_Y0YJ3Qfc" target="_blank" class="video-btn">
+▶ Watch: FastAPI Full Tutorial Playlist
+</a>
+
+<p><b>What you should learn:</b></p>
+<ul>
+<li>How APIs work</li>
+<li>Creating routes (GET, POST)</li>
+<li>Running a FastAPI server</li>
+<li>Understanding request → response flow</li>
+</ul>
+
+<p class="success">
+✔ You don’t need to watch everything — focus on basics + endpoints
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Install Dependencies</h2>
+
+<pre>
+pip install fastapi uvicorn
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Create Backend File</h2>
+
+<pre>
+backend/app.py
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 3 — Add Code</h2>
+
+<pre>
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.get("/")
+def home():
+    return {"message": "AI Ecosphere Backend Running"}
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🔍 Code Explanation</h2>
+
+<ul>
+<li><b>FastAPI()</b> → Creates API app</li>
+<li><b>@app.get()</b> → Defines endpoint</li>
+<li><b>/health</b> → Used for system checks</li>
+<li><b>Return JSON</b> → API response</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 4 — Run Server</h2>
+
+<pre>
+uvicorn app:app --reload
+</pre>
+
+</div>
+
+<div class="box">
+<h2>✅ Expected Output</h2>
+
+<p>Open browser:</p>
+
+<pre>
+http://127.0.0.1:8000/health
+</pre>
+
+<pre>
+{"status":"ok"}
+</pre>
+
+<p class="success">
+✔ Backend is working
+</p>
+
+</div>
+
+<div class="box">
+<h2>⚙️ How this fits in system</h2>
+
+<p>
+Frontend → Backend API → AI Processing → Response
+</p>
+
+</div>
+
+<div class="box">
+<h2>❌ Common Errors</h2>
+
+<ul>
+<li>Module not found → install dependencies</li>
+<li>Port already used → change port</li>
+<li>Server not starting → check file name</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Before Next Step</h2>
+
+<ul>
+<li>✔ Server running</li>
+<li>✔ API accessible</li>
+<li>✔ JSON response working</li>
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>

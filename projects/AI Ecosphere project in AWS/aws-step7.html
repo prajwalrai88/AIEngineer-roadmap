@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 7 — Embeddings & Vector DB</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;">AWS AI Ecosphere</div>
+<div>
+<a href="aws-index.html">🏠 Home</a>
+<a href="aws-dashboard.html">📊 Dashboard</a>
+</div>
+</div>
+
+<div class="container">
+
+<h1>Step 7 — Embeddings & Vector Database</h1>
+
+<div class="box">
+<h2>🎥 Learn First</h2>
+<a href="https://www.youtube.com/watch?v=nkbtOplq9jM" target="_blank" class="video-btn">
+▶ Embeddings + FAISS
+</a>
+</div>
+
+<div class="box">
+<h2>🎯 Goal</h2>
+<p>
+Convert your data into embeddings and store them in a vector database (FAISS) 
+so that we can perform semantic search in the next step.
+</p>
+</div>
+
+<div class="box">
+<h2>🪜 Code</h2>
+
+<p><b>1. Create data file</b></p>
+<pre>
+nano data.txt
+</pre>
+
+<p>Add sample content:</p>
+<pre>
+AWS is a cloud platform
+EC2 is a compute service
+S3 is a storage service
+</pre>
+
+---
+
+<p><b>2. Create embedding script</b></p>
+<pre>
+nano embed.py
+</pre>
+
+<pre>
+import numpy as np
+import faiss
+import pickle
+from openai import OpenAI
+
+client = OpenAI()
+
+# Load data
+with open("data.txt") as f:
+    docs = [line.strip() for line in f.readlines()]
+
+# Chunking function
+def chunk_text(text, size=200):
+    return [text[i:i+size] for i in range(0, len(text), size)]
+
+chunks = []
+for doc in docs:
+    chunks.extend(chunk_text(doc))
+
+# Create embeddings
+embeddings = []
+for chunk in chunks:
+    res = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=chunk
+    )
+    embeddings.append(res.data[0].embedding)
+
+# Convert to numpy
+emb_np = np.array(embeddings).astype("float32")
+
+# Create FAISS index
+index = faiss.IndexFlatL2(len(emb_np[0]))
+index.add(emb_np)
+
+# Create mapping
+docstore = {i: chunk for i, chunk in enumerate(chunks)}
+
+# Save
+faiss.write_index(index, "vector.index")
+pickle.dump(docstore, open("docstore.pkl", "wb"))
+
+print("Vector DB created successfully")
+</pre>
+
+---
+
+<p><b>3. Run the script</b></p>
+<pre>
+python3 embed.py
+</pre>
+
+<p><b>Expected output:</b></p>
+<ul>
+<li>File created → <b>vector.index</b></li>
+<li>File created → <b>docstore.pkl</b></li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🧠 Explanation</h2>
+
+<ul>
+<li><b>chunk_text()</b> → splits large text into smaller pieces for better accuracy</li>
+<li><b>embeddings</b> → converts text into numerical vectors</li>
+<li><b>FAISS</b> → stores vectors for fast similarity search</li>
+<li><b>docstore</b> → maps vectors back to original text</li>
+<li><b>vector.index</b> → saved vector database</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+<ul>
+<li>✔ vector.index created</li>
+<li>✔ docstore.pkl created</li>
+<li>✔ embeddings generated successfully</li>
+</ul>
+
+<p style="color:#34d399;">
+✔ Your vector database is ready for RAG
+</p>
+
+</div>
+
+</div>
+</body>
+</html>

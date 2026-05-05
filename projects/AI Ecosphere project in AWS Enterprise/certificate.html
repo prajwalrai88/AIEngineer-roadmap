@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Certificate Generator</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#020617;
+  color:#e2e8f0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+input{
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  margin-top:10px;
+  width:260px;
+}
+
+button{
+  margin-top:10px;
+  padding:12px 18px;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+canvas{
+  margin-top:20px;
+  border-radius:10px;
+  background:#020617;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>🏆 Generate Your Certificate</h2>
+
+<input type="text" id="nameInput" placeholder="Enter your name">
+
+<button onclick="generateCert()">Generate Certificate</button>
+<button onclick="downloadCert()">Download</button>
+
+<canvas id="certCanvas" width="900" height="600"></canvas>
+
+<script>
+
+function drawCertificate(name){
+
+const canvas = document.getElementById("certCanvas");
+const ctx = canvas.getContext("2d");
+
+// CLEAR CANVAS
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+// BACKGROUND
+ctx.fillStyle = "#020617";
+ctx.fillRect(0,0,900,600);
+
+// BORDER
+ctx.strokeStyle = "#38bdf8";
+ctx.lineWidth = 4;
+ctx.strokeRect(20,20,860,560);
+
+// TITLE
+ctx.fillStyle = "#a78bfa";
+ctx.font = "bold 36px Arial";
+ctx.textAlign = "center";
+ctx.fillText("Certificate of Completion", 450, 120);
+
+// SUBTITLE
+ctx.fillStyle = "#e2e8f0";
+ctx.font = "20px Arial";
+ctx.fillText("AWS AI Ecosphere — Production Grade", 450, 170);
+
+// NAME
+ctx.fillStyle = "#38bdf8";
+ctx.font = "bold 32px Arial";
+ctx.fillText(name, 450, 280);
+
+// DESCRIPTION
+ctx.fillStyle = "#e2e8f0";
+ctx.font = "18px Arial";
+ctx.fillText("has successfully completed the enterprise AI system", 450, 340);
+
+// DATE
+const date = new Date().toLocaleDateString();
+ctx.fillText("Date: " + date, 450, 400);
+
+// SIGNATURE
+ctx.beginPath();
+ctx.moveTo(300,480);
+ctx.lineTo(600,480);
+ctx.strokeStyle = "#e2e8f0";
+ctx.stroke();
+
+ctx.fillText("Authorized Signature", 450, 510);
+
+}
+
+function generateCert(){
+const name = document.getElementById("nameInput").value || "Your Name";
+drawCertificate(name);
+}
+
+// AUTO DRAW (IMPORTANT FIX)
+document.addEventListener("DOMContentLoaded", function(){
+
+// small delay ensures rendering works everywhere
+setTimeout(()=>{
+drawCertificate("Your Name");
+}, 100);
+
+});
+
+function downloadCert(){
+const canvas = document.getElementById("certCanvas");
+const link = document.createElement("a");
+link.download = "certificate.png";
+link.href = canvas.toDataURL("image/png");
+link.click();
+}
+
+</script>
+
+</body>
+</html>

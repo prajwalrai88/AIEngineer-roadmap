@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 8 — RAG API</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;">AWS AI Ecosphere</div>
+<div>
+<a href="aws-index.html">🏠 Home</a>
+<a href="aws-dashboard.html">📊 Dashboard</a>
+</div>
+</div>
+
+<div class="container">
+
+<h1>Step 8 — RAG API</h1>
+
+<div class="box">
+<h2>🎥 Learn First</h2>
+<a href="https://www.youtube.com/watch?v=63B-3rqRFbQ" target="_blank" class="video-btn">
+▶ RAG Pipeline
+</a>
+</div>
+
+<div class="box">
+<h2>🎯 Goal</h2>
+<p>
+Use your vector database and LLM to answer questions via API.
+</p>
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Make sure backend file exists</h2>
+<p>Your file should be:</p>
+<pre>app.py</pre>
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Run your API server</h2>
+
+<pre>
+uvicorn app:app --host 0.0.0.0 --port 8000
+</pre>
+
+<p class="success">✔ Server should start without errors</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 3 — Get your EC2 Public IP</h2>
+
+<ul>
+<li>Go to AWS Console → EC2</li>
+<li>Select your instance</li>
+<li>Copy <b>Public IPv4 address</b></li>
+</ul>
+
+<p><b>Example:</b></p>
+<pre>3.110.45.210</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 4 — Test your API</h2>
+
+<p>Use this format:</p>
+
+<pre>
+http://YOUR-EC2-IP:8000/query?q=YOUR-QUESTION
+</pre>
+
+<p><b>Example:</b></p>
+
+<pre>
+http://3.110.45.210:8000/query?q=What is EC2?
+</pre>
+
+<ul>
+<li>Replace YOUR-EC2-IP with your IP</li>
+<li>Replace YOUR-QUESTION with your query</li>
+</ul>
+
+<p class="success">✔ You should see JSON response</p>
+
+</div>
+
+<div class="box">
+<h2>🧠 Explanation</h2>
+
+<ul>
+<li>Query → converted into embedding</li>
+<li>FAISS → finds relevant data</li>
+<li>LLM → generates answer</li>
+<li>API → exposes this to frontend</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+
+<ul>
+<li>✔ API running</li>
+<li>✔ EC2 IP working</li>
+<li>✔ Query returns correct response</li>
+</ul>
+
+</div>
+
+</div>
+</body>
+</html>

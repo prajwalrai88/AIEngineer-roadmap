@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>P3 — eksctl Setup</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;}
+pre{background:#111827;padding:12px;border-radius:10px;}
+h1{color:#38bdf8;} h2{color:#34d399;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>P3 — eksctl Setup</h1>
+
+<div class="box">
+<h2>Install</h2>
+
+<pre>
+curl --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz" | tar xz
+sudo mv eksctl /usr/local/bin
+</pre>
+
+</div>
+
+<div class="box">
+<h2>Validate</h2>
+
+<pre>
+eksctl version
+</pre>
+
+✔ Shows version
+
+</div>
+
+</div>
+</body>
+</html>

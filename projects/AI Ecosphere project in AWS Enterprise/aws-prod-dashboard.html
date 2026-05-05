@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Production Dashboard</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Inter, Arial;
+  background:linear-gradient(135deg,#020617,#020617,#0f172a);
+  color:#e2e8f0;
+}
+
+.container{max-width:1200px;margin:auto;padding:30px;}
+
+.card{
+  background:rgba(255,255,255,0.04);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.08);
+  margin-top:20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
+
+.step{
+  padding:15px;
+  border-radius:10px;
+  background:#020617;
+  border:1px solid rgba(255,255,255,.05);
+}
+
+.step.done{border:1px solid #34d399;}
+
+button{
+  margin-top:10px;
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.open{background:#38bdf8;color:black;}
+.done-btn{background:#34d399;color:black;margin-left:8px;}
+
+.progress-bar{
+  width:100%;
+  height:20px;
+  background:#1f2937;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+}
+
+.cert-btn{
+  padding:14px 20px;
+  border-radius:10px;
+  font-weight:600;
+  border:none;
+  cursor:not-allowed;
+  background:#334155;
+  color:#94a3b8;
+}
+
+.cert-btn.active{
+  cursor:pointer;
+  background:linear-gradient(90deg,#38bdf8,#a78bfa);
+  color:black;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 style="color:#38bdf8;">Production Dashboard</h1>
+
+<!-- PROGRESS -->
+<div class="card">
+<h2>📊 Progress (Prerequisites + Steps)</h2>
+
+<div class="progress-bar">
+<div id="progressFill" class="progress-fill"></div>
+</div>
+
+<p id="progressText">0% Completed</p>
+</div>
+
+<!-- PREREQUISITES -->
+<div class="card">
+<h2>⚙️ Phase 0 — Prerequisites</h2>
+<div class="grid" id="preContainer"></div>
+</div>
+
+<!-- STEPS -->
+<div class="card">
+<h2>🚀 Steps</h2>
+<div class="grid" id="stepsContainer"></div>
+</div>
+
+<!-- CERTIFICATE -->
+<div class="card">
+<h2>🏆 Certification</h2>
+
+<p id="certStatus" style="color:#f87171;">
+Complete all steps to unlock certificate
+</p>
+
+<button id="certBtn" class="cert-btn" onclick="openCert()">
+Generate Certificate
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+// DATA
+const prereqs = [
+{num:1,name:"AWS CLI",file:"aws-prod-pre1.html"},
+{num:2,name:"kubectl",file:"aws-prod-pre2.html"},
+{num:3,name:"eksctl",file:"aws-prod-pre3.html"},
+{num:4,name:"Docker",file:"aws-prod-pre4.html"},
+{num:5,name:"IAM Setup",file:"aws-prod-pre5.html"},
+{num:6,name:"API Keys",file:"aws-prod-pre6.html"}
+];
+
+const steps = [
+{num:1,name:"VPC",file:"aws-prod-step1.html"},
+{num:2,name:"EKS",file:"aws-prod-step2.html"},
+{num:3,name:"Deploy App",file:"aws-prod-step3.html"},
+{num:4,name:"ALB",file:"aws-prod-step4.html"},
+{num:5,name:"Auto Scaling",file:"aws-prod-step5.html"},
+{num:6,name:"CloudFront",file:"aws-prod-step6.html"},
+{num:7,name:"FAISS",file:"aws-prod-step7.html"},
+{num:8,name:"API Gateway",file:"aws-prod-step8.html"},
+{num:9,name:"Monitoring",file:"aws-prod-step9.html"},
+{num:10,name:"Validation",file:"aws-prod-step10.html"}
+];
+
+let progress = JSON.parse(localStorage.getItem("full-progress") || "{}");
+
+// RENDER
+function renderAll(){
+
+// PREREQS
+let preHTML="";
+prereqs.forEach(p=>{
+const key="pre-"+p.num;
+preHTML+=`
+<div class="step ${progress[key] ? 'done':''}">
+<h3>${p.name}</h3>
+<button class="open" onclick="window.open('${p.file}')">Open</button>
+<button class="done-btn" onclick="markDone('${key}')">
+${progress[key] ? "Done":"Mark Done"}
+</button>
+</div>`;
+});
+document.getElementById("preContainer").innerHTML=preHTML;
+
+// STEPS
+let stepHTML="";
+steps.forEach(s=>{
+const key="step-"+s.num;
+stepHTML+=`
+<div class="step ${progress[key] ? 'done':''}">
+<h3>Step ${s.num} — ${s.name}</h3>
+<button class="open" onclick="window.open('${s.file}')">Open</button>
+<button class="done-btn" onclick="markDone('${key}')">
+${progress[key] ? "Done":"Mark Done"}
+</button>
+</div>`;
+});
+document.getElementById("stepsContainer").innerHTML=stepHTML;
+
+updateProgress();
+}
+
+// MARK DONE
+function markDone(key){
+progress[key]=true;
+localStorage.setItem("full-progress", JSON.stringify(progress));
+renderAll();
+}
+
+// PROGRESS + CERTIFICATE CONTROL
+function updateProgress(){
+const total = prereqs.length + steps.length;
+const done = Object.keys(progress).length;
+const percent = Math.round((done/total)*100);
+
+document.getElementById("progressFill").style.width=percent+"%";
+document.getElementById("progressText").innerText=percent+"% Completed";
+
+// CERT LOGIC
+const btn = document.getElementById("certBtn");
+const status = document.getElementById("certStatus");
+
+if(percent === 100){
+btn.classList.add("active");
+btn.style.cursor="pointer";
+status.innerText="🎉 Certificate Unlocked!";
+status.style.color="#34d399";
+}else{
+btn.classList.remove("active");
+status.innerText="Complete all steps to unlock certificate";
+status.style.color="#f87171";
+}
+}
+
+// OPEN CERT
+function openCert(){
+const total = prereqs.length + steps.length;
+const done = Object.keys(progress).length;
+
+if(done !== total){
+alert("Complete all steps first!");
+return;
+}
+
+window.open("certificate.html","_blank");
+}
+
+renderAll();
+
+</script>
+
+</body>
+</html>

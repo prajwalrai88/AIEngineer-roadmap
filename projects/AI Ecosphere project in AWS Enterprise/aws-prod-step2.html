@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 2 — EKS Cluster</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+.code{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.success{color:#34d399;}
+.note{color:#fbbf24;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Step 2 — Create EKS Cluster</h1>
+
+<!-- OVERVIEW -->
+<div class="box">
+<h2>🧠 What this step does</h2>
+
+<pre>
+EKS = Managed Kubernetes on AWS
+</pre>
+
+<p>
+This step creates your Kubernetes cluster where your application will run.
+</p>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Create Cluster</h2>
+
+<p><b>Where:</b> Local terminal</p>
+
+<div class="code">
+eksctl create cluster \
+--name ai-ecosphere-cluster \
+--region ap-south-1 \
+--nodes 2
+</div>
+
+<p class="note">
+This takes ~10–15 minutes.
+</p>
+
+<p class="success">
+✔ Cluster created
+</p>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Connect to Cluster (VERY IMPORTANT)</h2>
+
+<p><b>Where:</b> Local terminal</p>
+
+<div class="code">
+aws eks update-kubeconfig \
+--region ap-south-1 \
+--name ai-ecosphere-cluster
+</div>
+
+<p>
+This command connects your local machine to your EKS cluster.
+Without this, kubectl commands will not work.
+</p>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Verify Connection</h2>
+
+<div class="code">
+kubectl get nodes
+</div>
+
+<p><b>Expected:</b></p>
+
+<div class="code">
+ip-xxx   Ready
+ip-yyy   Ready
+</div>
+
+<p class="success">
+✔ Cluster is ready
+</p>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Check Pods</h2>
+
+<div class="code">
+kubectl get pods -A
+</div>
+
+<p>
+You should see system pods running.
+</p>
+
+</div>
+
+<!-- EXPLANATION -->
+<div class="box">
+<h2>🧠 What just happened</h2>
+
+<pre>
+You created:
+✔ Kubernetes control plane (managed by AWS)
+✔ Worker nodes (EC2 instances)
+✔ Networking + security
+</pre>
+
+</div>
+
+<!-- TROUBLESHOOT -->
+<div class="box">
+<h2>🧠 If command fails</h2>
+
+<ul>
+<li>Check AWS CLI:
+<div class="code">aws sts get-caller-identity</div></li>
+
+<li>Check kubectl:
+<div class="code">kubectl version --client</div></li>
+
+<li>Check region mismatch</li>
+</ul>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 3 — Backend on EC2</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;overflow:auto;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;font-weight:600;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="position:sticky;top:0;background:#0a0a0f;padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;font-weight:bold;">AWS AI Ecosphere</div>
+<div>
+<a href="aws-index.html" style="margin-right:15px;color:#34d399;">🏠 Home</a>
+<a href="aws-dashboard.html" style="color:#60a5fa;">📊 Dashboard</a>
+</div>
+</div>
+
+<div style="background:#12121a;padding:10px 20px;">
+Step 3 of 10 — Backend Setup on EC2
+</div>
+
+<div class="container">
+
+<h1>Step 3 — Backend on EC2</h1>
+
+<div class="box">
+<h2>🎯 What</h2>
+<p>Setup FastAPI backend on EC2 instance.</p>
+</div>
+
+<div class="box">
+<h2>🎥 Learn</h2>
+<a href="https://www.youtube.com/watch?v=xjgHXOGnOhk" target="_blank" class="video-btn">
+▶ Deploy Backend on EC2 (Updated)
+</a>
+</div>
+
+<div class="box">
+<h2>🪜 Install Python</h2>
+<pre>
+sudo apt update
+sudo apt install python3-pip -y
+</pre>
+</div>
+
+<div class="box">
+<h2>🪜 Install FastAPI</h2>
+<pre>
+pip3 install fastapi uvicorn
+</pre>
+</div>
+
+<div class="box">
+<h2>🪜 Create App</h2>
+<pre>
+nano app.py
+</pre>
+
+<pre>
+from fastapi import FastAPI
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"status": "running"}
+</pre>
+</div>
+
+<div class="box">
+<h2>🪜 Run Server</h2>
+<pre>
+uvicorn app:app --host 0.0.0.0 --port 8000
+</pre>
+</div>
+
+<div class="box">
+<h2>🌐 Access</h2>
+<pre>
+http://PUBLIC_IP:8000
+</pre>
+<p class="success">✔ Backend live</p>
+</div>
+
+<div class="box">
+<h2>❌ Common Errors</h2>
+<ul>
+<li>Port blocked → security group issue</li>
+<li>Server not running</li>
+<li>Wrong IP</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+<ul>
+<li>✔ Backend running</li>
+<li>✔ Accessible via browser</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>

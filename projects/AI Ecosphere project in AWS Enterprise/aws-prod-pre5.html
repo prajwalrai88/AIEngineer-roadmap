@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>P5 — IAM Setup (Detailed)</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#38bdf8;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.warning{color:#f87171;}
+.success{color:#34d399;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>P5 — IAM Setup (AWS Permissions)</h1>
+
+<div class="box">
+<h2>🎯 Goal</h2>
+<p>
+Create a dedicated IAM user with proper permissions so you can safely interact with AWS using CLI and tools like EKS.
+</p>
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Open IAM Console</h2>
+
+<ul>
+<li>Login to AWS Console</li>
+<li>Search for <b>IAM</b> in top search bar</li>
+<li>Click <b>IAM</b></li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Create IAM User</h2>
+
+<ul>
+<li>Click <b>Users</b> (left sidebar)</li>
+<li>Click <b>Create user</b></li>
+<li>Enter username:
+<pre>ai-ecosphere-user</pre>
+</li>
+
+<li>Click <b>Next</b></li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 3 — Set Permissions</h2>
+
+<ul>
+<li>Select: <b>Attach policies directly</b></li>
+
+<li>Search and select:
+<pre>AdministratorAccess</pre>
+</li>
+
+</ul>
+
+<p class="warning">
+⚠ This gives full access — OK for learning, NOT for production environments
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 4 — Create Access Keys</h2>
+
+<ul>
+<li>After user is created → click the user</li>
+<li>Go to <b>Security credentials</b> tab</li>
+<li>Scroll to <b>Access keys</b></li>
+<li>Click <b>Create access key</b></li>
+<li>Select:
+<pre>Command Line Interface (CLI)</pre>
+</li>
+<li>Click Next → Create</li>
+</ul>
+
+<p class="warning">
+⚠ Copy and save:
+</p>
+
+<pre>
+Access Key ID
+Secret Access Key
+</pre>
+
+<p class="warning">
+You will NOT be able to see the secret again
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 5 — Configure AWS CLI</h2>
+
+Run this in your terminal:
+
+<pre>
+aws configure
+</pre>
+
+Enter values:
+
+<pre>
+AWS Access Key ID: YOUR_KEY
+AWS Secret Access Key: YOUR_SECRET
+Default region name: ap-south-1
+Default output format: json
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 6 — Validate Setup</h2>
+
+Run:
+
+<pre>
+aws sts get-caller-identity
+</pre>
+
+Expected output:
+
+<pre>
+{
+  "UserId": "...",
+  "Account": "...",
+  "Arn": "arn:aws:iam::...:user/ai-ecosphere-user"
+}
+</pre>
+
+<p class="success">
+✔ IAM setup is correct
+</p>
+
+</div>
+
+<div class="box">
+<h2>🧠 Explanation</h2>
+
+<ul>
+<li><b>IAM User</b> → your identity in AWS</li>
+<li><b>Access Keys</b> → used by CLI/tools</li>
+<li><b>Policies</b> → define permissions</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+
+<ul>
+<li>✔ IAM user created</li>
+<li>✔ Access keys generated</li>
+<li>✔ CLI configured</li>
+<li>✔ Validation command successful</li>
+</ul>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 6 — S3 + CloudFront</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+.code{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.success{color:#34d399;}
+.note{color:#fbbf24;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Step 6 — S3 + CloudFront (Frontend Hosting)</h1>
+
+<!-- OVERVIEW -->
+<div class="box">
+<h2>🧠 What you will do</h2>
+
+<p>
+You will:
+</p>
+
+<ul>
+<li>Create a frontend file</li>
+<li>Upload it to S3</li>
+<li>Serve it using CloudFront</li>
+</ul>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Create S3 Bucket</h2>
+
+<p><b>Where:</b> AWS Console → S3 → Create bucket</p>
+
+<ul>
+<li>Bucket name → any unique name</li>
+<li>Region → ap-south-1</li>
+<li>Uncheck "Block all public access"</li>
+</ul>
+
+<p class="success">✔ Bucket created</p>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Create Frontend File (VERY IMPORTANT)</h2>
+
+<p><b>Where:</b> Your local machine</p>
+
+<p><b>Action:</b></p>
+<ul>
+<li>Right-click → New File</li>
+<li>Name it: <b>index.html</b></li>
+</ul>
+
+<p><b>Open the file and paste EXACTLY this:</b></p>
+
+<div class="code">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;AWS AI Ecosphere&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body style="font-family: Arial; text-align: center; margin-top: 50px;"&gt;
+
+&lt;h1&gt;AWS AI Ecosphere&lt;/h1&gt;
+&lt;p&gt;Frontend connected successfully&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</div>
+
+<p class="success">✔ File created correctly</p>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Upload File to S3</h2>
+
+<p><b>Where:</b> Open your S3 bucket</p>
+
+<ul>
+<li>Click <b>Upload</b></li>
+<li>Select <b>index.html</b></li>
+<li>Click Upload</li>
+</ul>
+
+<p class="success">✔ File uploaded</p>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Enable Static Website Hosting</h2>
+
+<p><b>Where:</b> S3 → Bucket → Properties</p>
+
+<ul>
+<li>Scroll to <b>Static website hosting</b></li>
+<li>Enable it</li>
+</ul>
+
+<div class="code">
+Index document: index.html
+</div>
+
+<p><b>Copy the website endpoint URL shown</b></p>
+
+<p class="success">✔ S3 website ready</p>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="box">
+<h2>🪜 Step 5 — Create CloudFront Distribution</h2>
+
+<p><b>Where:</b> AWS Console → CloudFront → Create distribution</p>
+
+<ul>
+<li>Origin → Select your S3 bucket</li>
+<li>Viewer protocol → Redirect HTTP to HTTPS</li>
+</ul>
+
+<p>Click <b>Create distribution</b></p>
+
+</div>
+
+<!-- STEP 6 -->
+<div class="box">
+<h2>🪜 Step 6 — Get CloudFront URL</h2>
+
+<p><b>Where:</b> Open your distribution</p>
+
+<p><b>Copy:</b></p>
+
+<div class="code">
+https://dxxxxx.cloudfront.net
+</div>
+
+</div>
+
+<!-- STEP 7 -->
+<div class="box">
+<h2>🪜 Step 7 — Test</h2>
+
+<p><b>Open in browser:</b></p>
+
+<div class="code">
+CloudFront URL
+</div>
+
+<p><b>You should see:</b></p>
+
+<ul>
+<li>AWS AI Ecosphere</li>
+<li>Frontend connected successfully</li>
+</ul>
+
+<p class="success">✔ Frontend working</p>
+
+</div>
+
+<!-- NOTE -->
+<div class="box">
+<h2>🧠 Note</h2>
+
+<p class="note">
+This setup allows public access for learning.  
+In production, S3 access is restricted and controlled via CloudFront.
+</p>
+
+</div>
+
+</div>
+</body>
+</html>

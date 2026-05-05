@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 7 — Docker</title>
+
+<style>
+body{
+background:#0a0a0f;
+color:#f5f5fa;
+font-family:Arial;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px;
+}
+
+.box{
+background:#12121a;
+padding:18px;
+border-radius:12px;
+margin-top:15px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+h1{color:#8b5cf6;}
+h2{color:#34d399;}
+
+pre{
+background:#111827;
+padding:12px;
+border-radius:10px;
+overflow:auto;
+}
+
+.video-btn{
+display:inline-block;
+margin-top:10px;
+padding:12px 18px;
+background:#1f2937;
+color:#34d399;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+}
+
+.success{color:#34d399;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div style="
+position:sticky;
+top:0;
+background:#0a0a0f;
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+justify-content:space-between;
+">
+<div style="color:#8b5cf6;font-weight:bold;">AI Ecosphere</div>
+
+<div>
+<a href="index.html" style="margin-right:15px;color:#34d399;text-decoration:none;">🏠 Home</a>
+<a href="dashboard.html" style="color:#60a5fa;text-decoration:none;">📊 Dashboard</a>
+</div>
+</div>
+
+<!-- STEP INDICATOR -->
+<div style="background:#12121a;padding:10px 20px;border-bottom:1px solid rgba(255,255,255,.08);">
+Step 7 of 10 — Docker Setup
+</div>
+
+<div class="container">
+
+<h1>Step 7 — Docker</h1>
+
+<div class="box">
+<h2>🎯 What are we doing?</h2>
+<p>Packaging backend into a container.</p>
+</div>
+
+<div class="box">
+<h2>🎥 Learn This Concept</h2>
+
+<a href="https://www.youtube.com/watch?v=fqMOX6JJhGo" target="_blank" class="video-btn">
+▶ Docker Explained Simply
+</a>
+
+<ul>
+<li>Image vs container</li>
+<li>Dockerfile basics</li>
+<li>Running containers</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>🪜 Dockerfile</h2>
+
+<pre>
+FROM python:3.11
+WORKDIR /app
+COPY . .
+RUN pip install fastapi uvicorn
+CMD ["uvicorn","app:app","--host","0.0.0.0","--port","8000"]
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Run</h2>
+
+<pre>
+docker build -t ai-app .
+docker run -p 8000:8000 ai-app
+</pre>
+
+</div>
+
+<div class="box">
+<h2>✅ Expected</h2>
+<p class="success">Backend running inside container</p>
+</div>
+
+</div>
+
+</body>
+</html>

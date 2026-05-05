@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 10 — Final Validation</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.nav{padding:15px 30px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+.code{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+.note{color:#fbbf24;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+<div style="color:#38bdf8;font-weight:bold;">AWS AI Ecosphere</div>
+<button onclick="window.location.href='index.html'" 
+style="background:#38bdf8;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;">
+🏠 Home
+</button>
+</div>
+
+<div class="container">
+
+<h1>Step 10 — Final Validation + Testing</h1>
+
+<!-- OVERVIEW -->
+<div class="box">
+<h2>🧠 What you are validating</h2>
+
+<pre>
+User → API Gateway → ALB → Kubernetes → Response
+</pre>
+
+<p>
+We will verify that your complete system is working end-to-end.
+</p>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Get API Endpoint</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>AWS Console → API Gateway</li>
+<li>Select your API</li>
+<li>Look at top → <b>Invoke URL</b></li>
+</ul>
+
+<p><b>Example:</b></p>
+
+<div class="code">
+https://abc123xyz.execute-api.ap-south-1.amazonaws.com
+</div>
+
+<p class="success">✔ Copy this URL</p>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Test Health API</h2>
+
+<div class="code">
+https://YOUR-INVOKE-URL/health
+</div>
+
+<p><b>Expected:</b></p>
+
+<div class="code">
+{"status":"ok"}
+</div>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Test Query API</h2>
+
+<div class="code">
+https://YOUR-INVOKE-URL/query?q=What is AWS?
+</div>
+
+<p><b>Expected:</b></p>
+
+<div class="code">
+Valid response from system
+</div>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Test Authentication</h2>
+
+<p><b>Without token:</b></p>
+
+<div class="code">
+curl https://YOUR-INVOKE-URL/query?q=test
+</div>
+
+<p><b>Expected:</b></p>
+
+<div class="code">
+401 Unauthorized
+</div>
+
+<p><b>With token:</b></p>
+
+<div class="code">
+curl -H "Authorization: Bearer YOUR_ID_TOKEN" https://YOUR-INVOKE-URL/query?q=test
+</div>
+
+<p><b>Expected:</b></p>
+
+<div class="code">
+Valid response
+</div>
+
+<p class="success">✔ Authentication working</p>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="box">
+<h2>🪜 Step 5 — Load Test</h2>
+
+<p><b>Where:</b> Terminal</p>
+
+<div class="code">
+kubectl run load-test --image=busybox --restart=Never -- \
+/bin/sh -c "while true; do wget -q -O- http://rag-service; done"
+</div>
+
+</div>
+
+<!-- STEP 6 -->
+<div class="box">
+<h2>🪜 Step 6 — Check Scaling</h2>
+
+<div class="code">
+kubectl get pods -w
+</div>
+
+<p><b>Expected:</b></p>
+<ul>
+<li>Pods increase automatically</li>
+</ul>
+
+</div>
+
+<!-- STEP 7 -->
+<div class="box">
+<h2>🪜 Step 7 — Check Logs</h2>
+
+<div class="code">
+kubectl logs POD_NAME
+</div>
+
+<p class="note">
+Get POD_NAME using: kubectl get pods
+</p>
+
+</div>
+
+<!-- TROUBLESHOOT -->
+<div class="box">
+<h2>🧠 If API is not working</h2>
+
+<p>Follow this order:</p>
+
+<h3>1. Check API Gateway</h3>
+<div class="code">
+https://YOUR-INVOKE-URL/health
+</div>
+<ul>
+<li>❌ Not loading → API Gateway issue</li>
+<li>✔ Working → go next</li>
+</ul>
+
+<h3>2. Check ALB</h3>
+<div class="code">
+kubectl get ingress
+</div>
+
+<div class="code">
+http://YOUR-ALB-DNS
+</div>
+
+<ul>
+<li>❌ Not working → ALB issue</li>
+<li>✔ Working → API Gateway issue</li>
+</ul>
+
+<h3>3. Check Pods</h3>
+<div class="code">
+kubectl get pods
+</div>
+
+<ul>
+<li>Should be Running</li>
+</ul>
+
+<div class="code">
+kubectl logs POD_NAME
+</div>
+
+<h3>4. Check Service</h3>
+<div class="code">
+kubectl get svc
+</div>
+
+<h3>5. Check Auth</h3>
+<ul>
+<li>401 → Token expired</li>
+<li>Login again (Step 9)</li>
+</ul>
+
+<div class="box">
+<h3>🧠 Debug Flow</h3>
+
+<pre>
+API Gateway → ALB → Pods
+</pre>
+
+<p>Find where it breaks and fix that layer.</p>
+
+</div>
+
+</div>
+
+<!-- FINAL -->
+<div class="box">
+<h2>🧠 Final Result</h2>
+
+<ul>
+<li>✔ API working</li>
+<li>✔ Auth working</li>
+<li>✔ Scaling working</li>
+<li>✔ Logs visible</li>
+</ul>
+
+<p class="success">
+✔ System fully functional
+</p>
+
+</div>
+
+<!-- NAV -->
+<div style="text-align:center;margin-top:40px;">
+<button onclick="window.location.href='index.html'" 
+style="padding:10px 16px;border:none;border-radius:8px;background:#38bdf8;cursor:pointer;">
+🏠 Back to Dashboard
+</button>
+</div>
+
+</div>
+</body>
+</html>

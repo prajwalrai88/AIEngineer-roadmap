@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 8 — API Gateway</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.nav{padding:15px 30px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+.code{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+.note{color:#fbbf24;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+<div style="color:#38bdf8;font-weight:bold;">AWS AI Ecosphere</div>
+<button onclick="window.location.href='index.html'" 
+style="background:#38bdf8;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;">
+🏠 Home
+</button>
+</div>
+
+<div class="container">
+
+<h1>Step 8 — API Gateway (Public API Layer)</h1>
+
+<!-- OVERVIEW -->
+<div class="box">
+<h2>🧠 What problem are we solving?</h2>
+
+<pre>
+ALB URL → direct access (not ideal)
+API Gateway → controlled public API entry
+</pre>
+
+<p>
+API Gateway acts as the front door for your system.
+It receives requests and forwards them to your backend (ALB → Kubernetes).
+</p>
+
+</div>
+
+<!-- FLOW -->
+<div class="box">
+<h2>🧠 Request Flow</h2>
+
+<pre>
+User → API Gateway → ALB → Kubernetes → Response
+</pre>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Create API</h2>
+
+<p><b>Where:</b> AWS Console → API Gateway</p>
+
+<ul>
+<li>Click <b>Create API</b></li>
+<li>Select <b>HTTP API</b></li>
+<li>Click <b>Build</b></li>
+</ul>
+
+<p><b>Fill:</b></p>
+
+<div class="code">
+API name: ai-ecosphere-api
+</div>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Add Integration (Connect ALB)</h2>
+
+<p><b>Where:</b> Inside API → Integrations → Add integration</p>
+
+<ul>
+<li>Integration type → HTTP</li>
+</ul>
+
+<p><b>Enter ALB URL:</b></p>
+
+<div class="code">
+http://YOUR-ALB-DNS
+</div>
+
+<p class="note">
+Get ALB DNS from Step 4:
+kubectl get ingress
+</p>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Create Route</h2>
+
+<p><b>Where:</b> Routes → Create route</p>
+
+<div class="code">
+Method: ANY
+Path: /{proxy+}
+</div>
+
+<p>
+This means:
+All incoming requests → forwarded to backend
+</p>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Attach Integration</h2>
+
+<ul>
+<li>Select the route you created</li>
+<li>Attach the ALB integration</li>
+</ul>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="box">
+<h2>🪜 Step 5 — Deploy API (Stage)</h2>
+
+<p><b>Where:</b> Stages</p>
+
+<p>
+A stage is a deployed version of your API.
+</p>
+
+<div class="code">
+Default stage: $default
+</div>
+
+<p class="success">✔ API deployed automatically</p>
+
+</div>
+
+<!-- STEP 6 -->
+<div class="box">
+<h2>🪜 Step 6 — Get Invoke URL (IMPORTANT)</h2>
+
+<p><b>Where:</b></p>
+<ul>
+<li>Top section of API page</li>
+<li>Look for <b>Invoke URL</b></li>
+</ul>
+
+<p><b>Example:</b></p>
+
+<div class="code">
+https://abc123xyz.execute-api.ap-south-1.amazonaws.com
+</div>
+
+<p class="success">
+✔ This is your public API endpoint
+</p>
+
+</div>
+
+<!-- STEP 7 -->
+<div class="box">
+<h2>🪜 Step 7 — Test API</h2>
+
+<p><b>Open in browser:</b></p>
+
+<div class="code">
+https://YOUR-INVOKE-URL/query?q=test
+</div>
+
+<p><b>Expected:</b></p>
+
+<div class="code">
+Valid response from your app
+</div>
+
+</div>
+
+<!-- VALIDATION -->
+<div class="box">
+<h2>🧠 What you achieved</h2>
+
+<pre>
+✔ Public API created
+✔ Requests routed to ALB
+✔ Backend connected successfully
+</pre>
+
+</div>
+
+<!-- TROUBLESHOOT -->
+<div class="box">
+<h2>🧠 If it does not work</h2>
+
+<ul>
+<li>No response:
+<div class="code">Check ALB URL directly</div></li>
+
+<li>404 error:
+<div class="code">Check route /{proxy+}</div></li>
+
+<li>Integration issue:
+Verify ALB DNS is correct</li>
+</ul>
+
+</div>
+
+<!-- PRODUCTION -->
+<div class="box">
+<h2>🧠 Production Insight</h2>
+
+<pre>
+Current:
+Direct ALB integration
+
+Production:
+✔ Add authentication (Cognito)
+✔ Add rate limiting
+✔ Add custom domain + SSL
+</pre>
+
+</div>
+
+<!-- NAV -->
+<div style="text-align:center;margin-top:40px;">
+<button onclick="window.location.href='index.html'" 
+style="padding:10px 16px;border:none;border-radius:8px;background:#38bdf8;cursor:pointer;">
+🏠 Back to Dashboard
+</button>
+</div>
+
+</div>
+</body>
+</html>

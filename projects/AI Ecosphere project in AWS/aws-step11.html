@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Step 11 — Docker</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#05070d;
+  color:#e5e7eb;
+}
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:30px;
+}
+h1{ color:#8b5cf6; margin-bottom:10px; }
+h2{ color:#22c55e; margin-top:30px; }
+.card{
+  background:#111827;
+  padding:20px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.08);
+  margin-top:15px;
+}
+.flow{
+  background:#020617;
+  padding:18px;
+  border-radius:10px;
+  margin-top:10px;
+  text-align:center;
+  font-weight:bold;
+}
+pre{
+  background:#0b1220;
+  padding:12px;
+  border-radius:10px;
+  overflow:auto;
+}
+.btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:12px 18px;
+  background:#34d399;
+  color:#000;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:600;
+}
+.muted{ color:#9ca3af; }
+.success{ color:#34d399; }
+.warning{ color:#f87171; }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px;
+}
+.card h3{ margin-top:0; }
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#1f2937;
+  color:#93c5fd;
+  font-size:12px;
+  margin-right:8px;
+}
+.small{ font-size:13px; }
+</style>
+
+</head>
+<body>
+<div class="container">
+<h1>Step 11 — Docker</h1>
+
+<div class="card">
+  <h2>🎯 What are we doing?</h2>
+  <p>Containerize application.</p>
+</div>
+
+<div class="card">
+  <h2>🧠 Why is this needed?</h2>
+  <p>Ensures consistent environments.</p>
+</div>
+
+<div class="card">
+  <h2>🪜 Steps</h2>
+  <ul><li>Create Dockerfile</li><li>Build image</li><li>Run container</li></ul>
+</div>
+
+<div class="card">
+  <h2>🧪 Commands / Code</h2>
+  <pre>docker build -t app .
+docker run -p 8000:8000 app</pre>
+</div>
+
+<div class="card">
+  <h2>🚦 Before Next Step</h2>
+  <ul><li>Container running</li></ul>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 6 — Frontend (Next.js)</title>
+
+<style>
+body{
+background:#0a0a0f;
+color:#f5f5fa;
+font-family:Arial;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px;
+}
+
+.box{
+background:#12121a;
+padding:18px;
+border-radius:12px;
+margin-top:15px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+h1{color:#8b5cf6;}
+h2{color:#34d399;}
+
+pre{
+background:#111827;
+padding:12px;
+border-radius:10px;
+overflow:auto;
+white-space:pre-wrap;
+}
+
+.video-btn{
+display:inline-block;
+margin-top:10px;
+padding:12px 18px;
+background:#1f2937;
+color:#34d399;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+}
+
+.success{color:#34d399;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div style="
+position:sticky;
+top:0;
+background:#0a0a0f;
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+justify-content:space-between;
+">
+<div style="color:#8b5cf6;font-weight:bold;">AI Ecosphere</div>
+
+<div>
+<a href="index.html" style="margin-right:15px;color:#34d399;text-decoration:none;">🏠 Home</a>
+<a href="dashboard.html" style="color:#60a5fa;text-decoration:none;">📊 Dashboard</a>
+</div>
+</div>
+
+<!-- STEP INDICATOR -->
+<div style="background:#12121a;padding:10px 20px;border-bottom:1px solid rgba(255,255,255,.08);">
+Step 6 of 10 — Frontend (Next.js UI)
+</div>
+
+<div class="container">
+
+<h1>Step 6 — Frontend UI</h1>
+
+<div class="box">
+<h2>🎯 What are we doing?</h2>
+<p>
+We are building a simple UI to capture user input and send it to our AI system.
+</p>
+</div>
+
+<div class="box">
+<h2>🎥 Learn This Concept</h2>
+
+<a href="https://www.youtube.com/watch?v=wm5gMKuwSYk" target="_blank" class="video-btn">
+▶ Next.js Beginner Tutorial
+</a>
+
+<ul>
+<li>React state (useState)</li>
+<li>Handling input</li>
+<li>Rendering UI</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Create Frontend</h2>
+<pre>
+npx create-next-app frontend
+cd frontend
+npm run dev
+</pre>
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Replace Code (FULLY CORRECT)</h2>
+
+<pre>
+"use client";
+
+import { useState } from "react";
+
+export default function Home() {
+  const [message, setMessage] = useState("");
+
+  return (
+    &lt;div style={{ padding: "20px" }}&gt;
+
+      &lt;h1 style={{ color: "#8b5cf6" }}&gt;AI Chat&lt;/h1&gt;
+
+      &lt;input
+        type="text"
+        value={message}
+        onChange={(e) =&gt; setMessage(e.target.value)}
+        placeholder="Type your message..."
+        style={{
+          padding: "10px",
+          width: "300px",
+          marginRight: "10px"
+        }}
+      /&gt;
+
+      &lt;button
+        onClick={() =&gt; alert(message)}
+        style={{ padding: "10px" }}
+      &gt;
+        Send
+      &lt;/button&gt;
+
+    &lt;/div&gt;
+  );
+}
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🔍 Code Explanation</h2>
+
+<ul>
+<li><b>useState</b> → Stores input value</li>
+<li><b>value={message}</b> → binds input</li>
+<li><b>onChange</b> → updates state</li>
+<li><b>button click</b> → shows message</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>⚙️ How this fits in system</h2>
+
+<p>
+User → Frontend → (Next Step: Backend API)
+</p>
+
+</div>
+
+<div class="box">
+<h2>✅ Expected Output</h2>
+
+<p class="success">
+✔ App runs at http://localhost:3000  
+✔ Input works  
+✔ Button shows alert  
+</p>
+
+</div>
+
+<div class="box">
+<h2>❌ Common Errors</h2>
+
+<ul>
+<li>JSX error → incorrect brackets</li>
+<li>Nothing renders → wrong file edited</li>
+<li>App not running → run npm install</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Before Next Step</h2>
+
+<ul>
+<li>✔ UI loads</li>
+<li>✔ Input works</li>
+<li>✔ Button works</li>
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>

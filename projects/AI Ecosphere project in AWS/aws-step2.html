@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 2 — EC2 Setup</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;overflow:auto;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;font-weight:600;}
+.success{color:#34d399;} .warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="position:sticky;top:0;background:#0a0a0f;padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;font-weight:bold;">AWS AI Ecosphere</div>
+
+<div>
+<a href="aws-index.html" style="margin-right:15px;color:#34d399;">🏠 Home</a>
+<a href="aws-dashboard.html" style="color:#60a5fa;">📊 Dashboard</a>
+</div>
+</div>
+
+<!-- STEP -->
+<div style="background:#12121a;padding:10px 20px;">
+Step 2 of 10 — EC2 Instance Setup
+</div>
+
+<div class="container">
+
+<h1>Step 2 — EC2 Setup</h1>
+
+<div class="box">
+<h2>🎯 What are we doing?</h2>
+<p>Creating a virtual server to run backend + AI pipeline.</p>
+</div>
+
+<div class="box">
+<h2>🎥 Learn</h2>
+
+<a href="https://www.youtube.com/watch?v=YH_DVenJHII" target="_blank" class="video-btn">
+▶ AWS EC2 Full Setup Tutorial
+</a>
+
+<ul>
+<li>EC2 basics</li>
+<li>Instance creation</li>
+<li>Security groups</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Launch Instance</h2>
+<ul>
+<li>Go to EC2 → Launch Instance</li>
+<li>Name: ai-ecosphere-server</li>
+<li>AMI: Ubuntu</li>
+<li>Type: t2.micro</li>
+</ul>
+</div>
+
+<div class="box">
+<h2>🪜 Key Pair</h2>
+<ul>
+<li>Create new key pair</li>
+<li>Download .pem file</li>
+</ul>
+<p class="warning">⚠ Never lose this file</p>
+</div>
+
+<div class="box">
+<h2>🪜 Security Group</h2>
+<pre>
+SSH (22)
+HTTP (80)
+Custom (8000)
+</pre>
+</div>
+
+<div class="box">
+<h2>🪜 SSH Login</h2>
+<pre>
+chmod 400 key.pem
+ssh -i key.pem ubuntu@PUBLIC_IP
+</pre>
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+<ul>
+<li>✔ EC2 running</li>
+<li>✔ SSH connected</li>
+<li>✔ Ports open</li>
+</ul>
+</div>
+
+</div>
+</body>
+</html>

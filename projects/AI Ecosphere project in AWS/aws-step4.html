@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 4 — Security Groups</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;font-weight:600;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="position:sticky;top:0;background:#0a0a0f;padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;font-weight:bold;">AWS AI Ecosphere</div>
+<div>
+<a href="aws-index.html" style="margin-right:15px;color:#34d399;">🏠 Home</a>
+<a href="aws-dashboard.html" style="color:#60a5fa;">📊 Dashboard</a>
+</div>
+</div>
+
+<div style="background:#12121a;padding:10px 20px;">
+Step 4 of 10 — Security Groups & Access
+</div>
+
+<div class="container">
+
+<h1>Step 4 — Security Groups</h1>
+
+<div class="box">
+<h2>🎯 What</h2>
+<p>Configure firewall rules for your EC2 instance.</p>
+</div>
+
+<div class="box">
+<h2>🎥 Learn</h2>
+<a href="https://www.youtube.com/watch?v=l134cBAJCuc" target="_blank" class="video-btn">
+▶ AWS Security Groups Explained
+</a>
+</div>
+
+<div class="box">
+<h2>🧠 Why this matters</h2>
+<p>
+Security groups control who can access your server.  
+Wrong config = app not accessible OR security risk.
+</p>
+</div>
+
+<div class="box">
+<h2>🪜 Setup Rules</h2>
+
+<pre>
+SSH (22) → Your IP only
+HTTP (80) → 0.0.0.0/0
+Custom (8000) → 0.0.0.0/0
+</pre>
+
+</div>
+
+<div class="box">
+<h2>⚠️ Important</h2>
+
+<ul>
+<li>Never open SSH to entire internet in production</li>
+<li>Limit access to your IP</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Apply Changes</h2>
+
+<ul>
+<li>Go to EC2 → Security Groups</li>
+<li>Edit inbound rules</li>
+<li>Add required ports</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>✅ Verify</h2>
+
+<ul>
+<li>Backend accessible on browser</li>
+<li>No connection timeout</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+
+<ul>
+<li>✔ Ports configured</li>
+<li>✔ Backend reachable</li>
+<li>✔ SSH secure</li>
+</ul>
+
+</div>
+
+</div>
+</body>
+</html>

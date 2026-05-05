@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 4 — Document Ingestion</title>
+
+<style>
+body{
+background:#0a0a0f;
+color:#f5f5fa;
+font-family:Arial;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px;
+}
+
+.box{
+background:#12121a;
+padding:18px;
+border-radius:12px;
+margin-top:15px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+h1{color:#8b5cf6;}
+h2{color:#34d399;}
+
+pre{
+background:#111827;
+padding:12px;
+border-radius:10px;
+overflow:auto;
+}
+
+.success{color:#34d399;}
+
+.video-btn{
+display:inline-block;
+margin-top:10px;
+padding:12px 18px;
+background:#1f2937;
+color:#34d399;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div style="
+position:sticky;
+top:0;
+background:#0a0a0f;
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+justify-content:space-between;
+">
+
+<div style="color:#8b5cf6;font-weight:bold;">
+AI Ecosphere
+</div>
+
+<div>
+<a href="index.html" style="margin-right:15px;color:#34d399;text-decoration:none;">
+🏠 Home
+</a>
+
+<a href="dashboard.html" style="color:#60a5fa;text-decoration:none;">
+📊 Dashboard
+</a>
+</div>
+
+</div>
+
+<!-- STEP INDICATOR -->
+<div style="
+background:#12121a;
+padding:10px 20px;
+border-bottom:1px solid rgba(255,255,255,.08);
+">
+Step 4 of 10 — Document Ingestion Pipeline
+</div>
+
+<div class="container">
+
+<h1>Step 4 — Document Ingestion</h1>
+
+<div class="box">
+<h2>🎯 What are we doing?</h2>
+<p>
+We are loading a PDF document and converting it into structured text that can be processed by AI.
+</p>
+</div>
+
+<div class="box">
+<h2>🧠 Why is this needed?</h2>
+<p>
+AI models cannot directly read PDF files.  
+We must extract the text first, then convert it into embeddings in later steps.
+</p>
+</div>
+
+<!-- VERIFIED VIDEO -->
+<div class="box">
+<h2>🎥 Learn This Concept</h2>
+
+<a href="https://www.youtube.com/watch?v=bL92ALSZ2Cg" target="_blank" class="video-btn">
+▶ Watch: LangChain PDF Loader Tutorial
+</a>
+
+<p><b>What you should learn:</b></p>
+<ul>
+<li>How PDFs are loaded in LangChain</li>
+<li>How text is extracted from documents</li>
+<li>What Document objects represent</li>
+</ul>
+
+<p class="success">
+✔ Watch once, then come back and implement below
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Install Dependencies</h2>
+
+<pre>
+pip install langchain pypdf
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Create ingestion.py</h2>
+
+<p>Create a file inside <b>ingestion/</b> folder:</p>
+
+<pre>
+ingestion/ingestion.py
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 3 — Add Code</h2>
+
+<pre>
+from langchain.document_loaders import PyPDFLoader
+
+loader = PyPDFLoader("sample.pdf")
+documents = loader.load()
+
+print("Loaded pages:", len(documents))
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🔍 Code Explanation</h2>
+
+<ul>
+<li><b>PyPDFLoader</b> → Loads PDF file</li>
+<li><b>loader.load()</b> → Extracts text</li>
+<li><b>documents</b> → List of pages</li>
+<li><b>len(documents)</b> → Number of pages</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>⚙️ How this fits in system</h2>
+
+<p>
+PDF → Text Extraction → (Next Step: Chunking & Embeddings)
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 4 — Add Sample PDF</h2>
+
+<ul>
+<li>Download any PDF</li>
+<li>Rename it to <b>sample.pdf</b></li>
+<li>Place inside <b>ingestion/</b></li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 5 — Run Script</h2>
+
+<pre>
+python ingestion.py
+</pre>
+
+</div>
+
+<div class="box">
+<h2>✅ Expected Output</h2>
+
+<pre>
+Loaded pages: 5
+</pre>
+
+<p class="success">
+✔ This confirms ingestion is working
+</p>
+
+</div>
+
+<div class="box">
+<h2>❌ Common Errors</h2>
+
+<ul>
+<li>File not found → Check PDF name</li>
+<li>Module not found → Reinstall packages</li>
+<li>Wrong folder → Run from correct directory</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Before Next Step</h2>
+
+<ul>
+<li>✔ PDF loads successfully</li>
+<li>✔ Output shows page count</li>
+<li>✔ No errors</li>
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>

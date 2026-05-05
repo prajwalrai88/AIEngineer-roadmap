@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>P2 — kubectl Setup</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;}
+pre{background:#111827;padding:12px;border-radius:10px;}
+h1{color:#38bdf8;} h2{color:#34d399;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>P2 — kubectl Setup</h1>
+
+<div class="box">
+<h2>Install</h2>
+
+<pre>
+curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+</pre>
+
+</div>
+
+<div class="box">
+<h2>Validate</h2>
+
+<pre>
+kubectl version --client
+</pre>
+
+✔ Shows version
+
+</div>
+
+</div>
+</body>
+</html>

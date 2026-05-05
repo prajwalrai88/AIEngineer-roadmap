@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 3 — Deploy RAG App</title>
+
+<style>
+body{background:#0a0a0f;color:#e5e7eb;font-family:Arial;margin:0;}
+.container{max-width:1000px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:20px;border-radius:12px;margin-top:15px;}
+pre{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Step 3 — Deploy RAG App (CRITICAL STEP)</h1>
+
+<!-- PROJECT STRUCTURE -->
+<div class="box">
+<h2>🧠 Step 0 — Project Structure (MANDATORY)</h2>
+
+<h3>Where</h3>
+<ul>
+<li>Your LOCAL machine</li>
+</ul>
+
+<h3>Create folder</h3>
+<pre>
+aws-ai-ecosphere-prod/
+</pre>
+
+<h3>Inside this folder create:</h3>
+<pre>
+app.py
+requirements.txt
+Dockerfile
+deployment.yaml
+service.yaml
+</pre>
+
+<p class="success">
+✔ All work will happen inside this folder
+</p>
+
+</div>
+
+<!-- STEP 1 -->
+<div class="box">
+<h2>🪜 Step 1 — Create app.py</h2>
+
+<pre>
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "RAG App Running"}
+</pre>
+
+</div>
+
+<!-- STEP 2 -->
+<div class="box">
+<h2>🪜 Step 2 — Create requirements.txt</h2>
+
+<pre>
+fastapi
+uvicorn
+</pre>
+
+</div>
+
+<!-- STEP 3 -->
+<div class="box">
+<h2>🪜 Step 3 — Create Dockerfile</h2>
+
+<pre>
+FROM python:3.10
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+</pre>
+
+</div>
+
+<!-- STEP 4 -->
+<div class="box">
+<h2>🪜 Step 4 — Build Docker Image</h2>
+
+<h3>Where</h3>
+<ul>
+<li>Open terminal</li>
+<li>Navigate into project folder</li>
+</ul>
+
+<pre>
+cd aws-ai-ecosphere-prod
+</pre>
+
+<h3>Run</h3>
+<pre>
+docker build -t YOUR_DOCKERHUB_USERNAME/rag-app .
+</pre>
+
+<h3>Example</h3>
+<pre>
+docker build -t prajwalrai/rag-app .
+</pre>
+
+<h3>Validation</h3>
+<pre>
+docker images
+</pre>
+
+Expected:
+<pre>
+rag-app   latest
+</pre>
+
+</div>
+
+<!-- STEP 5 -->
+<div class="box">
+<h2>🪜 Step 5 — Push Image to DockerHub</h2>
+
+<h3>Login</h3>
+<pre>
+docker login
+</pre>
+
+<h3>Push</h3>
+<pre>
+docker push YOUR_DOCKERHUB_USERNAME/rag-app
+</pre>
+
+<h3>Validation</h3>
+<ul>
+<li>Go to DockerHub</li>
+<li>Confirm image exists</li>
+</ul>
+
+<p class="success">
+✔ Image available for Kubernetes
+</p>
+
+</div>
+
+<!-- STEP 6 -->
+<div class="box">
+<h2>🪜 Step 6 — Create deployment.yaml</h2>
+
+<pre>
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rag
+  template:
+    metadata:
+      labels:
+        app: rag
+    spec:
+      containers:
+      - name: rag-container
+        image: YOUR_DOCKERHUB_USERNAME/rag-app:latest
+        ports:
+        - containerPort: 8000
+</pre>
+
+</div>
+
+<!-- STEP 7 -->
+<div class="box">
+<h2>🪜 Step 7 — Create service.yaml</h2>
+
+<pre>
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-service
+spec:
+  type: ClusterIP
+  selector:
+    app: rag
+  ports:
+    - port: 80
+      targetPort: 8000
+</pre>
+
+</div>
+
+<!-- STEP 8 -->
+<div class="box">
+<h2>🪜 Step 8 — Deploy to Kubernetes</h2>
+
+<h3>Where</h3>
+<ul>
+<li>Terminal (same folder)</li>
+</ul>
+
+<pre>
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+</pre>
+
+</div>
+
+<!-- STEP 9 -->
+<div class="box">
+<h2>🪜 Step 9 — Validate Deployment</h2>
+
+<h3>Check pods</h3>
+<pre>
+kubectl get pods
+</pre>
+
+Expected:
+<pre>
+rag-app-xxxx   Running
+</pre>
+
+---
+
+<h3>Check service</h3>
+<pre>
+kubectl get svc
+</pre>
+
+Expected:
+<pre>
+rag-service   ClusterIP
+</pre>
+
+<p class="success">
+✔ Application deployed successfully
+</p>
+
+</div>
+
+<!-- EXPLANATION -->
+<div class="box">
+<h2>🧠 What just happened?</h2>
+
+<pre>
+Code → Docker Image → DockerHub → Kubernetes → Running Pods
+</pre>
+
+<p>
+You containerized your app and deployed it to EKS.
+</p>
+
+<p class="success">
+✔ This is the foundation of everything ahead
+</p>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 9 — Frontend Deployment</title>
+
+<style>
+body{
+background:#0a0a0f;
+color:#f5f5fa;
+font-family:Arial;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:30px;
+}
+
+.box{
+background:#12121a;
+padding:18px;
+border-radius:12px;
+margin-top:15px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+h1{color:#8b5cf6;}
+h2{color:#34d399;}
+
+pre{
+background:#111827;
+padding:12px;
+border-radius:10px;
+overflow:auto;
+white-space:pre-wrap;
+}
+
+.video-btn{
+display:inline-block;
+margin-top:10px;
+padding:12px 18px;
+background:#1f2937;
+color:#34d399;
+border-radius:8px;
+text-decoration:none;
+font-weight:600;
+}
+
+.success{color:#34d399;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div style="
+position:sticky;
+top:0;
+background:#0a0a0f;
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+justify-content:space-between;
+">
+
+<div style="color:#8b5cf6;font-weight:bold;">
+AI Ecosphere
+</div>
+
+<div>
+<a href="index.html" style="margin-right:15px;color:#34d399;text-decoration:none;">
+🏠 Home
+</a>
+
+<a href="dashboard.html" style="color:#60a5fa;text-decoration:none;">
+📊 Dashboard
+</a>
+</div>
+
+</div>
+
+<!-- STEP INDICATOR -->
+<div style="
+background:#12121a;
+padding:10px 20px;
+border-bottom:1px solid rgba(255,255,255,.08);
+">
+Step 9 of 10 — Frontend Deployment (Vercel)
+</div>
+
+<div class="container">
+
+<h1>Step 9 — Deploy Frontend</h1>
+
+<div class="box">
+<h2>🎯 What are we doing?</h2>
+<p>
+We are deploying our frontend UI so users can access it from the internet.
+</p>
+</div>
+
+<div class="box">
+<h2>🧠 Why is this needed?</h2>
+<p>
+Your frontend currently runs only on your local machine.  
+Deployment makes it publicly accessible.
+</p>
+</div>
+
+<!-- VERIFIED VIDEO -->
+<div class="box">
+<h2>🎥 Learn This Concept</h2>
+
+<a href="https://www.youtube.com/watch?v=2HBIzEx6IZA" target="_blank" class="video-btn">
+▶ Deploy Next.js App (Vercel)
+</a>
+
+<ul>
+<li>How Vercel deployment works</li>
+<li>Connecting GitHub</li>
+<li>Environment variables</li>
+<li>Build & deploy process</li>
+</ul>
+
+<p class="success">
+✔ Watch once, then follow steps below
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Push Frontend to GitHub</h2>
+
+<pre>
+cd frontend
+
+git init
+git add .
+git commit -m "frontend deploy"
+git remote add origin https://github.com/your-username/frontend-repo.git
+git push -u origin main
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Go to Vercel</h2>
+
+<ul>
+<li>Open https://vercel.com</li>
+<li>Login using GitHub</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 3 — Import Project</h2>
+
+<ul>
+<li>Click "Add New → Project"</li>
+<li>Select your frontend repo</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 4 — Add Backend URL</h2>
+
+<p>
+Connect frontend to backend deployed in Step 8.
+</p>
+
+<pre>
+NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 5 — Update API Call</h2>
+
+<pre>
+fetch(`${process.env.NEXT_PUBLIC_API_URL}/health`)
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 6 — Deploy</h2>
+
+<ul>
+<li>Click "Deploy"</li>
+<li>Wait 1–2 minutes</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>✅ Expected Output</h2>
+
+<p>Your app will be live at:</p>
+
+<pre>
+https://your-app.vercel.app
+</pre>
+
+<p class="success">
+✔ UI loads successfully  
+✔ Connected to backend  
+</p>
+
+</div>
+
+<div class="box">
+<h2>⚙️ How this fits in system</h2>
+
+<p>
+User → Frontend (Vercel) → Backend (Render) → AI → Response
+</p>
+
+</div>
+
+<div class="box">
+<h2>❌ Common Errors</h2>
+
+<ul>
+<li>API not working → wrong backend URL</li>
+<li>Build failed → check logs</li>
+<li>No response → backend not deployed</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Before Final Step</h2>
+
+<ul>
+<li>✔ Frontend deployed</li>
+<li>✔ URL accessible</li>
+<li>✔ Backend connected</li>
+</ul>
+
+</div>
+
+</div>
+
+</body>
+</html>

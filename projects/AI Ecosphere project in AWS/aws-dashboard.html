@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AWS AI Ecosphere Dashboard</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#0a0a0f;
+color:#f5f5fa;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:30px;
+}
+
+h1{
+color:#8b5cf6;
+margin-bottom:10px;
+}
+
+h2{
+color:#34d399;
+margin-top:30px;
+}
+
+.card{
+background:#12121a;
+padding:20px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,.08);
+margin-top:15px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
+margin-top:20px;
+}
+
+.flow{
+background:#020617;
+padding:20px;
+border-radius:10px;
+text-align:center;
+font-weight:bold;
+margin-top:10px;
+}
+
+.progress-bar{
+width:100%;
+height:20px;
+background:#1f2937;
+border-radius:10px;
+overflow:hidden;
+margin-top:10px;
+}
+
+.progress-fill{
+height:100%;
+width:0%;
+background:#34d399;
+transition:0.3s;
+}
+
+button{
+margin-top:10px;
+padding:10px 14px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+}
+
+.open{
+background:#60a5fa;
+color:black;
+}
+
+.complete{
+background:#34d399;
+color:black;
+margin-left:10px;
+}
+
+.done{
+color:#34d399;
+font-weight:bold;
+}
+
+.nav{
+position:sticky;
+top:0;
+background:#0a0a0f;
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,.08);
+display:flex;
+justify-content:space-between;
+}
+
+a{
+text-decoration:none;
+font-weight:600;
+}
+
+.home{color:#34d399;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="nav">
+<div style="color:#8b5cf6;font-weight:bold;">AWS AI Ecosphere</div>
+
+<div>
+<a href="aws-index.html" class="home">🏠 Home</a>
+</div>
+</div>
+
+<div class="container">
+
+<h1>AWS AI Ecosphere Dashboard</h1>
+<p>Execute and track your enterprise AI system on AWS.</p>
+
+<!-- FLOW -->
+<h2>System Architecture</h2>
+
+<div class="flow">
+User → CloudFront → S3 → API Gateway → EC2 → AI → Response
+</div>
+
+<!-- PROGRESS -->
+<h2>Progress</h2>
+
+<div class="progress-bar">
+<div id="progressFill" class="progress-fill"></div>
+</div>
+
+<p id="progressText">0% Completed</p>
+
+<!-- STEPS -->
+<h2>Execution Steps</h2>
+
+<div class="grid" id="stepsContainer"></div>
+
+<!-- CTA -->
+<div class="card">
+<h2>🚀 Next Level</h2>
+<p>
+Advanced deployments using AWS native infrastructure (EC2, S3, IAM, etc.)
+with scaling, security, and production-grade setup will be added next.
+</p>
+</div>
+
+</div>
+
+<script>
+const steps = [
+{num:1, name:"AWS Account & IAM Setup", file:"aws-step1.html"},
+{num:2, name:"EC2 Setup", file:"aws-step2.html"},
+{num:3, name:"Backend on EC2", file:"aws-step3.html"},
+{num:4, name:"Security Groups", file:"aws-step4.html"},
+{num:5, name:"S3 Frontend Hosting", file:"aws-step5.html"},
+{num:6, name:"API Gateway", file:"aws-step6.html"},
+{num:7, name:"RAG Pipeline", file:"aws-step7.html"},
+{num:8, name:"CloudWatch Logs", file:"aws-step8.html"},
+{num:9, name:"Scaling Basics", file:"aws-step9.html"},
+{num:10, name:"Final Validation", file:"aws-step10.html"}
+];
+
+let progress = JSON.parse(localStorage.getItem("aws-progress") || "{}");
+
+function renderSteps(){
+let html = "";
+
+steps.forEach(step => {
+html += `
+<div class="card">
+<h3>Step ${step.num} — ${step.name}</h3>
+
+<button class="open" onclick="openStep('${step.file}')">
+Open
+</button>
+
+<button class="complete" onclick="markComplete(${step.num})">
+${progress[step.num] ? "Done" : "Mark Complete"}
+</button>
+
+<p>${progress[step.num] ? "<span class='done'>✔ Completed</span>" : "Pending"}</p>
+</div>
+`;
+});
+
+document.getElementById("stepsContainer").innerHTML = html;
+updateProgress();
+}
+
+function openStep(file){
+window.open(file, "_blank");
+}
+
+function markComplete(num){
+progress[num] = true;
+localStorage.setItem("aws-progress", JSON.stringify(progress));
+renderSteps();
+}
+
+function updateProgress(){
+const completed = Object.keys(progress).length;
+const percent = Math.round((completed / steps.length) * 100);
+
+document.getElementById("progressFill").style.width = percent + "%";
+document.getElementById("progressText").innerText = percent + "% Completed";
+}
+
+renderSteps();
+</script>
+
+</body>
+</html>

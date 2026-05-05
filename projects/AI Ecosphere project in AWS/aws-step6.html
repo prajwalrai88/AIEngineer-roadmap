@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Step 6 — API Gateway Integration</title>
+
+<style>
+body{background:#0a0a0f;color:#f5f5fa;font-family:Arial;margin:0;}
+.container{max-width:900px;margin:auto;padding:30px;}
+.box{background:#12121a;padding:18px;border-radius:12px;margin-top:15px;border:1px solid rgba(255,255,255,.08);}
+h1{color:#8b5cf6;} h2{color:#34d399;}
+pre{background:#111827;padding:12px;border-radius:10px;white-space:pre-wrap;}
+.video-btn{display:inline-block;margin-top:10px;padding:12px 18px;background:#1f2937;color:#34d399;border-radius:8px;text-decoration:none;}
+.success{color:#34d399;}
+.warning{color:#f87171;}
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div style="padding:15px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;">
+<div style="color:#8b5cf6;">AWS AI Ecosphere</div>
+<div>
+<a href="aws-index.html">🏠 Home</a>
+<a href="aws-dashboard.html">📊 Dashboard</a>
+</div>
+</div>
+
+<div class="container">
+
+<h1>Step 6 — API Gateway Integration</h1>
+
+<div class="box">
+<h2>🎥 Learn First</h2>
+<a href="https://www.youtube.com/watch?v=cr1BdiU35Uw" target="_blank" class="video-btn">
+▶ API Gateway Integration
+</a>
+</div>
+
+<div class="box">
+<h2>🎯 Goal</h2>
+<p>
+Connect your frontend (S3) with your backend (EC2 FastAPI server) using API Gateway.
+</p>
+</div>
+
+<div class="box">
+<h2>🪜 Step 1 — Get Your EC2 Public IP</h2>
+
+<ul>
+<li>Go to AWS Console</li>
+<li>Click <b>EC2</b></li>
+<li>Click <b>Instances</b></li>
+<li>Select your instance</li>
+<li>Find <b>Public IPv4 address</b></li>
+</ul>
+
+<p><b>Example:</b></p>
+<pre>3.110.45.210</pre>
+
+<p class="warning">⚠ You will use YOUR IP in all steps below</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 2 — Make Sure Backend is Running</h2>
+
+<p>Connect to your EC2 instance and run:</p>
+
+<pre>
+uvicorn app:app --host 0.0.0.0 --port 8000
+</pre>
+
+<p class="success">✔ Your API server should now be running</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 3 — Open Port 8000 (IMPORTANT)</h2>
+
+<ul>
+<li>Go to EC2 → Security Groups</li>
+<li>Select your instance security group</li>
+<li>Edit inbound rules</li>
+<li>Add rule:</li>
+</ul>
+
+<pre>
+Type: Custom TCP
+Port: 8000
+Source: Anywhere (0.0.0.0/0)
+</pre>
+
+<p class="warning">⚠ Without this, your API will NOT be accessible</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 4 — Test Backend Directly</h2>
+
+<p>Open browser or terminal:</p>
+
+<pre>
+http://YOUR-EC2-IP:8000/query?q=test
+</pre>
+
+<p><b>Example:</b></p>
+<pre>
+http://3.110.45.210:8000/query?q=test
+</pre>
+
+<p class="success">✔ You should see a JSON response</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 5 — Create API Gateway</h2>
+
+<ul>
+<li>Go to AWS Console → API Gateway</li>
+<li>Click <b>Create API</b></li>
+<li>Select <b>HTTP API</b></li>
+<li>Click <b>Build</b></li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 6 — Add Integration</h2>
+
+<p>Use your EC2 backend URL:</p>
+
+<pre>
+http://YOUR-EC2-IP:8000/query
+</pre>
+
+<p class="muted">
+Replace YOUR-EC2-IP with your actual IP
+</p>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 7 — Configure Route</h2>
+
+<ul>
+<li>Route path: <b>/query</b></li>
+<li>Method: <b>GET</b></li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 8 — Deploy API</h2>
+
+<ul>
+<li>Click <b>Deploy</b></li>
+<li>Copy the generated API URL</li>
+</ul>
+
+<p><b>Example:</b></p>
+<pre>
+https://abc123.execute-api.ap-south-1.amazonaws.com/query
+</pre>
+
+</div>
+
+<div class="box">
+<h2>🪜 Step 9 — Test API Gateway</h2>
+
+<pre>
+https://YOUR-API-URL/query?q=test
+</pre>
+
+<p class="success">✔ Should return same response as EC2</p>
+
+</div>
+
+<div class="box">
+<h2>🧠 Explanation</h2>
+
+<ul>
+<li><b>EC2 IP</b> → your backend server</li>
+<li><b>Port 8000</b> → where FastAPI runs</li>
+<li><b>/query</b> → your API endpoint</li>
+<li><b>API Gateway</b> → acts as public entry point</li>
+</ul>
+
+</div>
+
+<div class="box">
+<h2>🚦 Checklist</h2>
+
+<ul>
+<li>✔ Backend running</li>
+<li>✔ Port 8000 open</li>
+<li>✔ EC2 API working</li>
+<li>✔ API Gateway working</li>
+</ul>
+
+<p class="success">
+✔ Frontend can now connect to backend
+</p>
+
+</div>
+
+</div>
+</body>
+</html>
