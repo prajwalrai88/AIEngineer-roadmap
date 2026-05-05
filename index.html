@@ -1,262 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Engineer Ecosystem</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Engineer Ecosystem</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
-body{background:#0f172a;color:white;overflow-x:hidden}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins;
+        }
 
-/* PARTICLES */
-canvas{position:fixed;top:0;left:0;z-index:-1}
+        body {
+            background: #0f172a;
+            color: white;
+            overflow-x: hidden
+        }
 
-/* LAYOUT */
-.container{text-align:center;padding:40px}
-h1{
-font-size:3rem;
-background:linear-gradient(90deg,#00f5ff,#7b2ff7);
--webkit-background-clip:text;
-color:transparent;
-}
-.subtitle{opacity:0.7;margin-top:10px}
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1
+        }
 
-/* GRID */
-.grid{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-margin-top:30px
-}
+        .container {
+            text-align: center;
+            padding: 40px
+        }
 
-.card{
-width:260px;
-margin:15px;
-padding:20px;
-border-radius:15px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(10px);
-border:1px solid rgba(255,255,255,0.1);
-transition:.3s;
-cursor:pointer;
-position:relative
-}
+        h1 {
+            font-size: 3rem;
+            background: linear-gradient(90deg, #00f5ff, #7b2ff7);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
 
-.card:hover{
-transform:translateY(-10px) scale(1.05)
-}
+        .subtitle {
+            opacity: 0.7;
+            margin-top: 10px
+        }
 
-.locked{
-opacity:.3;
-pointer-events:none
-}
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px
+        }
 
-.locked::after{
-content:"🔒 Locked";
-position:absolute;
-top:10px;
-right:10px;
-font-size:12px
-}
+        .card {
+            width: 260px;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: .3s;
+            cursor: pointer;
+            position: relative
+        }
 
-/* PROGRESS */
-.progress{
-width:60%;
-height:20px;
-background:#222;
-margin:20px auto;
-border-radius:20px
-}
-.progress-bar{
-height:100%;
-width:0%;
-border-radius:20px;
-background:linear-gradient(90deg,#00f5ff,#7b2ff7);
-transition:.5s
-}
+        .card:hover {
+            transform: translateY(-10px) scale(1.05)
+        }
 
-.btn{
-margin-top:20px;
-padding:10px 20px;
-background:#7b2ff7;
-border:none;
-border-radius:10px;
-cursor:pointer
-}
+        .locked {
+            opacity: .3;
+            pointer-events: none
+        }
 
-input{
-width:300px;
-padding:10px;
-margin:10px;
-border-radius:10px;
-border:none
-}
-</style>
+        .locked::after {
+            content: "🔒 Locked";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 12px
+        }
+
+        .progress {
+            width: 60%;
+            height: 20px;
+            background: #222;
+            margin: 20px auto;
+            border-radius: 20px
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #00f5ff, #7b2ff7);
+            transition: .5s
+        }
+
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #7b2ff7;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer
+        }
+
+        input {
+            width: 300px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: none
+        }
+    </style>
 </head>
 
 <body>
 
-<canvas id="particles"></canvas>
+    <canvas id="particles"></canvas>
 
-<div class="container">
+    <div class="container">
 
-<h1>AI Engineer Ecosystem</h1>
-<p class="subtitle">From Zero → Enterprise AI Engineer in 3–6 Months 🚀</p>
+        <h1>AI Engineer Ecosystem</h1>
+        <p class="subtitle">From Zero → Enterprise AI Engineer in 3–6 Months 🚀</p>
 
-<button class="btn" onclick="login()">Login with Google</button>
+        <button class="btn" onclick="login()">Login with Google</button>
 
-<!-- LEARNING -->
-<h2>Learning Modules</h2>
+        <!-- LEARNING -->
+        <h2>Learning Modules</h2>
 
-<div class="grid">
+        <div class="grid">
 
-<div class="card" onclick="openLearning('platform')">Platform Engineer Roadmap</div>
-<div class="card" onclick="openLearning('ai')">AI Engineer Roadmap</div>
-<div class="card" onclick="openLearning('infra')">AI Infrastructure Roadmap</div>
-<div class="card" onclick="openLearning('llm')">LLM GENAI Engineer Roadmap</div>
+            <div class="card" onclick="openLearning('platform')">Platform Engineer Roadmap</div>
+            <div class="card" onclick="openLearning('ai')">AI Engineer Roadmap</div>
+            <div class="card" onclick="openLearning('infra')">AI Infrastructure Roadmap</div>
+            <div class="card" onclick="openLearning('llm')">LLM GENAI Engineer Roadmap</div>
 
-</div>
+        </div>
 
-<div class="progress">
-<div id="bar" class="progress-bar"></div>
-</div>
+        <div class="progress">
+            <div id="bar" class="progress-bar"></div>
+        </div>
 
-<!-- PROJECTS -->
-<h2>Projects</h2>
-<p style="opacity:.7">Complete at least 2 modules to unlock</p>
+        <!-- PROJECTS -->
+        <h2>Projects</h2>
+        <p style="opacity:.7">Complete at least 2 modules to unlock</p>
 
-<div class="grid" id="projects">
+        <div class="grid" id="projects">
 
-<div class="card locked" onclick="openProject('projects/basic/index.html')">
-AI Ecosphere Basic
-</div>
+            <div class="card locked" onclick="openProject('projects/basic/index.html')">
+                AI Ecosphere Basic
+            </div>
 
-<div class="card locked" onclick="openProject('projects/aws/index.html')">
-AI Ecosphere AWS
-</div>
+            <div class="card locked" onclick="openProject('projects/aws/index.html')">
+                AI Ecosphere AWS
+            </div>
 
-<div class="card locked" onclick="openProject('projects/enterprise/index.html')">
-AI Ecosphere Enterprise
-</div>
+            <div class="card locked" onclick="openProject('projects/enterprise/index.html')">
+                AI Ecosphere Enterprise
+            </div>
 
-</div>
+        </div>
 
-<!-- CONTACT -->
-<div style="margin-top:50px">
-<h2>New suggestion on learning Please provide inputs</h2>
-<form action="mailto:raiframestudios@gmail.com" method="POST" enctype="text/plain">
-<input name="topic" placeholder="Enter topic suggestion" required>
-<br>
-<button class="btn">Send</button>
-</form>
-</div>
+        <!-- CONTACT -->
+        <div style="margin-top:50px">
+            <h2>New suggestion on learning Please provide inputs</h2>
 
-</div>
+            <form action="mailto:raiframestudios@gmail.com" method="POST" enctype="text/plain">
+                <input name="topic" placeholder="Enter topic suggestion" required>
+                <br>
+                <button class="btn">Send</button>
+            </form>
 
-<script>
+        </div>
 
-/* MODULE STATE */
-let modules = JSON.parse(localStorage.getItem("modules")) || {
-platform:false,
-ai:false,
-infra:false,
-llm:false
-};
+    </div>
 
-/* OPEN LEARNING */
-function openLearning(module){
-localStorage.setItem("currentModule", module);
-window.location.href = "learning/" + module + "/index.html";
-}
+    <script>
 
-/* PROGRESS */
-function calculateProgress(){
-let completed = Object.values(modules).filter(v=>v).length;
-let progress = (completed/4)*100;
+        /* MODULE STATE */
+        let modules = JSON.parse(localStorage.getItem("modules")) || {
+            platform: false,
+            ai: false,
+            infra: false,
+            llm: false
+        };
 
-document.getElementById("bar").style.width = progress + "%";
+        /* 🔥 FIXED LEARNING LINKS (MATCH YOUR FILE NAMES) */
+        function openLearning(module) {
 
-/* unlock logic */
-let cards = document.querySelectorAll("#projects .card");
+            let paths = {
+                platform: "learning/Platform Engineer Roadmap.html",
+                ai: "learning/AI Engineer Roadmap.html",
+                infra: "learning/AI infrastructure Roadmap.html",
+                llm: "learning/LLMGENAI Engineer Roadmap.html"
+            };
 
-if(progress >= 50){
-cards[0].classList.remove("locked");
-}
+            localStorage.setItem("currentModule", module);
 
-if(progress === 100){
-cards.forEach(c=>c.classList.remove("locked"));
-}
+            window.location.href = paths[module];
+        }
 
-return progress;
-}
+        /* PROGRESS */
+        function calculateProgress() {
+            let completed = Object.values(modules).filter(v => v).length;
+            let progress = (completed / 4) * 100;
 
-calculateProgress();
+            document.getElementById("bar").style.width = progress + "%";
 
-/* PROJECT NAV */
-function openProject(path){
+            /* unlock */
+            let cards = document.querySelectorAll("#projects .card");
 
-let progress = calculateProgress();
+            if (progress >= 50) {
+                cards[0].classList.remove("locked");
+            }
 
-if(progress < 50){
-alert("Complete at least 2 modules first 🚀");
-return;
-}
+            if (progress === 100) {
+                cards.forEach(c => c.classList.remove("locked"));
+            }
 
-if(progress < 100 && path.includes("aws")){
-alert("Complete all modules to unlock advanced projects 🔥");
-return;
-}
+            return progress;
+        }
 
-window.location.href = path;
-}
+        calculateProgress();
 
-/* LOGIN */
-function login(){
-alert("Firebase login can be added later");
-}
+        /* PROJECT NAV */
+        function openProject(path) {
 
-/* PARTICLES */
-const canvas=document.querySelector("canvas");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+            let progress = calculateProgress();
 
-let particles=[];
+            if (progress < 50) {
+                alert("Complete at least 2 modules first 🚀");
+                return;
+            }
 
-for(let i=0;i<120;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-dx:(Math.random()-0.5)*1.5,
-dy:(Math.random()-0.5)*1.5
-});
-}
+            if (progress < 100 && path.includes("aws")) {
+                alert("Complete all modules to unlock advanced projects 🔥");
+                return;
+            }
 
-function animate(){
-ctx.clearRect(0,0,canvas.width,canvas.height);
+            window.location.href = path;
+        }
 
-particles.forEach(p=>{
-ctx.beginPath();
-ctx.arc(p.x,p.y,2,0,Math.PI*2);
-ctx.fillStyle="#00f5ff";
-ctx.fill();
+        /* LOGIN */
+        function login() {
+            alert("Firebase login can be added later");
+        }
 
-p.x+=p.dx;
-p.y+=p.dy;
+        /* PARTICLES */
+        const canvas = document.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-if(p.x<0||p.x>canvas.width)p.dx*=-1;
-if(p.y<0||p.y>canvas.height)p.dy*=-1;
-});
+        let particles = [];
 
-requestAnimationFrame(animate);
-}
+        for (let i = 0; i < 120; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                dx: (Math.random() - 0.5) * 1.5,
+                dy: (Math.random() - 0.5) * 1.5
+            });
+        }
 
-animate();
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-</script>
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+                ctx.fillStyle = "#00f5ff";
+                ctx.fill();
+
+                p.x += p.dx;
+                p.y += p.dy;
+
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+    </script>
 
 </body>
+
 </html>
