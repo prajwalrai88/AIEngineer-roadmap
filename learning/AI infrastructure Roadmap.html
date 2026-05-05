@@ -1,453 +1,601 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>AI Infrastructure Engineer Roadmap — 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
---bg:#0a0a0f;
---surface:#12121a;
---surface2:#1b1b26;
---surface3:#242433;
---border:rgba(255,255,255,.08);
---text:#f5f5fa;
---muted:#9ca3af;
---p1:#60a5fa;
---p2:#34d399;
---p3:#8b5cf6;
---p4:#fb923c;
---p5:#fbbf24;
---radius:18px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-font-family:'DM Sans',sans-serif;
-background:var(--bg);
-color:var(--text);
-line-height:1.5;
-overflow-x:hidden;
-}
-body:before{
-content:'';
-position:fixed;
-inset:0;
-background-image:
-linear-gradient(rgba(96,165,250,.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(96,165,250,.03) 1px, transparent 1px);
-background-size:40px 40px;
-pointer-events:none;
-z-index:0;
-}
-.glow{
-position:fixed;
-border-radius:50%;
-filter:blur(120px);
-opacity:.15;
-z-index:0;
-pointer-events:none;
-}
-.g1{width:500px;height:500px;background:#60a5fa;top:-150px;left:-100px;}
-.g2{width:400px;height:400px;background:#34d399;bottom:-100px;right:-100px;}
-.container{position:relative;z-index:1;max-width:1400px;margin:auto;padding:28px;}
-.badge{
-display:inline-flex;
-padding:6px 14px;
-border-radius:999px;
-background:rgba(96,165,250,.08);
-border:1px solid rgba(96,165,250,.25);
-color:var(--p1);
-font-size:11px;
-font-family:'DM Mono',monospace;
-margin-bottom:14px;
-text-transform:uppercase;
-letter-spacing:.08em;
-}
-h1{
-font-family:'Syne',sans-serif;
-font-size:clamp(30px,4vw,52px);
-line-height:1.05;
-font-weight:800;
-margin-bottom:10px;
-}
-h1 span{color:var(--p1)}
-.sub{color:var(--muted);font-size:15px;margin-bottom:30px;}
-.dashboard{display:flex;gap:18px;flex-wrap:wrap;margin:30px 0;}
-.stat{
-background:var(--surface);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:20px;
-flex:1;
-min-width:180px;
-}
-.stat h3{
-font-size:34px;
-font-family:'Syne',sans-serif;
-margin-bottom:6px;
-}
-.stat p{font-size:13px;color:var(--muted);}
-.progress-box{
-background:var(--surface);
-border:1px solid var(--border);
-border-radius:var(--radius);
-padding:24px;
-display:flex;
-align-items:center;
-gap:24px;
-margin-bottom:30px;
-flex-wrap:wrap;
-}
-.ring{
-width:90px;
-height:90px;
-border-radius:50%;
-background:conic-gradient(var(--p1) 0deg,var(--p2) 0deg,#222 0deg);
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-}
-.ring:before{
-content:'';
-position:absolute;
-width:64px;
-height:64px;
-background:var(--surface);
-border-radius:50%;
-}
-.ring span{
-position:relative;
-z-index:2;
-font-family:'Syne';
-font-size:18px;
-font-weight:700;
-}
-.progress-content{flex:1;min-width:240px;}
-.progress-title{font-family:'Syne';font-size:18px;margin-bottom:8px;}
-.progress-bar{
-height:8px;
-border-radius:999px;
-background:#222;
-overflow:hidden;
-}
-.progress-fill{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,var(--p1),var(--p2));
-transition:.3s;
-}
-.search{
-background:var(--surface);
-border:1px solid var(--border);
-border-radius:14px;
-padding:12px 16px;
-color:var(--text);
-width:320px;
-max-width:100%;
-margin-bottom:24px;
-}
-.roadmap{display:flex;flex-direction:column;gap:18px;}
-.domain{
-background:var(--surface);
-border:1px solid var(--border);
-border-radius:20px;
-overflow:hidden;
-}
-.domain-head{
-padding:20px 24px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-cursor:pointer;
-background:linear-gradient(90deg,rgba(96,165,250,.05),transparent);
-}
-.domain-left{display:flex;gap:16px;align-items:center;}
-.domain-num{
-width:42px;
-height:42px;
-border-radius:14px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:'Syne';
-font-weight:700;
-background:rgba(96,165,250,.1);
-color:var(--p1);
-}
-.domain-title{
-font-family:'Syne';
-font-size:20px;
-font-weight:700;
-}
-.domain-sub{font-size:13px;color:var(--muted);}
-.domain-body{
-display:none;
-padding:24px;
-border-top:1px solid var(--border);
-background:var(--surface2);
-}
-.open .domain-body{display:block;}
-.toggle{font-size:20px;color:var(--muted);}
-.topic-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:18px;
-}
-.topic{
-background:var(--surface);
-border:1px solid var(--border);
-border-radius:18px;
-padding:18px;
-}
-.topic h4{
-font-family:'Syne';
-font-size:18px;
-margin-bottom:10px;
-}
-.label{
-display:inline-block;
-padding:4px 10px;
-font-size:11px;
-border-radius:999px;
-margin-bottom:12px;
-font-family:'DM Mono';
-}
-.beginner{background:rgba(52,211,153,.08);color:var(--p2);}
-.intermediate{background:rgba(96,165,250,.08);color:var(--p1);}
-.advanced{background:rgba(251,146,60,.08);color:var(--p4);}
-.section-title{
-font-size:11px;
-text-transform:uppercase;
-letter-spacing:.08em;
-color:var(--muted);
-margin:14px 0 8px;
-font-family:'DM Mono';
-}
-ul{padding-left:18px;}
-li{margin-bottom:6px;font-size:14px;}
-.checklist label{
-display:block;
-margin-bottom:8px;
-font-size:14px;
-cursor:pointer;
-}
-.checklist input{margin-right:8px;}
-.links a{
-display:block;
-color:var(--p1);
-text-decoration:none;
-font-size:14px;
-margin-bottom:8px;
-}
-.links a:hover{text-decoration:underline}
-.footer{
-margin:50px 0 20px;
-text-align:center;
-font-size:13px;
-color:var(--muted);
-}
-@media(max-width:768px){
-.topic-grid{grid-template-columns:1fr}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>AI Infrastructure Engineer Roadmap — 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface2: #1b1b26;
+            --surface3: #242433;
+            --border: rgba(255, 255, 255, .08);
+            --text: #f5f5fa;
+            --muted: #9ca3af;
+            --p1: #60a5fa;
+            --p2: #34d399;
+            --p3: #8b5cf6;
+            --p4: #fb923c;
+            --p5: #fbbf24;
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        body:before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(96, 165, 250, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(96, 165, 250, .03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: .15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .g1 {
+            width: 500px;
+            height: 500px;
+            background: #60a5fa;
+            top: -150px;
+            left: -100px;
+        }
+
+        .g2 {
+            width: 400px;
+            height: 400px;
+            background: #34d399;
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: auto;
+            padding: 28px;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 6px 14px;
+            border-radius: 999px;
+            background: rgba(96, 165, 250, .08);
+            border: 1px solid rgba(96, 165, 250, .25);
+            color: var(--p1);
+            font-size: 11px;
+            font-family: 'DM Mono', monospace;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(30px, 4vw, 52px);
+            line-height: 1.05;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        h1 span {
+            color: var(--p1)
+        }
+
+        .sub {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .stat h3 {
+            font-size: 34px;
+            font-family: 'Syne', sans-serif;
+            margin-bottom: 6px;
+        }
+
+        .stat p {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .progress-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .ring {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: conic-gradient(var(--p1) 0deg, var(--p2) 0deg, #222 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .ring:before {
+            content: '';
+            position: absolute;
+            width: 64px;
+            height: 64px;
+            background: var(--surface);
+            border-radius: 50%;
+        }
+
+        .ring span {
+            position: relative;
+            z-index: 2;
+            font-family: 'Syne';
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .progress-content {
+            flex: 1;
+            min-width: 240px;
+        }
+
+        .progress-title {
+            font-family: 'Syne';
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            border-radius: 999px;
+            background: #222;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--p1), var(--p2));
+            transition: .3s;
+        }
+
+        .search {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 12px 16px;
+            color: var(--text);
+            width: 320px;
+            max-width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .domain {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .domain-head {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: linear-gradient(90deg, rgba(96, 165, 250, .05), transparent);
+        }
+
+        .domain-left {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .domain-num {
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne';
+            font-weight: 700;
+            background: rgba(96, 165, 250, .1);
+            color: var(--p1);
+        }
+
+        .domain-title {
+            font-family: 'Syne';
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .domain-sub {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .domain-body {
+            display: none;
+            padding: 24px;
+            border-top: 1px solid var(--border);
+            background: var(--surface2);
+        }
+
+        .open .domain-body {
+            display: block;
+        }
+
+        .toggle {
+            font-size: 20px;
+            color: var(--muted);
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 18px;
+        }
+
+        .topic {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+        }
+
+        .topic h4 {
+            font-family: 'Syne';
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 4px 10px;
+            font-size: 11px;
+            border-radius: 999px;
+            margin-bottom: 12px;
+            font-family: 'DM Mono';
+        }
+
+        .beginner {
+            background: rgba(52, 211, 153, .08);
+            color: var(--p2);
+        }
+
+        .intermediate {
+            background: rgba(96, 165, 250, .08);
+            color: var(--p1);
+        }
+
+        .advanced {
+            background: rgba(251, 146, 60, .08);
+            color: var(--p4);
+        }
+
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: var(--muted);
+            margin: 14px 0 8px;
+            font-family: 'DM Mono';
+        }
+
+        ul {
+            padding-left: 18px;
+        }
+
+        li {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .checklist label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .checklist input {
+            margin-right: 8px;
+        }
+
+        .links a {
+            display: block;
+            color: var(--p1);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .links a:hover {
+            text-decoration: underline
+        }
+
+        .footer {
+            margin: 50px 0 20px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        @media(max-width:768px) {
+            .topic-grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="glow g1"></div>
-<div class="glow g2"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
 
-<div class="container">
+    <div class="container">
 
-<div class="badge">Adaptive AI Infra Career Roadmap</div>
-<h1>AI Infrastructure <span>Engineer</span><br>Roadmap 2026</h1>
-<div class="sub">GPU clusters • Kubernetes • Model serving • Distributed AI systems • Production scale infra</div>
+        <div class="badge">Adaptive AI Infra Career Roadmap</div>
+        <h1>AI Infrastructure <span>Engineer</span><br>Roadmap 2026</h1>
+        <div class="sub">GPU clusters • Kubernetes • Model serving • Distributed AI systems • Production scale infra
+        </div>
 
-<div class="dashboard">
-<div class="stat"><h3 id="topicsDone">0</h3><p>Topics Completed</p></div>
-<div class="stat"><h3 id="conceptsDone">0</h3><p>Concepts Checked</p></div>
-<div class="stat"><h3>10</h3><p>Infrastructure Domains</p></div>
-<div class="stat"><h3>GPU</h3><p>Production Focused</p></div>
-</div>
+        <div class="dashboard">
+            <div class="stat">
+                <h3 id="topicsDone">0</h3>
+                <p>Topics Completed</p>
+            </div>
+            <div class="stat">
+                <h3 id="conceptsDone">0</h3>
+                <p>Concepts Checked</p>
+            </div>
+            <div class="stat">
+                <h3>10</h3>
+                <p>Infrastructure Domains</p>
+            </div>
+            <div class="stat">
+                <h3>GPU</h3>
+                <p>Production Focused</p>
+            </div>
+        </div>
 
-<div class="progress-box">
-<div class="ring" id="ring"><span id="ringText">0%</span></div>
-<div class="progress-content">
-<div class="progress-title">Infrastructure Learning Progress</div>
-<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-</div>
-</div>
+        <div class="progress-box">
+            <div class="ring" id="ring"><span id="ringText">0%</span></div>
+            <div class="progress-content">
+                <div class="progress-title">Infrastructure Learning Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
 
-<input class="search" id="searchInput" placeholder="Search GPU, Kubernetes, Ray, Triton..." />
+        <input class="search" id="searchInput" placeholder="Search GPU, Kubernetes, Ray, Triton..." />
 
-<div class="roadmap" id="roadmap"></div>
+        <div class="roadmap" id="roadmap"></div>
 
-<div class="footer">
-Built for AI Infra Careers • GPUs → Clusters → Inference → Distributed Systems → LLM Serving
-</div>
-</div>
+        <div class="footer">
+            Built for AI Infra Careers • GPUs → Clusters → Inference → Distributed Systems → LLM Serving
+        </div>
+    </div>
 
-<script>
-const DATA = [
-{
-domain:"Linux + Systems Foundations",
-desc:"OS and infrastructure fundamentals",
-topics:[{
-title:"Linux for AI Infra",
-level:"beginner",
-objective:"Master Linux internals for AI infrastructure operations",
-subtopics:["Processes & threads","Memory mgmt","NUMA basics","IO scheduling","Filesystem tuning"],
-reading:["https://linuxjourney.com/"],
-videos:["https://www.youtube.com/watch?v=sWbUDq4S6Y8"],
-projects:["Optimize Linux node for GPU workloads"],
-interview:["How does NUMA affect GPU workloads?"]
-}]
-},
-{
-domain:"GPU Architecture",
-desc:"Understand GPU compute deeply",
-topics:[{
-title:"GPU Systems Fundamentals",
-level:"intermediate",
-objective:"Learn GPU internals for model training and inference",
-subtopics:["CUDA cores","VRAM architecture","Tensor cores","PCIe lanes","GPU scheduling"],
-reading:["https://docs.nvidia.com/cuda/"],
-videos:["https://www.youtube.com/watch?v=4sgKnKbR-WE"],
-projects:["Benchmark GPU inference workloads"],
-interview:["Difference between CUDA cores and Tensor cores?"]
-}]
-},
-{
-domain:"Containers + Kubernetes",
-desc:"AI workloads orchestration",
-topics:[{
-title:"Kubernetes for GPU Workloads",
-level:"advanced",
-objective:"Deploy GPU AI workloads on Kubernetes",
-subtopics:["GPU operator","Node pools","Taints/tolerations","Device plugins","GPU scheduling"],
-reading:["https://kubernetes.io/docs/"],
-videos:["https://www.youtube.com/watch?v=X48VuDVv0do"],
-projects:["Deploy GPU inference cluster on K8s"],
-interview:["How does Kubernetes schedule GPU pods?"]
-}]
-},
-{
-domain:"Distributed Training Systems",
-desc:"Scaling multi-node training",
-topics:[{
-title:"Distributed AI Training",
-level:"advanced",
-objective:"Run large-scale distributed training jobs",
-subtopics:["Horovod","DeepSpeed","NCCL","Data parallelism","Model parallelism"],
-reading:["https://www.deepspeed.ai/"],
-videos:["https://www.youtube.com/watch?v=wY2A5SX5uYQ"],
-projects:["Train model across multi-node cluster"],
-interview:["Data parallelism vs model parallelism?"]
-}]
-},
-{
-domain:"Model Serving Infrastructure",
-desc:"Inference serving architecture",
-topics:[{
-title:"Inference Serving Platforms",
-level:"advanced",
-objective:"Serve models at scale efficiently",
-subtopics:["Triton Inference Server","vLLM","TensorRT","Batching","Autoscaling"],
-reading:["https://developer.nvidia.com/nvidia-triton-inference-server"],
-videos:["https://www.youtube.com/watch?v=H6nK9X3TQk8"],
-projects:["Deploy Triton serving cluster"],
-interview:["Why use dynamic batching in inference?"]
-}]
-},
-{
-domain:"Vector + Storage Systems",
-desc:"AI data plane infrastructure",
-topics:[{
-title:"AI Data Infrastructure",
-level:"intermediate",
-objective:"Store embeddings and model artifacts efficiently",
-subtopics:["Vector DB infra","Object storage","Embedding indexing","FAISS scaling"],
-reading:["https://faiss.ai/"],
-videos:["https://www.youtube.com/watch?v=klTvEwg3oJ4"],
-projects:["Deploy FAISS cluster service"],
-interview:["How does approximate nearest neighbor search work?"]
-}]
-},
-{
-domain:"LLM Infrastructure",
-desc:"Production LLM infra systems",
-topics:[{
-title:"LLM Serving Infrastructure",
-level:"advanced",
-objective:"Deploy large language models efficiently",
-subtopics:["Quantization","KV cache","vLLM internals","Token streaming","Multi-GPU inference"],
-reading:["https://docs.vllm.ai/"],
-videos:["https://www.youtube.com/watch?v=UF2z2K0D9zQ"],
-projects:["Serve Llama model with vLLM"],
-interview:["How does KV cache improve inference speed?"]
-}]
-},
-{
-domain:"Observability + Monitoring",
-desc:"Infra monitoring for AI systems",
-topics:[{
-title:"AI Infra Observability",
-level:"advanced",
-objective:"Monitor GPU clusters and inference systems",
-subtopics:["Prometheus GPU exporters","Grafana dashboards","Latency tracing","GPU telemetry"],
-reading:["https://prometheus.io/docs/"],
-videos:["https://www.youtube.com/watch?v=h4Sl21AKiDg"],
-projects:["Create GPU observability dashboard"],
-interview:["How monitor GPU memory bottlenecks?"]
-}]
-},
-{
-domain:"MLOps Infra Automation",
-desc:"Automating infra pipelines",
-topics:[{
-title:"AI Infra CI/CD Pipelines",
-level:"advanced",
-objective:"Automate deployment of AI infra stacks",
-subtopics:["Terraform GPU infra","GitOps for ML infra","ArgoCD","Helm packaging"],
-reading:["https://argo-cd.readthedocs.io/"],
-videos:["https://www.youtube.com/watch?v=MeU5_k9ssrs"],
-projects:["Deploy GPU infra using Terraform + ArgoCD"],
-interview:["How automate multi-cluster AI infra rollout?"]
-}]
-},
-{
-domain:"Interview + System Design",
-desc:"Infra architecture interviews",
-topics:[{
-title:"AI Infra System Design",
-level:"advanced",
-objective:"Crack AI infra interviews",
-subtopics:["Design GPU cluster","Design inference platform","Design distributed training infra"],
-reading:["https://highscalability.com/"],
-videos:["https://www.youtube.com/watch?v=i7twT3x5yv8"],
-projects:["Mock infra design interview"],
-interview:["Design LLM serving platform for 1M users/day"]
-}]
-}
-];
+    <script>
+        const DATA = [
+            {
+                domain: "Linux + Systems Foundations",
+                desc: "OS and infrastructure fundamentals",
+                topics: [{
+                    title: "Linux for AI Infra",
+                    level: "beginner",
+                    objective: "Master Linux internals for AI infrastructure operations",
+                    subtopics: ["Processes & threads", "Memory mgmt", "NUMA basics", "IO scheduling", "Filesystem tuning"],
+                    reading: ["https://linuxjourney.com/"],
+                    videos: ["https://www.youtube.com/watch?v=sWbUDq4S6Y8"],
+                    projects: ["Optimize Linux node for GPU workloads"],
+                    interview: ["How does NUMA affect GPU workloads?"]
+                }]
+            },
+            {
+                domain: "GPU Architecture",
+                desc: "Understand GPU compute deeply",
+                topics: [{
+                    title: "GPU Systems Fundamentals",
+                    level: "intermediate",
+                    objective: "Learn GPU internals for model training and inference",
+                    subtopics: ["CUDA cores", "VRAM architecture", "Tensor cores", "PCIe lanes", "GPU scheduling"],
+                    reading: ["https://docs.nvidia.com/cuda/"],
+                    videos: ["https://www.youtube.com/watch?v=4sgKnKbR-WE"],
+                    projects: ["Benchmark GPU inference workloads"],
+                    interview: ["Difference between CUDA cores and Tensor cores?"]
+                }]
+            },
+            {
+                domain: "Containers + Kubernetes",
+                desc: "AI workloads orchestration",
+                topics: [{
+                    title: "Kubernetes for GPU Workloads",
+                    level: "advanced",
+                    objective: "Deploy GPU AI workloads on Kubernetes",
+                    subtopics: ["GPU operator", "Node pools", "Taints/tolerations", "Device plugins", "GPU scheduling"],
+                    reading: ["https://kubernetes.io/docs/"],
+                    videos: ["https://www.youtube.com/watch?v=X48VuDVv0do"],
+                    projects: ["Deploy GPU inference cluster on K8s"],
+                    interview: ["How does Kubernetes schedule GPU pods?"]
+                }]
+            },
+            {
+                domain: "Distributed Training Systems",
+                desc: "Scaling multi-node training",
+                topics: [{
+                    title: "Distributed AI Training",
+                    level: "advanced",
+                    objective: "Run large-scale distributed training jobs",
+                    subtopics: ["Horovod", "DeepSpeed", "NCCL", "Data parallelism", "Model parallelism"],
+                    reading: ["https://www.deepspeed.ai/"],
+                    videos: ["https://www.youtube.com/watch?v=wY2A5SX5uYQ"],
+                    projects: ["Train model across multi-node cluster"],
+                    interview: ["Data parallelism vs model parallelism?"]
+                }]
+            },
+            {
+                domain: "Model Serving Infrastructure",
+                desc: "Inference serving architecture",
+                topics: [{
+                    title: "Inference Serving Platforms",
+                    level: "advanced",
+                    objective: "Serve models at scale efficiently",
+                    subtopics: ["Triton Inference Server", "vLLM", "TensorRT", "Batching", "Autoscaling"],
+                    reading: ["https://developer.nvidia.com/nvidia-triton-inference-server"],
+                    videos: ["https://www.youtube.com/watch?v=H6nK9X3TQk8"],
+                    projects: ["Deploy Triton serving cluster"],
+                    interview: ["Why use dynamic batching in inference?"]
+                }]
+            },
+            {
+                domain: "Vector + Storage Systems",
+                desc: "AI data plane infrastructure",
+                topics: [{
+                    title: "AI Data Infrastructure",
+                    level: "intermediate",
+                    objective: "Store embeddings and model artifacts efficiently",
+                    subtopics: ["Vector DB infra", "Object storage", "Embedding indexing", "FAISS scaling"],
+                    reading: ["https://faiss.ai/"],
+                    videos: ["https://www.youtube.com/watch?v=klTvEwg3oJ4"],
+                    projects: ["Deploy FAISS cluster service"],
+                    interview: ["How does approximate nearest neighbor search work?"]
+                }]
+            },
+            {
+                domain: "LLM Infrastructure",
+                desc: "Production LLM infra systems",
+                topics: [{
+                    title: "LLM Serving Infrastructure",
+                    level: "advanced",
+                    objective: "Deploy large language models efficiently",
+                    subtopics: ["Quantization", "KV cache", "vLLM internals", "Token streaming", "Multi-GPU inference"],
+                    reading: ["https://docs.vllm.ai/"],
+                    videos: ["https://www.youtube.com/watch?v=UF2z2K0D9zQ"],
+                    projects: ["Serve Llama model with vLLM"],
+                    interview: ["How does KV cache improve inference speed?"]
+                }]
+            },
+            {
+                domain: "Observability + Monitoring",
+                desc: "Infra monitoring for AI systems",
+                topics: [{
+                    title: "AI Infra Observability",
+                    level: "advanced",
+                    objective: "Monitor GPU clusters and inference systems",
+                    subtopics: ["Prometheus GPU exporters", "Grafana dashboards", "Latency tracing", "GPU telemetry"],
+                    reading: ["https://prometheus.io/docs/"],
+                    videos: ["https://www.youtube.com/watch?v=h4Sl21AKiDg"],
+                    projects: ["Create GPU observability dashboard"],
+                    interview: ["How monitor GPU memory bottlenecks?"]
+                }]
+            },
+            {
+                domain: "MLOps Infra Automation",
+                desc: "Automating infra pipelines",
+                topics: [{
+                    title: "AI Infra CI/CD Pipelines",
+                    level: "advanced",
+                    objective: "Automate deployment of AI infra stacks",
+                    subtopics: ["Terraform GPU infra", "GitOps for ML infra", "ArgoCD", "Helm packaging"],
+                    reading: ["https://argo-cd.readthedocs.io/"],
+                    videos: ["https://www.youtube.com/watch?v=MeU5_k9ssrs"],
+                    projects: ["Deploy GPU infra using Terraform + ArgoCD"],
+                    interview: ["How automate multi-cluster AI infra rollout?"]
+                }]
+            },
+            {
+                domain: "Interview + System Design",
+                desc: "Infra architecture interviews",
+                topics: [{
+                    title: "AI Infra System Design",
+                    level: "advanced",
+                    objective: "Crack AI infra interviews",
+                    subtopics: ["Design GPU cluster", "Design inference platform", "Design distributed training infra"],
+                    reading: ["https://highscalability.com/"],
+                    videos: ["https://www.youtube.com/watch?v=i7twT3x5yv8"],
+                    projects: ["Mock infra design interview"],
+                    interview: ["Design LLM serving platform for 1M users/day"]
+                }]
+            }
+        ];
 
-const roadmap=document.getElementById('roadmap');
+        const roadmap = document.getElementById('roadmap');
 
-function renderRoadmap(filter=''){
-roadmap.innerHTML='';
-DATA.forEach((d,idx)=>{
-const filtered=d.topics.filter(t=>
-t.title.toLowerCase().includes(filter.toLowerCase())||
-d.domain.toLowerCase().includes(filter.toLowerCase())
-);
-if(filtered.length===0)return;
+        function renderRoadmap(filter = '') {
+            roadmap.innerHTML = '';
+            DATA.forEach((d, idx) => {
+                const filtered = d.topics.filter(t =>
+                    t.title.toLowerCase().includes(filter.toLowerCase()) ||
+                    d.domain.toLowerCase().includes(filter.toLowerCase())
+                );
+                if (filtered.length === 0) return;
 
-const div=document.createElement('div');
-div.className='domain';
-div.innerHTML=`
+                const div = document.createElement('div');
+                div.className = 'domain';
+                div.innerHTML = `
 <div class="domain-head">
 <div class="domain-left">
-<div class="domain-num">${idx+1}</div>
+<div class="domain-num">${idx + 1}</div>
 <div>
 <div class="domain-title">${d.domain}</div>
 <div class="domain-sub">${d.desc}</div>
@@ -457,7 +605,7 @@ div.innerHTML=`
 </div>
 <div class="domain-body">
 <div class="topic-grid">
-${filtered.map(topic=>`
+${filtered.map(topic => `
 <div class="topic">
 <h4>${topic.title}</h4>
 <div class="label ${topic.level}">${topic.level}</div>
@@ -466,17 +614,17 @@ ${filtered.map(topic=>`
 
 <div class="section-title">Subtopics</div>
 <div class="checklist">
-${topic.subtopics.map(s=>`<label><input type="checkbox" class="chk"> ${s}</label>`).join('')}
+${topic.subtopics.map(s => `<label><input type="checkbox" class="chk"> ${s}</label>`).join('')}
 </div>
 
 <div class="section-title">Reading Materials</div>
 <div class="links">
-${topic.reading.map(r=>`<a href="${r}" target="_blank">${r}</a>`).join('')}
+${topic.reading.map(r => `<a href="${r}" target="_blank">${r}</a>`).join('')}
 </div>
 
 <div class="section-title">Videos</div>
 <div class="links">
-${topic.videos.map(v=>`<a href="${v}" target="_blank">${v}</a>`).join('')}
+${topic.videos.map(v => `<a href="${v}" target="_blank">${v}</a>`).join('')}
 </div>
 
 <div class="section-title">Hands-on Project</div>
@@ -489,41 +637,61 @@ ${topic.videos.map(v=>`<a href="${v}" target="_blank">${v}</a>`).join('')}
 </div>
 </div>
 `;
-div.querySelector('.domain-head').onclick=()=>{
-div.classList.toggle('open');
-div.querySelector('.toggle').textContent=div.classList.contains('open')?'−':'+';
-};
-roadmap.appendChild(div);
-});
-bindCheckboxes();
-}
+                div.querySelector('.domain-head').onclick = () => {
+                    div.classList.toggle('open');
+                    div.querySelector('.toggle').textContent = div.classList.contains('open') ? '−' : '+';
+                };
+                roadmap.appendChild(div);
+            });
+            bindCheckboxes();
+        }
 
-function bindCheckboxes(){
-document.querySelectorAll('.chk').forEach(c=>{
-c.addEventListener('change',updateProgress);
-});
-}
+        function bindCheckboxes() {
+            document.querySelectorAll('.chk').forEach(c => {
+                c.addEventListener('change', updateProgress);
+            });
+        }
 
-function updateProgress(){
-const all=[...document.querySelectorAll('.chk')];
-const checked=all.filter(c=>c.checked).length;
-const pct=all.length?Math.round((checked/all.length)*100):0;
+        function updateProgress() {
+            const all = [...document.querySelectorAll('.chk')];
+            const checked = all.filter(c => c.checked).length;
+            const pct = all.length ? Math.round((checked / all.length) * 100) : 0;
 
-document.getElementById('conceptsDone').textContent=checked;
-document.getElementById('topicsDone').textContent=
-[...document.querySelectorAll('.topic')].filter(t=>t.querySelectorAll('.chk:checked').length>0).length;
+            document.getElementById('conceptsDone').textContent = checked;
+            document.getElementById('topicsDone').textContent =
+                [...document.querySelectorAll('.topic')].filter(t => t.querySelectorAll('.chk:checked').length > 0).length;
 
-document.getElementById('ringText').textContent=pct+'%';
-document.getElementById('progressFill').style.width=pct+'%';
-document.getElementById('ring').style.background=
-`conic-gradient(var(--p1) ${pct*3.6}deg,var(--p2) ${pct*3.6}deg,#222 0deg)`;
-}
+            document.getElementById('ringText').textContent = pct + '%';
+            document.getElementById('progressFill').style.width = pct + '%';
+            document.getElementById('ring').style.background =
+                `conic-gradient(var(--p1) ${pct * 3.6}deg,var(--p2) ${pct * 3.6}deg,#222 0deg)`;
+        }
 
-document.getElementById('searchInput').addEventListener('input',e=>{
-renderRoadmap(e.target.value);
-});
+        document.getElementById('searchInput').addEventListener('input', e => {
+            renderRoadmap(e.target.value);
+        });
 
-renderRoadmap();
-</script>
+        renderRoadmap();
+    </script>
+    <hr>
+    <button onclick="markComplete()">Mark as Completed ✅</button>
+
+    <script>
+        function markComplete() {
+
+            let module = localStorage.getItem("currentModule");
+
+            let modules = JSON.parse(localStorage.getItem("modules")) || {};
+
+            modules[module] = true;
+
+            localStorage.setItem("modules", JSON.stringify(modules));
+
+            alert("Module Completed!");
+
+            window.location.href = "../../index.html";
+        }
+    </script>
 </body>
+
 </html>

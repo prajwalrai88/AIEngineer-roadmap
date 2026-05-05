@@ -1,199 +1,245 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>AWS AI Ecosphere</title>
+    <title>AWS AI Ecosphere</title>
 
-<style>
-body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#0a0a0f;
-color:#f5f5fa;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0a0a0f;
+            color: #f5f5fa;
+        }
 
-.container{
-max-width:1100px;
-margin:auto;
-padding:40px 20px;
-text-align:center;
-}
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
 
-h1{color:#8b5cf6;font-size:42px;}
-.subtitle{color:#9ca3af;margin-bottom:30px;}
+        h1 {
+            color: #8b5cf6;
+            font-size: 42px;
+        }
 
-.flow{
-background:#020617;
-padding:20px;
-border-radius:12px;
-margin:30px 0;
-font-weight:bold;
-}
+        .subtitle {
+            color: #9ca3af;
+            margin-bottom: 30px;
+        }
 
-.card{
-background:#12121a;
-padding:20px;
-border-radius:12px;
-border:1px solid rgba(255,255,255,.08);
-margin-top:20px;
-text-align:left;
-}
+        .flow {
+            background: #020617;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 30px 0;
+            font-weight: bold;
+        }
 
-.btn{
-display:inline-block;
-margin-top:20px;
-padding:14px 24px;
-background:#34d399;
-color:black;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
+        .card {
+            background: #12121a;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, .08);
+            margin-top: 20px;
+            text-align: left;
+        }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-margin-top:30px;
-}
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 24px;
+            background: #34d399;
+            color: black;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-.feature{
-background:#12121a;
-padding:20px;
-border-radius:10px;
-border:1px solid rgba(255,255,255,.08);
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-.feature h3{color:#34d399;}
+        .feature {
+            background: #12121a;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
 
-pre{
-background:#111827;
-padding:10px;
-border-radius:8px;
-}
+        .feature h3 {
+            color: #34d399;
+        }
 
-.success{color:#34d399;}
-.warning{color:#f87171;}
-</style>
+        pre {
+            background: #111827;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .success {
+            color: #34d399;
+        }
+
+        .warning {
+            color: #f87171;
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-<h1>AWS AI Ecosphere</h1>
+        <h1>AWS AI Ecosphere</h1>
 
-<p class="subtitle">
-Build a production-grade AI system using AWS native infrastructure.
-</p>
+        <p class="subtitle">
+            Build a production-grade AI system using AWS native infrastructure.
+        </p>
 
-<!-- FLOW -->
-<div class="flow">
-User → CloudFront → S3 → API Gateway → EC2 → AI → Response
-</div>
+        <!-- FLOW -->
+        <div class="flow">
+            User → CloudFront → S3 → API Gateway → EC2 → AI → Response
+        </div>
 
-<!-- FEATURES -->
-<div class="grid">
-<div class="feature"><h3>☁️ AWS Infra</h3><p>Real cloud setup</p></div>
-<div class="feature"><h3>⚙️ Backend</h3><p>FastAPI on EC2</p></div>
-<div class="feature"><h3>📦 Storage</h3><p>S3 + CloudFront</p></div>
-<div class="feature"><h3>🔐 Security</h3><p>IAM + networking</p></div>
-</div>
+        <!-- FEATURES -->
+        <div class="grid">
+            <div class="feature">
+                <h3>☁️ AWS Infra</h3>
+                <p>Real cloud setup</p>
+            </div>
+            <div class="feature">
+                <h3>⚙️ Backend</h3>
+                <p>FastAPI on EC2</p>
+            </div>
+            <div class="feature">
+                <h3>📦 Storage</h3>
+                <p>S3 + CloudFront</p>
+            </div>
+            <div class="feature">
+                <h3>🔐 Security</h3>
+                <p>IAM + networking</p>
+            </div>
+        </div>
 
-<!-- PREREQUISITES -->
-<div class="card">
+        <!-- PREREQUISITES -->
+        <div class="card">
 
-<h2 style="color:#34d399;">📋 Prerequisites (Complete Before Starting)</h2>
+            <h2 style="color:#34d399;">📋 Prerequisites (Complete Before Starting)</h2>
 
-<h3>1. System Setup</h3>
-<ul>
-<li>Install <b>Python 3.10+</b></li>
-<li>Install <b>Git</b></li>
-<li>Install <b>VS Code</b></li>
-</ul>
+            <h3>1. System Setup</h3>
+            <ul>
+                <li>Install <b>Python 3.10+</b></li>
+                <li>Install <b>Git</b></li>
+                <li>Install <b>VS Code</b></li>
+            </ul>
 
-<pre>
+            <pre>
 python --version
 git --version
 </pre>
 
-<p class="success">✔ Commands should return versions</p>
+            <p class="success">✔ Commands should return versions</p>
 
----
+            ---
 
-<h3>2. AWS Account</h3>
-<ul>
-<li>Create AWS account</li>
-<li>Enable billing</li>
-<li>Have access to AWS Console</li>
-</ul>
+            <h3>2. AWS Account</h3>
+            <ul>
+                <li>Create AWS account</li>
+                <li>Enable billing</li>
+                <li>Have access to AWS Console</li>
+            </ul>
 
-<p class="warning">
-⚠ AWS may charge small amounts (free tier recommended)
-</p>
+            <p class="warning">
+                ⚠ AWS may charge small amounts (free tier recommended)
+            </p>
 
----
+            ---
 
-<h3>3. Basic Knowledge</h3>
-<ul>
-<li>Terminal usage (cd, ssh)</li>
-<li>Basic Python understanding</li>
-</ul>
+            <h3>3. Basic Knowledge</h3>
+            <ul>
+                <li>Terminal usage (cd, ssh)</li>
+                <li>Basic Python understanding</li>
+            </ul>
 
----
+            ---
 
-<h3>4. SSH Readiness (IMPORTANT)</h3>
+            <h3>4. SSH Readiness (IMPORTANT)</h3>
 
-<pre>
+            <pre>
 ssh -V
 </pre>
 
-<p>
-✔ If command works → ready  
-❌ If not → install OpenSSH
-</p>
+            <p>
+                ✔ If command works → ready
+                ❌ If not → install OpenSSH
+            </p>
 
----
+            ---
 
-<h3>5. Internet + Browser</h3>
-<ul>
-<li>Stable internet connection</li>
-<li>Chrome / Edge browser</li>
-</ul>
+            <h3>5. Internet + Browser</h3>
+            <ul>
+                <li>Stable internet connection</li>
+                <li>Chrome / Edge browser</li>
+            </ul>
 
----
+            ---
 
-<h3>🚦 Final Check</h3>
+            <h3>🚦 Final Check</h3>
 
-<ul>
-<li>✔ Python working</li>
-<li>✔ Git working</li>
-<li>✔ AWS account ready</li>
-<li>✔ SSH available</li>
-</ul>
+            <ul>
+                <li>✔ Python working</li>
+                <li>✔ Git working</li>
+                <li>✔ AWS account ready</li>
+                <li>✔ SSH available</li>
+            </ul>
 
-<p class="success">
-✔ You are ready to start the project
-</p>
+            <p class="success">
+                ✔ You are ready to start the project
+            </p>
 
-</div>
+        </div>
 
-<!-- CTA -->
-<div class="card" style="text-align:center;">
+        <!-- CTA -->
+        <div class="card" style="text-align:center;">
 
-<h2 style="color:#34d399;">Start Building</h2>
+            <h2 style="color:#34d399;">Start Building</h2>
 
-<p>
-Now that everything is ready, begin execution from dashboard.
-</p>
+            <p>
+                Now that everything is ready, begin execution from dashboard.
+            </p>
 
-<a href="aws-dashboard.html" class="btn">
-🚀 Go to AWS Dashboard
-</a>
+            <a href="aws-dashboard.html" class="btn">
+                🚀 Go to AWS Dashboard
+            </a>
 
-</div>
+        </div>
 
-</div>
+    </div>
+    <hr>
+    <button onclick="markComplete()">Mark as Completed ✅</button>
 
+    <script>
+        function markComplete() {
+
+            let module = localStorage.getItem("currentModule");
+
+            let modules = JSON.parse(localStorage.getItem("modules")) || {};
+
+            modules[module] = true;
+
+            localStorage.setItem("modules", JSON.stringify(modules));
+
+            alert("Module Completed!");
+
+            window.location.href = "../../index.html";
+        }
+    </script>
 </body>
+
 </html>

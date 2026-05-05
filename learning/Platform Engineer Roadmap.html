@@ -1,582 +1,1183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Staff Platform Engineer Roadmap</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #1a1a24;
-    --surface3: #22222f;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --text: #f0f0f8;
-    --muted: #6b6b80;
-    --muted2: #9090a8;
-    --p1: #a78bfa;   --p1d: #7c3aed;  --p1bg: rgba(167,139,250,0.08); --p1bd: rgba(167,139,250,0.2);
-    --p2: #34d399;   --p2d: #059669;  --p2bg: rgba(52,211,153,0.08);  --p2bd: rgba(52,211,153,0.2);
-    --p3: #fb923c;   --p3d: #ea580c;  --p3bg: rgba(251,146,60,0.08);  --p3bd: rgba(251,146,60,0.2);
-    --p4: #60a5fa;   --p4d: #2563eb;  --p4bg: rgba(96,165,250,0.08);  --p4bd: rgba(96,165,250,0.2);
-    --p5: #fbbf24;   --p5d: #d97706;  --p5bg: rgba(251,191,36,0.08);  --p5bd: rgba(251,191,36,0.2);
-    --success: #34d399; --warning: #fbbf24; --danger: #f87171;
-    --radius: 12px; --radius-lg: 18px; --radius-xl: 24px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Platform Engineer Roadmap</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --surface3: #22222f;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(255, 255, 255, 0.12);
+      --text: #f0f0f8;
+      --muted: #6b6b80;
+      --muted2: #9090a8;
+      --p1: #a78bfa;
+      --p1d: #7c3aed;
+      --p1bg: rgba(167, 139, 250, 0.08);
+      --p1bd: rgba(167, 139, 250, 0.2);
+      --p2: #34d399;
+      --p2d: #059669;
+      --p2bg: rgba(52, 211, 153, 0.08);
+      --p2bd: rgba(52, 211, 153, 0.2);
+      --p3: #fb923c;
+      --p3d: #ea580c;
+      --p3bg: rgba(251, 146, 60, 0.08);
+      --p3bd: rgba(251, 146, 60, 0.2);
+      --p4: #60a5fa;
+      --p4d: #2563eb;
+      --p4bg: rgba(96, 165, 250, 0.08);
+      --p4bd: rgba(96, 165, 250, 0.2);
+      --p5: #fbbf24;
+      --p5d: #d97706;
+      --p5bg: rgba(251, 191, 36, 0.08);
+      --p5bd: rgba(251, 191, 36, 0.2);
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+      --radius: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 24px;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* Background grid */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(167,139,250,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(167,139,250,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
+    /* Background grid */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167, 139, 250, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167, 139, 250, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  .glow-orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(120px);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.15;
-  }
-  .glow-orb.g1 { width: 600px; height: 600px; background: #7c3aed; top: -200px; left: -200px; }
-  .glow-orb.g2 { width: 400px; height: 400px; background: #059669; bottom: -100px; right: -100px; }
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.15;
+    }
 
-  .container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .glow-orb.g1 {
+      width: 600px;
+      height: 600px;
+      background: #7c3aed;
+      top: -200px;
+      left: -200px;
+    }
 
-  /* Header */
-  .header {
-    padding: 48px 0 32px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 32px;
-  }
-  .header-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  .header-text {}
-  .header-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--p1bg); border: 1px solid var(--p1bd);
-    color: var(--p1); font-size: 11px; font-weight: 500;
-    font-family: 'DM Mono', monospace;
-    padding: 4px 12px; border-radius: 20px; margin-bottom: 16px;
-    letter-spacing: 0.08em; text-transform: uppercase;
-  }
-  .header-badge::before { content: ''; width: 6px; height: 6px; background: var(--p1); border-radius: 50%; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
-  h1 {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  h1 span { color: var(--p1); }
-  .header-sub { font-size: 15px; color: var(--muted2); font-weight: 300; }
+    .glow-orb.g2 {
+      width: 400px;
+      height: 400px;
+      background: #059669;
+      bottom: -100px;
+      right: -100px;
+    }
 
-  /* Stats */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-    margin-bottom: 32px;
-  }
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s;
-  }
-  .stat-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    border-radius: 2px 2px 0 0;
-  }
-  .stat-card.sc1::after { background: var(--p1); }
-  .stat-card.sc2::after { background: var(--p2); }
-  .stat-card.sc3::after { background: var(--p4); }
-  .stat-card.sc4::after { background: var(--p3); }
-  .stat-val {
-    font-family: 'Syne', sans-serif;
-    font-size: 36px; font-weight: 800;
-    line-height: 1; margin-bottom: 4px;
-  }
-  .stat-card.sc1 .stat-val { color: var(--p1); }
-  .stat-card.sc2 .stat-val { color: var(--p2); }
-  .stat-card.sc3 .stat-val { color: var(--p4); }
-  .stat-card.sc4 .stat-val { color: var(--p3); }
-  .stat-label { font-size: 12px; color: var(--muted); font-weight: 400; }
-  .stat-bar { height: 2px; background: var(--border2); border-radius: 2px; margin-top: 14px; overflow: hidden; }
-  .stat-bar-fill { height: 100%; border-radius: 2px; transition: width 0.6s ease; }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-  /* Progress ring */
-  .progress-section {
-    display: flex; align-items: center; gap: 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px 24px;
-    margin-bottom: 32px;
-  }
-  .ring-container { position: relative; width: 80px; height: 80px; flex-shrink: 0; }
-  .ring-container svg { transform: rotate(-90deg); }
-  .ring-label { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  .ring-pct { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; color: var(--text); }
-  .ring-sub { font-size: 10px; color: var(--muted); font-family: 'DM Mono', monospace; }
-  .progress-info { flex: 1; }
-  .progress-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-  .progress-desc { font-size: 13px; color: var(--muted2); margin-bottom: 12px; }
-  .overall-bar { height: 6px; background: var(--border2); border-radius: 3px; overflow: hidden; }
-  .overall-bar-fill { height: 100%; background: linear-gradient(90deg, var(--p1), var(--p2)); border-radius: 3px; transition: width 0.6s ease; }
+    /* Header */
+    .header {
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
 
-  /* Phase nav */
-  .phase-nav {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px;
-  }
-  .phase-btn {
-    display: flex; align-items: center; gap: 8px;
-    padding: 10px 18px;
-    border-radius: 40px;
-    border: 1px solid var(--border2);
-    background: var(--surface);
-    color: var(--muted2);
-    font-size: 13px; font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .phase-btn:hover { border-color: var(--border2); color: var(--text); background: var(--surface2); }
-  .phase-btn.active { color: var(--text); }
-  .phase-btn.p1.active { background: var(--p1bg); border-color: var(--p1bd); color: var(--p1); }
-  .phase-btn.p2.active { background: var(--p2bg); border-color: var(--p2bd); color: var(--p2); }
-  .phase-btn.p3.active { background: var(--p3bg); border-color: var(--p3bd); color: var(--p3); }
-  .phase-btn.p4.active { background: var(--p4bg); border-color: var(--p4bd); color: var(--p4); }
-  .phase-btn.p5.active { background: var(--p5bg); border-color: var(--p5bd); color: var(--p5); }
-  .phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .header-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
 
-  /* Phase header */
-  .phase-header {
-    display: flex; align-items: center; gap: 14px;
-    padding: 24px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    margin-bottom: 16px;
-  }
-  .phase-icon {
-    width: 48px; height: 48px; border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
-    flex-shrink: 0;
-  }
-  .phase-info { flex: 1; }
-  .phase-name { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 2px; }
-  .phase-desc { font-size: 13px; color: var(--muted2); }
-  .phase-prog-wrap { text-align: right; }
-  .phase-prog-num { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--muted2); margin-bottom: 6px; }
-  .phase-prog-bar { width: 120px; height: 4px; background: var(--border2); border-radius: 2px; overflow: hidden; }
-  .phase-prog-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+    .header-text {}
 
-  /* Topics grid */
-  .topics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 14px;
-    margin-bottom: 40px;
-  }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--p1bg);
+      border: 1px solid var(--p1bd);
+      color: var(--p1);
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'DM Mono', monospace;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
 
-  .topic-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: all 0.2s;
-    cursor: pointer;
-  }
-  .topic-card:hover { border-color: var(--border2); transform: translateY(-1px); }
-  .topic-card.open { border-color: var(--border2); }
+    .header-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--p1);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
 
-  .tc-head { padding: 18px 20px 16px; }
-  .tc-row1 { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-  .tc-badge {
-    width: 32px; height: 32px; border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
-    flex-shrink: 0; margin-top: 1px;
-  }
-  .tc-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; line-height: 1.3; flex: 1; color: var(--text); }
-  .tc-chev { color: var(--muted); font-size: 12px; transition: transform 0.2s; flex-shrink: 0; margin-top: 4px; }
-  .open .tc-chev { transform: rotate(180deg); }
-  .tc-why { font-size: 12px; color: var(--muted2); margin-bottom: 14px; line-height: 1.5; }
+    @keyframes pulse {
 
-  .tc-footer { display: flex; align-items: center; gap: 10px; }
-  .depth-wrap { display: flex; gap: 3px; align-items: center; }
-  .depth-pip { width: 20px; height: 4px; border-radius: 2px; }
-  .depth-label { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-left: 6px; }
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
 
-  .s-btns { display: flex; gap: 4px; margin-left: auto; }
-  .s-btn {
-    font-size: 11px; padding: 4px 10px; border-radius: 20px;
-    border: 1px solid var(--border2); background: transparent;
-    color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
-  }
-  .s-btn:hover { color: var(--text); border-color: var(--border2); }
-  .s-btn.active-todo { background: var(--surface3); color: var(--muted2); }
-  .s-btn.active-prog { background: rgba(251,191,36,0.12); color: var(--warning); border-color: rgba(251,191,36,0.3); }
-  .s-btn.active-done { background: rgba(52,211,153,0.12); color: var(--success); border-color: rgba(52,211,153,0.3); }
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8)
+      }
+    }
 
-  /* Card body */
-  .tc-body { display: none; border-top: 1px solid var(--border); }
-  .open .tc-body { display: block; }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
 
-  .tc-tabs { display: flex; border-bottom: 1px solid var(--border); }
-  .tc-tab {
-    flex: 1; padding: 11px 8px; font-size: 12px; font-weight: 500;
-    color: var(--muted); background: none; border: none; cursor: pointer;
-    font-family: 'DM Sans', sans-serif; border-bottom: 2px solid transparent;
-    margin-bottom: -1px; transition: all 0.15s;
-  }
-  .tc-tab:hover { color: var(--muted2); }
-  .tc-tab.active { color: var(--text); border-bottom-color: var(--text); }
+    h1 span {
+      color: var(--p1);
+    }
 
-  .tc-panel { display: none; padding: 18px 20px; }
-  .tc-panel.active { display: block; }
+    .header-sub {
+      font-size: 15px;
+      color: var(--muted2);
+      font-weight: 300;
+    }
 
-  .sec-lbl { font-size: 10px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; font-family: 'DM Mono', monospace; }
+    /* Stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
 
-  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
-  .chip {
-    font-size: 12px; padding: 5px 12px; border-radius: 20px;
-    border: 1px solid var(--border2); color: var(--muted2);
-    cursor: pointer; transition: all 0.15s; user-select: none;
-    background: var(--surface2);
-  }
-  .chip:hover { border-color: var(--border2); color: var(--text); }
-  .chip.on { color: var(--p1); border-color: rgba(167,139,250,0.3); background: var(--p1bg); }
-  .chip-count { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; margin-bottom: 14px; }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
 
-  .staff-q {
-    background: var(--surface2);
-    border-left: 2px solid var(--p5);
-    border-radius: 0 8px 8px 0;
-    padding: 10px 14px; font-size: 13px;
-    color: var(--text); margin-bottom: 8px; line-height: 1.55;
-  }
-  .sq-label { font-size: 10px; font-weight: 500; color: var(--p5); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-family: 'DM Mono', monospace; }
+    .stat-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      border-radius: 2px 2px 0 0;
+    }
 
-  .yt-item {
-    display: flex; align-items: center; gap: 10px;
-    padding: 10px 0; border-bottom: 1px solid var(--border);
-  }
-  .yt-item:last-child { border-bottom: none; }
-  .yt-ico {
-    width: 36px; height: 26px; background: #FF0000; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  }
-  .yt-tri { width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 10px solid white; margin-left: 2px; }
-  .yt-info { flex: 1; min-width: 0; }
-  .yt-title { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .yt-ch { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: 'DM Mono', monospace; }
-  .yt-watch {
-    font-size: 11px; padding: 5px 12px; border-radius: 6px;
-    border: 1px solid rgba(96,165,250,0.3); color: var(--p4);
-    background: rgba(96,165,250,0.08); text-decoration: none;
-    white-space: nowrap; flex-shrink: 0; transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .yt-watch:hover { background: rgba(96,165,250,0.15); }
+    .stat-card.sc1::after {
+      background: var(--p1);
+    }
 
-  .action-row { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-  .act-btn {
-    font-size: 12px; padding: 7px 16px; border-radius: 8px;
-    border: 1px solid var(--border2); background: var(--surface2);
-    color: var(--text); cursor: pointer; font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
-  }
-  .act-btn:hover { background: var(--surface3); border-color: var(--border2); }
-  .act-btn.primary { border-color: var(--p1bd); color: var(--p1); background: var(--p1bg); }
-  .act-btn.primary:hover { background: rgba(167,139,250,0.15); }
+    .stat-card.sc2::after {
+      background: var(--p2);
+    }
 
-  /* Completion badge on card */
-  .tc-progress-strip {
-    height: 2px; background: var(--border);
-  }
-  .tc-progress-fill { height: 100%; transition: width 0.4s ease; }
+    .stat-card.sc3::after {
+      background: var(--p4);
+    }
 
-  /* Footer */
-  .footer { padding: 40px 0 32px; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 13px; }
-  .footer span { color: var(--p1); }
+    .stat-card.sc4::after {
+      background: var(--p3);
+    }
 
-  @media (max-width: 640px) {
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .topics-grid { grid-template-columns: 1fr; }
-    .phase-btn { font-size: 12px; padding: 8px 14px; }
-    .progress-section { flex-wrap: wrap; }
-  }
-</style>
+    .stat-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-card.sc1 .stat-val {
+      color: var(--p1);
+    }
+
+    .stat-card.sc2 .stat-val {
+      color: var(--p2);
+    }
+
+    .stat-card.sc3 .stat-val {
+      color: var(--p4);
+    }
+
+    .stat-card.sc4 .stat-val {
+      color: var(--p3);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .stat-bar {
+      height: 2px;
+      background: var(--border2);
+      border-radius: 2px;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.6s ease;
+    }
+
+    /* Progress ring */
+    .progress-section {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+
+    .ring-container {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+
+    .ring-container svg {
+      transform: rotate(-90deg);
+    }
+
+    .ring-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ring-pct {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .ring-sub {
+      font-size: 10px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .progress-info {
+      flex: 1;
+    }
+
+    .progress-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .progress-desc {
+      font-size: 13px;
+      color: var(--muted2);
+      margin-bottom: 12px;
+    }
+
+    .overall-bar {
+      height: 6px;
+      background: var(--border2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .overall-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--p1), var(--p2));
+      border-radius: 3px;
+      transition: width 0.6s ease;
+    }
+
+    /* Phase nav */
+    .phase-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .phase-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 40px;
+      border: 1px solid var(--border2);
+      background: var(--surface);
+      color: var(--muted2);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .phase-btn:hover {
+      border-color: var(--border2);
+      color: var(--text);
+      background: var(--surface2);
+    }
+
+    .phase-btn.active {
+      color: var(--text);
+    }
+
+    .phase-btn.p1.active {
+      background: var(--p1bg);
+      border-color: var(--p1bd);
+      color: var(--p1);
+    }
+
+    .phase-btn.p2.active {
+      background: var(--p2bg);
+      border-color: var(--p2bd);
+      color: var(--p2);
+    }
+
+    .phase-btn.p3.active {
+      background: var(--p3bg);
+      border-color: var(--p3bd);
+      color: var(--p3);
+    }
+
+    .phase-btn.p4.active {
+      background: var(--p4bg);
+      border-color: var(--p4bd);
+      color: var(--p4);
+    }
+
+    .phase-btn.p5.active {
+      background: var(--p5bg);
+      border-color: var(--p5bd);
+      color: var(--p5);
+    }
+
+    .phase-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Phase header */
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+    }
+
+    .phase-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .phase-info {
+      flex: 1;
+    }
+
+    .phase-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .phase-desc {
+      font-size: 13px;
+      color: var(--muted2);
+    }
+
+    .phase-prog-wrap {
+      text-align: right;
+    }
+
+    .phase-prog-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--muted2);
+      margin-bottom: 6px;
+    }
+
+    .phase-prog-bar {
+      width: 120px;
+      height: 4px;
+      background: var(--border2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .phase-prog-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s ease;
+    }
+
+    /* Topics grid */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .topic-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-1px);
+    }
+
+    .topic-card.open {
+      border-color: var(--border2);
+    }
+
+    .tc-head {
+      padding: 18px 20px 16px;
+    }
+
+    .tc-row1 {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .tc-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .tc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.3;
+      flex: 1;
+      color: var(--text);
+    }
+
+    .tc-chev {
+      color: var(--muted);
+      font-size: 12px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .open .tc-chev {
+      transform: rotate(180deg);
+    }
+
+    .tc-why {
+      font-size: 12px;
+      color: var(--muted2);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .tc-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .depth-wrap {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .depth-pip {
+      width: 20px;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    .depth-label {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      margin-left: 6px;
+    }
+
+    .s-btns {
+      display: flex;
+      gap: 4px;
+      margin-left: auto;
+    }
+
+    .s-btn {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border2);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+
+    .s-btn:hover {
+      color: var(--text);
+      border-color: var(--border2);
+    }
+
+    .s-btn.active-todo {
+      background: var(--surface3);
+      color: var(--muted2);
+    }
+
+    .s-btn.active-prog {
+      background: rgba(251, 191, 36, 0.12);
+      color: var(--warning);
+      border-color: rgba(251, 191, 36, 0.3);
+    }
+
+    .s-btn.active-done {
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--success);
+      border-color: rgba(52, 211, 153, 0.3);
+    }
+
+    /* Card body */
+    .tc-body {
+      display: none;
+      border-top: 1px solid var(--border);
+    }
+
+    .open .tc-body {
+      display: block;
+    }
+
+    .tc-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tc-tab {
+      flex: 1;
+      padding: 11px 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: all 0.15s;
+    }
+
+    .tc-tab:hover {
+      color: var(--muted2);
+    }
+
+    .tc-tab.active {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    .tc-panel {
+      display: none;
+      padding: 18px 20px;
+    }
+
+    .tc-panel.active {
+      display: block;
+    }
+
+    .sec-lbl {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .chip {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border2);
+      color: var(--muted2);
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+      background: var(--surface2);
+    }
+
+    .chip:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+
+    .chip.on {
+      color: var(--p1);
+      border-color: rgba(167, 139, 250, 0.3);
+      background: var(--p1bg);
+    }
+
+    .chip-count {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 14px;
+    }
+
+    .staff-q {
+      background: var(--surface2);
+      border-left: 2px solid var(--p5);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    .sq-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--p5);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .yt-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .yt-item:last-child {
+      border-bottom: none;
+    }
+
+    .yt-ico {
+      width: 36px;
+      height: 26px;
+      background: #FF0000;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .yt-tri {
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 10px solid white;
+      margin-left: 2px;
+    }
+
+    .yt-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .yt-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .yt-ch {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .yt-watch {
+      font-size: 11px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(96, 165, 250, 0.3);
+      color: var(--p4);
+      background: rgba(96, 165, 250, 0.08);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: all 0.15s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .yt-watch:hover {
+      background: rgba(96, 165, 250, 0.15);
+    }
+
+    .action-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .act-btn {
+      font-size: 12px;
+      padding: 7px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border2);
+      background: var(--surface2);
+      color: var(--text);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+
+    .act-btn:hover {
+      background: var(--surface3);
+      border-color: var(--border2);
+    }
+
+    .act-btn.primary {
+      border-color: var(--p1bd);
+      color: var(--p1);
+      background: var(--p1bg);
+    }
+
+    .act-btn.primary:hover {
+      background: rgba(167, 139, 250, 0.15);
+    }
+
+    /* Completion badge on card */
+    .tc-progress-strip {
+      height: 2px;
+      background: var(--border);
+    }
+
+    .tc-progress-fill {
+      height: 100%;
+      transition: width 0.4s ease;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 0 32px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer span {
+      color: var(--p1);
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .topics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .phase-btn {
+        font-size: 12px;
+        padding: 8px 14px;
+      }
+
+      .progress-section {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="glow-orb g1"></div>
-<div class="glow-orb g2"></div>
+  <div class="glow-orb g1"></div>
+  <div class="glow-orb g2"></div>
 
-<div class="container">
+  <div class="container">
 
-  <header class="header">
-    <div class="header-inner">
-      <div class="header-text">
-        <div class="header-badge">Staff interview prep</div>
-        <h1>Platform <span>Engineer</span><br>Roadmap</h1>
-        <div class="header-sub">5 phases · 17 topics · full interview preparation</div>
-      </div>
-      <div class="progress-section" style="flex:0 0 auto;min-width:300px;max-width:380px;">
-        <div class="ring-container">
-          <svg width="80" height="80" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="6"/>
-            <circle id="ring-circ" cx="40" cy="40" r="33" fill="none" stroke="url(#ringGrad)" stroke-width="6"
-              stroke-dasharray="207.3" stroke-dashoffset="207.3" stroke-linecap="round"
-              style="transition:stroke-dashoffset .6s ease"/>
-            <defs>
-              <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#a78bfa"/>
-                <stop offset="100%" stop-color="#34d399"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <div class="ring-label">
-            <div class="ring-pct" id="ring-pct">0%</div>
-            <div class="ring-sub">done</div>
+    <header class="header">
+      <div class="header-inner">
+        <div class="header-text">
+          <div class="header-badge">Staff interview prep</div>
+          <h1>Platform <span>Engineer</span><br>Roadmap</h1>
+          <div class="header-sub">5 phases · 17 topics · full interview preparation</div>
+        </div>
+        <div class="progress-section" style="flex:0 0 auto;min-width:300px;max-width:380px;">
+          <div class="ring-container">
+            <svg width="80" height="80" viewBox="0 0 80 80">
+              <circle cx="40" cy="40" r="33" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="6" />
+              <circle id="ring-circ" cx="40" cy="40" r="33" fill="none" stroke="url(#ringGrad)" stroke-width="6"
+                stroke-dasharray="207.3" stroke-dashoffset="207.3" stroke-linecap="round"
+                style="transition:stroke-dashoffset .6s ease" />
+              <defs>
+                <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#a78bfa" />
+                  <stop offset="100%" stop-color="#34d399" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ring-label">
+              <div class="ring-pct" id="ring-pct">0%</div>
+              <div class="ring-sub">done</div>
+            </div>
+          </div>
+          <div class="progress-info">
+            <div class="progress-title">Overall progress</div>
+            <div class="progress-desc" id="prog-desc">0 of 62 concepts checked</div>
+            <div class="overall-bar">
+              <div class="overall-bar-fill" id="overall-fill" style="width:0%"></div>
+            </div>
           </div>
         </div>
-        <div class="progress-info">
-          <div class="progress-title">Overall progress</div>
-          <div class="progress-desc" id="prog-desc">0 of 62 concepts checked</div>
-          <div class="overall-bar"><div class="overall-bar-fill" id="overall-fill" style="width:0%"></div></div>
+      </div>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card sc1">
+        <div class="stat-val" id="sv-done">0</div>
+        <div class="stat-label">Topics completed</div>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" id="sb-done" style="width:0%;background:var(--p1)"></div>
+        </div>
+      </div>
+      <div class="stat-card sc2">
+        <div class="stat-val" id="sv-prog">0</div>
+        <div class="stat-label">In progress</div>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" id="sb-prog" style="width:0%;background:var(--p2)"></div>
+        </div>
+      </div>
+      <div class="stat-card sc3">
+        <div class="stat-val" id="sv-chk">0</div>
+        <div class="stat-label">Concepts checked</div>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" id="sb-chk" style="width:0%;background:var(--p4)"></div>
+        </div>
+      </div>
+      <div class="stat-card sc4">
+        <div class="stat-val" id="sv-left">17</div>
+        <div class="stat-label">Topics remaining</div>
+        <div class="stat-bar">
+          <div class="stat-bar-fill" id="sb-left" style="width:100%;background:var(--p3)"></div>
         </div>
       </div>
     </div>
-  </header>
 
-  <div class="stats-grid">
-    <div class="stat-card sc1">
-      <div class="stat-val" id="sv-done">0</div>
-      <div class="stat-label">Topics completed</div>
-      <div class="stat-bar"><div class="stat-bar-fill" id="sb-done" style="width:0%;background:var(--p1)"></div></div>
-    </div>
-    <div class="stat-card sc2">
-      <div class="stat-val" id="sv-prog">0</div>
-      <div class="stat-label">In progress</div>
-      <div class="stat-bar"><div class="stat-bar-fill" id="sb-prog" style="width:0%;background:var(--p2)"></div></div>
-    </div>
-    <div class="stat-card sc3">
-      <div class="stat-val" id="sv-chk">0</div>
-      <div class="stat-label">Concepts checked</div>
-      <div class="stat-bar"><div class="stat-bar-fill" id="sb-chk" style="width:0%;background:var(--p4)"></div></div>
-    </div>
-    <div class="stat-card sc4">
-      <div class="stat-val" id="sv-left">17</div>
-      <div class="stat-label">Topics remaining</div>
-      <div class="stat-bar"><div class="stat-bar-fill" id="sb-left" style="width:100%;background:var(--p3)"></div></div>
-    </div>
+    <nav class="phase-nav" id="phase-nav"></nav>
+    <div id="phase-content"></div>
+
+    <footer class="footer">
+      Built for your <span>Staff Platform Engineer</span> journey · Track every concept, ace every interview
+    </footer>
+
   </div>
 
-  <nav class="phase-nav" id="phase-nav"></nav>
-  <div id="phase-content"></div>
+  <script>
+    const PHASES = [
+      {
+        id: 1, label: "Phase 1", name: "Core Foundation", cls: "p1",
+        color: "#a78bfa", colorD: "#7c3aed", bg: "rgba(167,139,250,0.08)", bd: "rgba(167,139,250,0.2)",
+        desc: "Mandatory before staff interviews",
+        topics: [
+          {
+            n: 1, title: "Platform Engineering Mindset", why: "How you think, not just tools", depth: 3,
+            concepts: ["DevOps vs SRE vs Platform Eng", "Internal Developer Platform (IDP)", "Golden paths", "Self-service infrastructure", "Platform as product thinking"],
+            staffQs: ["How would you build a platform for 500 developers?", "What makes a platform team different from a DevOps team?"],
+            videos: [{ t: "Platform Engineering Explained", ch: "DevOps Toolkit", url: "https://www.youtube.com/watch?v=ghzsBm8vOms" }, { t: "Internal Developer Platforms in depth", ch: "KubeCon", url: "https://www.youtube.com/watch?v=5dPQmEB1kOo" }, { t: "Golden paths & developer self-service", ch: "Humanitec", url: "https://www.youtube.com/watch?v=SkHBd4aDPxs" }]
+          },
+          {
+            n: 2, title: "Kubernetes Deep Production Architecture", why: "Core staff K8s differentiator", depth: 5,
+            concepts: ["Scheduler internals", "Control plane components", "etcd behavior & quorum", "CNI and CNI failure modes", "Ingress architecture", "Multi-cluster design", "Failure domains", "Capacity design", "Cluster scaling tradeoffs"],
+            staffQs: ["How do you design a multi-cluster topology for HA?", "What happens when etcd loses quorum — walk me through the blast radius."],
+            videos: [{ t: "Kubernetes architecture deep dive", ch: "TechWorld with Nana", url: "https://www.youtube.com/watch?v=umXEmn3cMkY" }, { t: "etcd internals for Kubernetes", ch: "CNCF", url: "https://www.youtube.com/watch?v=D2pm6ufIt98" }, { t: "CNI explained in depth", ch: "Tigera / Calico", url: "https://www.youtube.com/watch?v=iV8VoBhen1Q" }]
+          },
+          {
+            n: 3, title: "Kubernetes Production Incident Debugging", why: "Top interview area — live debugging", depth: 5,
+            concepts: ["Pod pending root causes", "CrashLoopBackOff analysis", "DNS failure debugging", "API server slowness", "Node pressure (memory/disk/PID)", "IP exhaustion debugging"],
+            staffQs: ["A pod is stuck Pending for 10 mins — walk me through it.", "API server latency spikes to 5s — what do you check first?"],
+            videos: [{ t: "Kubernetes troubleshooting masterclass", ch: "That DevOps Guy", url: "https://www.youtube.com/watch?v=HL3D1HpEpOQ" }, { t: "Debugging K8s networking issues", ch: "Datadog", url: "https://www.youtube.com/watch?v=Wqhd5WCDdHo" }, { t: "Kubernetes DNS debugging", ch: "KubeCon", url: "https://www.youtube.com/watch?v=qWvvqSY7gjM" }]
+          },
+          {
+            n: 4, title: "AWS Architecture for Platform Engineers", why: "Architecture-level AWS, not service usage", depth: 4,
+            concepts: ["Multi-account landing zones", "EKS production design", "VPC networking deep dive", "Transit Gateway architecture", "IAM role chaining", "Route53 failover design"],
+            staffQs: ["Design a multi-account AWS landing zone from scratch.", "How do you implement cross-account IAM role chaining securely?"],
+            videos: [{ t: "AWS multi-account strategy", ch: "AWS re:Invent", url: "https://www.youtube.com/watch?v=zVJnenaD3U8" }, { t: "EKS production best practices", ch: "AWS", url: "https://www.youtube.com/watch?v=4dkWRMXgAkU" }, { t: "AWS VPC deep dive", ch: "AWS re:Invent", url: "https://www.youtube.com/watch?v=fnxB7pESiuk" }]
+          },
+          {
+            n: 5, title: "Terraform at Scale", why: "Own IaC across the entire org", depth: 4,
+            concepts: ["State scaling strategies", "Remote backend locking", "Drift detection", "Module versioning strategy", "Multi-env architecture", "Terraform pipelines (CI/CD)"],
+            staffQs: ["How do you manage Terraform across 300 AWS accounts?", "How do you handle Terraform state drift in production?"],
+            videos: [{ t: "Terraform at scale — best practices", ch: "HashiCorp", url: "https://www.youtube.com/watch?v=wgzgVm7Sqlk" }, { t: "Terraform modules & versioning", ch: "Anton Babenko", url: "https://www.youtube.com/watch?v=PwPMm0yT3Ec" }, { t: "Terragrunt for multi-account Terraform", ch: "gruntwork.io", url: "https://www.youtube.com/watch?v=jhFe7zqxCHE" }]
+          }
+        ]
+      },
+      {
+        id: 2, label: "Phase 2", name: "Scale System Design", cls: "p2",
+        color: "#34d399", colorD: "#059669", bg: "rgba(52,211,153,0.08)", bd: "rgba(52,211,153,0.2)",
+        desc: "Platform design for thousands of developers",
+        topics: [
+          {
+            n: 6, title: "CI/CD Platform Architecture", why: "Build pipelines for 500+ devs", depth: 4,
+            concepts: ["Build platform for 500 devs", "Shared vs dedicated runners", "Secure secret injection", "Progressive delivery", "GitOps pipelines"],
+            staffQs: ["Design a CI/CD platform for 500 engineers with isolation.", "How do you implement progressive delivery safely?"],
+            videos: [{ t: "CI/CD at scale with GitHub Actions", ch: "GitHub", url: "https://www.youtube.com/watch?v=R8_veQiYBjI" }, { t: "Progressive delivery with Argo Rollouts", ch: "ArgoCD", url: "https://www.youtube.com/watch?v=hIL0E2gLkf8" }, { t: "Harness platform engineering overview", ch: "Harness", url: "https://www.youtube.com/watch?v=96Bt3b0PNOU" }]
+          },
+          {
+            n: 7, title: "GitOps + ArgoCD Advanced Design", why: "Multi-cluster GitOps at staff depth", depth: 4,
+            concepts: ["App of apps pattern", "Multi-cluster GitOps", "Drift reconciliation", "RBAC isolation", "ArgoCD HA setup"],
+            staffQs: ["How do you manage 50 clusters with ArgoCD?", "Walk me through app-of-apps and when you'd use it."],
+            videos: [{ t: "ArgoCD in depth", ch: "DevOps Toolkit", url: "https://www.youtube.com/watch?v=MeU5_k9ssrs" }, { t: "Multi-cluster GitOps patterns", ch: "CNCF", url: "https://www.youtube.com/watch?v=RDU5HZiP5QU" }, { t: "ArgoCD app of apps pattern", ch: "Codefresh", url: "https://www.youtube.com/watch?v=2pvGL0zqf9o" }]
+          },
+          {
+            n: 8, title: "Observability Platform Design", why: "Metrics, logs, traces at org scale", depth: 4,
+            concepts: ["Metrics/logs/traces architecture", "Prometheus federation", "Thanos / Cortex / Mimir", "Grafana scale design", "Alert fatigue reduction"],
+            staffQs: ["How would you redesign noisy alerting for 200 microservices?", "Design a long-term metrics storage system."],
+            videos: [{ t: "Prometheus federation & Thanos", ch: "Grafana Labs", url: "https://www.youtube.com/watch?v=Fb_lYX01IX4" }, { t: "Observability at scale with Mimir", ch: "Grafana", url: "https://www.youtube.com/watch?v=W4V4XMIJpB0" }, { t: "Designing alerting for microservices", ch: "SREcon", url: "https://www.youtube.com/watch?v=7y4lnJuPUgg" }]
+          },
+          {
+            n: 9, title: "SRE Reliability Engineering", why: "Error budgets separate senior from staff", depth: 3,
+            concepts: ["SLI / SLO / Error budgets", "Incident command model", "Blameless RCA", "Reliability budgeting", "Toil reduction framework"],
+            staffQs: ["How do you set SLOs for a platform team?", "Walk me through running a blameless post-mortem."],
+            videos: [{ t: "SLOs and error budgets explained", ch: "Google SRE", url: "https://www.youtube.com/watch?v=tEylFyxbDLE" }, { t: "Incident command for engineers", ch: "PagerDuty", url: "https://www.youtube.com/watch?v=qRPLCOUlhT8" }, { t: "Toil reduction in SRE practice", ch: "SREcon", url: "https://www.youtube.com/watch?v=DcD1-Sd90Rg" }]
+          }
+        ]
+      },
+      {
+        id: 3, label: "Phase 3", name: "Leadership Depth", cls: "p3",
+        color: "#fb923c", colorD: "#ea580c", bg: "rgba(251,146,60,0.08)", bd: "rgba(251,146,60,0.2)",
+        desc: "What separates senior from staff engineers",
+        topics: [
+          {
+            n: 10, title: "Distributed Systems Thinking", why: "The true staff differentiator", depth: 5,
+            concepts: ["CAP theorem practical usage", "Consistency tradeoffs", "Consensus basics (Raft/Paxos)", "Leader election", "Queue systems design"],
+            staffQs: ["When would you choose AP over CP in a platform service?", "Explain how Raft consensus works and where it applies."],
+            videos: [{ t: "CAP theorem explained practically", ch: "Martin Kleppmann", url: "https://www.youtube.com/watch?v=k-Yaq8AHlFA" }, { t: "Raft consensus algorithm", ch: "MIT 6.824", url: "https://www.youtube.com/watch?v=vYp4LYbnnW8" }, { t: "Distributed systems for engineers", ch: "Fireship", url: "https://www.youtube.com/watch?v=UEAMfLPZZhE" }]
+          },
+          {
+            n: 11, title: "Multi-Region Platform Design", why: "HA and DR at global scale", depth: 4,
+            concepts: ["Active-active Kubernetes", "Disaster recovery design", "Cross-region replication", "DNS failover architecture"],
+            staffQs: ["Design an active-active platform across 3 AWS regions.", "How do you handle split-brain in a multi-region K8s setup?"],
+            videos: [{ t: "Multi-region Kubernetes patterns", ch: "KubeCon", url: "https://www.youtube.com/watch?v=3vS1JFDMApY" }, { t: "AWS multi-region architecture", ch: "AWS re:Invent", url: "https://www.youtube.com/watch?v=xhcIEBMm5wk" }, { t: "Disaster recovery on Kubernetes", ch: "Velero", url: "https://www.youtube.com/watch?v=X_ynVcHwFBE" }]
+          },
+          {
+            n: 12, title: "Platform Security Engineering", why: "Zero trust is a staff-level expectation", depth: 4,
+            concepts: ["Zero trust for platforms", "IAM least privilege design", "Secrets architecture", "OPA / Gatekeeper policies", "Supply chain security (SLSA/SBOM)"],
+            staffQs: ["How do you implement zero trust for a Kubernetes platform?", "Design a secrets management system for 50 microservices."],
+            videos: [{ t: "Zero trust on Kubernetes", ch: "CNCF", url: "https://www.youtube.com/watch?v=7onMUpb0kIU" }, { t: "OPA & Gatekeeper deep dive", ch: "Styra", url: "https://www.youtube.com/watch?v=14lGc7xMAe4" }, { t: "Supply chain security & SLSA", ch: "Google", url: "https://www.youtube.com/watch?v=4VhNTKCM-bs" }]
+          }
+        ]
+      },
+      {
+        id: 4, label: "Phase 4", name: "AI Infrastructure", cls: "p4",
+        color: "#60a5fa", colorD: "#2563eb", bg: "rgba(96,165,250,0.08)", bd: "rgba(96,165,250,0.2)",
+        desc: "Critical for your AI platform engineering transition",
+        topics: [
+          {
+            n: 13, title: "AI/LLM Infrastructure Basics", why: "Critical for your AI PE transition", depth: 3,
+            concepts: ["GPU clusters basics", "Model serving architecture", "Vector databases", "Embeddings lifecycle", "Inference scaling"],
+            staffQs: ["Design a model serving platform on Kubernetes.", "How do you scale inference for a high-traffic LLM API?"],
+            videos: [{ t: "GPU infrastructure for ML on K8s", ch: "NVIDIA", url: "https://www.youtube.com/watch?v=F0xQROMa4Y0" }, { t: "LLM inference serving at scale", ch: "Anyscale", url: "https://www.youtube.com/watch?v=gO1WMnHe0p4" }, { t: "Vector databases explained", ch: "Fireship", url: "https://www.youtube.com/watch?v=klTvEwg3oJ4" }]
+          },
+          {
+            n: 14, title: "RAG Platform Architecture", why: "Dominant LLM workload pattern", depth: 3,
+            concepts: ["Document ingestion pipelines", "Chunking systems", "Embedding pipelines", "Retrieval serving layer", "Latency bottlenecks"],
+            staffQs: ["Design a RAG platform that handles 10k queries/sec.", "What are the latency bottlenecks in a RAG pipeline?"],
+            videos: [{ t: "RAG architecture in production", ch: "LangChain", url: "https://www.youtube.com/watch?v=wd7GA8a_zXA" }, { t: "Building RAG pipelines at scale", ch: "Weaviate", url: "https://www.youtube.com/watch?v=NMrHPKmrM8o" }, { t: "Chunking strategies for RAG", ch: "Pinecone", url: "https://www.youtube.com/watch?v=8OJC21T2SL4" }]
+          },
+          {
+            n: 15, title: "LLMOps / MLOps Platform Design", why: "Own the model lifecycle end to end", depth: 3,
+            concepts: ["Model deployment pipelines", "Feature / model registry basics", "ML observability", "Prompt versioning infra"],
+            staffQs: ["Design an MLOps platform for a team shipping 20 models.", "How do you version and roll back a prompt in production?"],
+            videos: [{ t: "MLOps platform design", ch: "Made With ML", url: "https://www.youtube.com/watch?v=NgWujOrCZFo" }, { t: "Model registry with MLflow", ch: "MLflow", url: "https://www.youtube.com/watch?v=859OxXrt_TI" }, { t: "LLMOps — operationalizing LLMs", ch: "Weights & Biases", url: "https://www.youtube.com/watch?v=Fo40Znz7xpw" }]
+          }
+        ]
+      },
+      {
+        id: 5, label: "Phase 5", name: "Interview Mastery", cls: "p5",
+        color: "#fbbf24", colorD: "#d97706", bg: "rgba(251,191,36,0.08)", bd: "rgba(251,191,36,0.2)",
+        desc: "Execute flawlessly when it counts",
+        topics: [
+          {
+            n: 16, title: "Staff System Design Interviews", why: "Practice makes permanent", depth: 5,
+            concepts: ["Design Internal Developer Platform", "Design multi-region EKS platform", "Design RAG infra on Kubernetes", "Design deployment platform for 1000 engineers"],
+            staffQs: ["Design an IDP for 1000 engineers — whiteboard it.", "Design a multi-region EKS platform with full DR."],
+            videos: [{ t: "System design interview techniques", ch: "Alex Xu", url: "https://www.youtube.com/watch?v=i7twT3x5yv8" }, { t: "Designing developer platforms", ch: "Gergely Orosz", url: "https://www.youtube.com/watch?v=o4b4PwnAEgE" }, { t: "Platform engineering system design", ch: "DevOps Toolkit", url: "https://www.youtube.com/watch?v=dvnUFMSzF4M" }]
+          },
+          {
+            n: 17, title: "Leadership & Behavioral Interviews", why: "Stories, not just answers", depth: 3,
+            concepts: ["Conflict resolution stories", "Architecture disagreement stories", "Incident leadership examples", "Scaling org influence stories"],
+            staffQs: ["Tell me about a time you drove technical alignment across teams.", "Describe a production incident you led and what you changed after."],
+            videos: [{ t: "Staff engineer behavioral interview prep", ch: "Exponent", url: "https://www.youtube.com/watch?v=UBvWqbGFRLo" }, { t: "Leadership stories for senior engineers", ch: "Gergely Orosz", url: "https://www.youtube.com/watch?v=ddiCXSaEqek" }, { t: "STAR method for technical leadership", ch: "interviewing.io", url: "https://www.youtube.com/watch?v=0Z9RW_hhUT4" }]
+          }
+        ]
+      }
+    ];
 
-  <footer class="footer">
-    Built for your <span>Staff Platform Engineer</span> journey · Track every concept, ace every interview
-  </footer>
+    const TOTAL_TOPICS = PHASES.reduce((a, p) => a + p.topics.length, 0);
+    const TOTAL_CONCEPTS = PHASES.reduce((a, p) => p.topics.reduce((b, t) => b + t.concepts.length, 0) + a, 0);
 
-</div>
+    let state = {};
+    PHASES.forEach(p => p.topics.forEach(t => { state[t.n] = { status: 0, checked: {}, tab: 'concepts' }; }));
+    let activePhase = 1;
+    let openTopics = new Set();
 
-<script>
-const PHASES = [
-  {
-    id:1, label:"Phase 1", name:"Core Foundation", cls:"p1",
-    color:"#a78bfa", colorD:"#7c3aed", bg:"rgba(167,139,250,0.08)", bd:"rgba(167,139,250,0.2)",
-    desc:"Mandatory before staff interviews",
-    topics:[
-      {n:1, title:"Platform Engineering Mindset", why:"How you think, not just tools",depth:3,
-        concepts:["DevOps vs SRE vs Platform Eng","Internal Developer Platform (IDP)","Golden paths","Self-service infrastructure","Platform as product thinking"],
-        staffQs:["How would you build a platform for 500 developers?","What makes a platform team different from a DevOps team?"],
-        videos:[{t:"Platform Engineering Explained",ch:"DevOps Toolkit",url:"https://www.youtube.com/watch?v=ghzsBm8vOms"},{t:"Internal Developer Platforms in depth",ch:"KubeCon",url:"https://www.youtube.com/watch?v=5dPQmEB1kOo"},{t:"Golden paths & developer self-service",ch:"Humanitec",url:"https://www.youtube.com/watch?v=SkHBd4aDPxs"}]},
-      {n:2, title:"Kubernetes Deep Production Architecture", why:"Core staff K8s differentiator",depth:5,
-        concepts:["Scheduler internals","Control plane components","etcd behavior & quorum","CNI and CNI failure modes","Ingress architecture","Multi-cluster design","Failure domains","Capacity design","Cluster scaling tradeoffs"],
-        staffQs:["How do you design a multi-cluster topology for HA?","What happens when etcd loses quorum — walk me through the blast radius."],
-        videos:[{t:"Kubernetes architecture deep dive",ch:"TechWorld with Nana",url:"https://www.youtube.com/watch?v=umXEmn3cMkY"},{t:"etcd internals for Kubernetes",ch:"CNCF",url:"https://www.youtube.com/watch?v=D2pm6ufIt98"},{t:"CNI explained in depth",ch:"Tigera / Calico",url:"https://www.youtube.com/watch?v=iV8VoBhen1Q"}]},
-      {n:3, title:"Kubernetes Production Incident Debugging", why:"Top interview area — live debugging",depth:5,
-        concepts:["Pod pending root causes","CrashLoopBackOff analysis","DNS failure debugging","API server slowness","Node pressure (memory/disk/PID)","IP exhaustion debugging"],
-        staffQs:["A pod is stuck Pending for 10 mins — walk me through it.","API server latency spikes to 5s — what do you check first?"],
-        videos:[{t:"Kubernetes troubleshooting masterclass",ch:"That DevOps Guy",url:"https://www.youtube.com/watch?v=HL3D1HpEpOQ"},{t:"Debugging K8s networking issues",ch:"Datadog",url:"https://www.youtube.com/watch?v=Wqhd5WCDdHo"},{t:"Kubernetes DNS debugging",ch:"KubeCon",url:"https://www.youtube.com/watch?v=qWvvqSY7gjM"}]},
-      {n:4, title:"AWS Architecture for Platform Engineers", why:"Architecture-level AWS, not service usage",depth:4,
-        concepts:["Multi-account landing zones","EKS production design","VPC networking deep dive","Transit Gateway architecture","IAM role chaining","Route53 failover design"],
-        staffQs:["Design a multi-account AWS landing zone from scratch.","How do you implement cross-account IAM role chaining securely?"],
-        videos:[{t:"AWS multi-account strategy",ch:"AWS re:Invent",url:"https://www.youtube.com/watch?v=zVJnenaD3U8"},{t:"EKS production best practices",ch:"AWS",url:"https://www.youtube.com/watch?v=4dkWRMXgAkU"},{t:"AWS VPC deep dive",ch:"AWS re:Invent",url:"https://www.youtube.com/watch?v=fnxB7pESiuk"}]},
-      {n:5, title:"Terraform at Scale", why:"Own IaC across the entire org",depth:4,
-        concepts:["State scaling strategies","Remote backend locking","Drift detection","Module versioning strategy","Multi-env architecture","Terraform pipelines (CI/CD)"],
-        staffQs:["How do you manage Terraform across 300 AWS accounts?","How do you handle Terraform state drift in production?"],
-        videos:[{t:"Terraform at scale — best practices",ch:"HashiCorp",url:"https://www.youtube.com/watch?v=wgzgVm7Sqlk"},{t:"Terraform modules & versioning",ch:"Anton Babenko",url:"https://www.youtube.com/watch?v=PwPMm0yT3Ec"},{t:"Terragrunt for multi-account Terraform",ch:"gruntwork.io",url:"https://www.youtube.com/watch?v=jhFe7zqxCHE"}]}
-    ]
-  },
-  {
-    id:2, label:"Phase 2", name:"Scale System Design", cls:"p2",
-    color:"#34d399", colorD:"#059669", bg:"rgba(52,211,153,0.08)", bd:"rgba(52,211,153,0.2)",
-    desc:"Platform design for thousands of developers",
-    topics:[
-      {n:6, title:"CI/CD Platform Architecture", why:"Build pipelines for 500+ devs",depth:4,
-        concepts:["Build platform for 500 devs","Shared vs dedicated runners","Secure secret injection","Progressive delivery","GitOps pipelines"],
-        staffQs:["Design a CI/CD platform for 500 engineers with isolation.","How do you implement progressive delivery safely?"],
-        videos:[{t:"CI/CD at scale with GitHub Actions",ch:"GitHub",url:"https://www.youtube.com/watch?v=R8_veQiYBjI"},{t:"Progressive delivery with Argo Rollouts",ch:"ArgoCD",url:"https://www.youtube.com/watch?v=hIL0E2gLkf8"},{t:"Harness platform engineering overview",ch:"Harness",url:"https://www.youtube.com/watch?v=96Bt3b0PNOU"}]},
-      {n:7, title:"GitOps + ArgoCD Advanced Design", why:"Multi-cluster GitOps at staff depth",depth:4,
-        concepts:["App of apps pattern","Multi-cluster GitOps","Drift reconciliation","RBAC isolation","ArgoCD HA setup"],
-        staffQs:["How do you manage 50 clusters with ArgoCD?","Walk me through app-of-apps and when you'd use it."],
-        videos:[{t:"ArgoCD in depth",ch:"DevOps Toolkit",url:"https://www.youtube.com/watch?v=MeU5_k9ssrs"},{t:"Multi-cluster GitOps patterns",ch:"CNCF",url:"https://www.youtube.com/watch?v=RDU5HZiP5QU"},{t:"ArgoCD app of apps pattern",ch:"Codefresh",url:"https://www.youtube.com/watch?v=2pvGL0zqf9o"}]},
-      {n:8, title:"Observability Platform Design", why:"Metrics, logs, traces at org scale",depth:4,
-        concepts:["Metrics/logs/traces architecture","Prometheus federation","Thanos / Cortex / Mimir","Grafana scale design","Alert fatigue reduction"],
-        staffQs:["How would you redesign noisy alerting for 200 microservices?","Design a long-term metrics storage system."],
-        videos:[{t:"Prometheus federation & Thanos",ch:"Grafana Labs",url:"https://www.youtube.com/watch?v=Fb_lYX01IX4"},{t:"Observability at scale with Mimir",ch:"Grafana",url:"https://www.youtube.com/watch?v=W4V4XMIJpB0"},{t:"Designing alerting for microservices",ch:"SREcon",url:"https://www.youtube.com/watch?v=7y4lnJuPUgg"}]},
-      {n:9, title:"SRE Reliability Engineering", why:"Error budgets separate senior from staff",depth:3,
-        concepts:["SLI / SLO / Error budgets","Incident command model","Blameless RCA","Reliability budgeting","Toil reduction framework"],
-        staffQs:["How do you set SLOs for a platform team?","Walk me through running a blameless post-mortem."],
-        videos:[{t:"SLOs and error budgets explained",ch:"Google SRE",url:"https://www.youtube.com/watch?v=tEylFyxbDLE"},{t:"Incident command for engineers",ch:"PagerDuty",url:"https://www.youtube.com/watch?v=qRPLCOUlhT8"},{t:"Toil reduction in SRE practice",ch:"SREcon",url:"https://www.youtube.com/watch?v=DcD1-Sd90Rg"}]}
-    ]
-  },
-  {
-    id:3, label:"Phase 3", name:"Leadership Depth", cls:"p3",
-    color:"#fb923c", colorD:"#ea580c", bg:"rgba(251,146,60,0.08)", bd:"rgba(251,146,60,0.2)",
-    desc:"What separates senior from staff engineers",
-    topics:[
-      {n:10, title:"Distributed Systems Thinking", why:"The true staff differentiator",depth:5,
-        concepts:["CAP theorem practical usage","Consistency tradeoffs","Consensus basics (Raft/Paxos)","Leader election","Queue systems design"],
-        staffQs:["When would you choose AP over CP in a platform service?","Explain how Raft consensus works and where it applies."],
-        videos:[{t:"CAP theorem explained practically",ch:"Martin Kleppmann",url:"https://www.youtube.com/watch?v=k-Yaq8AHlFA"},{t:"Raft consensus algorithm",ch:"MIT 6.824",url:"https://www.youtube.com/watch?v=vYp4LYbnnW8"},{t:"Distributed systems for engineers",ch:"Fireship",url:"https://www.youtube.com/watch?v=UEAMfLPZZhE"}]},
-      {n:11, title:"Multi-Region Platform Design", why:"HA and DR at global scale",depth:4,
-        concepts:["Active-active Kubernetes","Disaster recovery design","Cross-region replication","DNS failover architecture"],
-        staffQs:["Design an active-active platform across 3 AWS regions.","How do you handle split-brain in a multi-region K8s setup?"],
-        videos:[{t:"Multi-region Kubernetes patterns",ch:"KubeCon",url:"https://www.youtube.com/watch?v=3vS1JFDMApY"},{t:"AWS multi-region architecture",ch:"AWS re:Invent",url:"https://www.youtube.com/watch?v=xhcIEBMm5wk"},{t:"Disaster recovery on Kubernetes",ch:"Velero",url:"https://www.youtube.com/watch?v=X_ynVcHwFBE"}]},
-      {n:12, title:"Platform Security Engineering", why:"Zero trust is a staff-level expectation",depth:4,
-        concepts:["Zero trust for platforms","IAM least privilege design","Secrets architecture","OPA / Gatekeeper policies","Supply chain security (SLSA/SBOM)"],
-        staffQs:["How do you implement zero trust for a Kubernetes platform?","Design a secrets management system for 50 microservices."],
-        videos:[{t:"Zero trust on Kubernetes",ch:"CNCF",url:"https://www.youtube.com/watch?v=7onMUpb0kIU"},{t:"OPA & Gatekeeper deep dive",ch:"Styra",url:"https://www.youtube.com/watch?v=14lGc7xMAe4"},{t:"Supply chain security & SLSA",ch:"Google",url:"https://www.youtube.com/watch?v=4VhNTKCM-bs"}]}
-    ]
-  },
-  {
-    id:4, label:"Phase 4", name:"AI Infrastructure", cls:"p4",
-    color:"#60a5fa", colorD:"#2563eb", bg:"rgba(96,165,250,0.08)", bd:"rgba(96,165,250,0.2)",
-    desc:"Critical for your AI platform engineering transition",
-    topics:[
-      {n:13, title:"AI/LLM Infrastructure Basics", why:"Critical for your AI PE transition",depth:3,
-        concepts:["GPU clusters basics","Model serving architecture","Vector databases","Embeddings lifecycle","Inference scaling"],
-        staffQs:["Design a model serving platform on Kubernetes.","How do you scale inference for a high-traffic LLM API?"],
-        videos:[{t:"GPU infrastructure for ML on K8s",ch:"NVIDIA",url:"https://www.youtube.com/watch?v=F0xQROMa4Y0"},{t:"LLM inference serving at scale",ch:"Anyscale",url:"https://www.youtube.com/watch?v=gO1WMnHe0p4"},{t:"Vector databases explained",ch:"Fireship",url:"https://www.youtube.com/watch?v=klTvEwg3oJ4"}]},
-      {n:14, title:"RAG Platform Architecture", why:"Dominant LLM workload pattern",depth:3,
-        concepts:["Document ingestion pipelines","Chunking systems","Embedding pipelines","Retrieval serving layer","Latency bottlenecks"],
-        staffQs:["Design a RAG platform that handles 10k queries/sec.","What are the latency bottlenecks in a RAG pipeline?"],
-        videos:[{t:"RAG architecture in production",ch:"LangChain",url:"https://www.youtube.com/watch?v=wd7GA8a_zXA"},{t:"Building RAG pipelines at scale",ch:"Weaviate",url:"https://www.youtube.com/watch?v=NMrHPKmrM8o"},{t:"Chunking strategies for RAG",ch:"Pinecone",url:"https://www.youtube.com/watch?v=8OJC21T2SL4"}]},
-      {n:15, title:"LLMOps / MLOps Platform Design", why:"Own the model lifecycle end to end",depth:3,
-        concepts:["Model deployment pipelines","Feature / model registry basics","ML observability","Prompt versioning infra"],
-        staffQs:["Design an MLOps platform for a team shipping 20 models.","How do you version and roll back a prompt in production?"],
-        videos:[{t:"MLOps platform design",ch:"Made With ML",url:"https://www.youtube.com/watch?v=NgWujOrCZFo"},{t:"Model registry with MLflow",ch:"MLflow",url:"https://www.youtube.com/watch?v=859OxXrt_TI"},{t:"LLMOps — operationalizing LLMs",ch:"Weights & Biases",url:"https://www.youtube.com/watch?v=Fo40Znz7xpw"}]}
-    ]
-  },
-  {
-    id:5, label:"Phase 5", name:"Interview Mastery", cls:"p5",
-    color:"#fbbf24", colorD:"#d97706", bg:"rgba(251,191,36,0.08)", bd:"rgba(251,191,36,0.2)",
-    desc:"Execute flawlessly when it counts",
-    topics:[
-      {n:16, title:"Staff System Design Interviews", why:"Practice makes permanent",depth:5,
-        concepts:["Design Internal Developer Platform","Design multi-region EKS platform","Design RAG infra on Kubernetes","Design deployment platform for 1000 engineers"],
-        staffQs:["Design an IDP for 1000 engineers — whiteboard it.","Design a multi-region EKS platform with full DR."],
-        videos:[{t:"System design interview techniques",ch:"Alex Xu",url:"https://www.youtube.com/watch?v=i7twT3x5yv8"},{t:"Designing developer platforms",ch:"Gergely Orosz",url:"https://www.youtube.com/watch?v=o4b4PwnAEgE"},{t:"Platform engineering system design",ch:"DevOps Toolkit",url:"https://www.youtube.com/watch?v=dvnUFMSzF4M"}]},
-      {n:17, title:"Leadership & Behavioral Interviews", why:"Stories, not just answers",depth:3,
-        concepts:["Conflict resolution stories","Architecture disagreement stories","Incident leadership examples","Scaling org influence stories"],
-        staffQs:["Tell me about a time you drove technical alignment across teams.","Describe a production incident you led and what you changed after."],
-        videos:[{t:"Staff engineer behavioral interview prep",ch:"Exponent",url:"https://www.youtube.com/watch?v=UBvWqbGFRLo"},{t:"Leadership stories for senior engineers",ch:"Gergely Orosz",url:"https://www.youtube.com/watch?v=ddiCXSaEqek"},{t:"STAR method for technical leadership",ch:"interviewing.io",url:"https://www.youtube.com/watch?v=0Z9RW_hhUT4"}]}
-    ]
-  }
-];
+    function getPhase(id) { return PHASES.find(p => p.id === id); }
 
-const TOTAL_TOPICS = PHASES.reduce((a,p)=>a+p.topics.length,0);
-const TOTAL_CONCEPTS = PHASES.reduce((a,p)=>p.topics.reduce((b,t)=>b+t.concepts.length,0)+a,0);
+    function calcStats() {
+      let done = 0, prog = 0, chk = 0;
+      PHASES.forEach(p => p.topics.forEach(t => {
+        const s = state[t.n];
+        if (s.status === 2) done++;
+        else if (s.status === 1) prog++;
+        chk += Object.values(s.checked).filter(Boolean).length;
+      }));
+      return { done, prog, chk, left: TOTAL_TOPICS - done };
+    }
 
-let state = {};
-PHASES.forEach(p=>p.topics.forEach(t=>{ state[t.n]={status:0,checked:{},tab:'concepts'}; }));
-let activePhase = 1;
-let openTopics = new Set();
+    function updateStats() {
+      const { done, prog, chk, left } = calcStats();
+      const pct = Math.round(chk / TOTAL_CONCEPTS * 100);
+      document.getElementById('sv-done').textContent = done;
+      document.getElementById('sv-prog').textContent = prog;
+      document.getElementById('sv-chk').textContent = chk;
+      document.getElementById('sv-left').textContent = left;
+      document.getElementById('sb-done').style.width = Math.round(done / TOTAL_TOPICS * 100) + '%';
+      document.getElementById('sb-prog').style.width = Math.round(prog / TOTAL_TOPICS * 100) + '%';
+      document.getElementById('sb-chk').style.width = pct + '%';
+      document.getElementById('sb-left').style.width = Math.round(left / TOTAL_TOPICS * 100) + '%';
+      document.getElementById('ring-pct').textContent = pct + '%';
+      document.getElementById('prog-desc').textContent = chk + ' of ' + TOTAL_CONCEPTS + ' concepts checked';
+      document.getElementById('overall-fill').style.width = pct + '%';
+      const circ = 207.3;
+      document.getElementById('ring-circ').setAttribute('stroke-dashoffset', circ - (circ * pct / 100));
+    }
 
-function getPhase(id){ return PHASES.find(p=>p.id===id); }
+    function buildNav() {
+      const nav = document.getElementById('phase-nav');
+      nav.innerHTML = '';
+      PHASES.forEach(p => {
+        const btn = document.createElement('button');
+        btn.className = 'phase-btn ' + p.cls + (p.id === activePhase ? ' active' : '');
+        btn.innerHTML = `<span class="phase-dot" style="background:${p.color}"></span>${p.label} — ${p.name}`;
+        btn.addEventListener('click', () => { activePhase = p.id; openTopics = new Set(); render(); });
+        nav.appendChild(btn);
+      });
+    }
 
-function calcStats(){
-  let done=0,prog=0,chk=0;
-  PHASES.forEach(p=>p.topics.forEach(t=>{
-    const s=state[t.n];
-    if(s.status===2) done++;
-    else if(s.status===1) prog++;
-    chk+=Object.values(s.checked).filter(Boolean).length;
-  }));
-  return {done,prog,chk,left:TOTAL_TOPICS-done};
-}
-
-function updateStats(){
-  const {done,prog,chk,left}=calcStats();
-  const pct=Math.round(chk/TOTAL_CONCEPTS*100);
-  document.getElementById('sv-done').textContent=done;
-  document.getElementById('sv-prog').textContent=prog;
-  document.getElementById('sv-chk').textContent=chk;
-  document.getElementById('sv-left').textContent=left;
-  document.getElementById('sb-done').style.width=Math.round(done/TOTAL_TOPICS*100)+'%';
-  document.getElementById('sb-prog').style.width=Math.round(prog/TOTAL_TOPICS*100)+'%';
-  document.getElementById('sb-chk').style.width=pct+'%';
-  document.getElementById('sb-left').style.width=Math.round(left/TOTAL_TOPICS*100)+'%';
-  document.getElementById('ring-pct').textContent=pct+'%';
-  document.getElementById('prog-desc').textContent=chk+' of '+TOTAL_CONCEPTS+' concepts checked';
-  document.getElementById('overall-fill').style.width=pct+'%';
-  const circ=207.3;
-  document.getElementById('ring-circ').setAttribute('stroke-dashoffset', circ-(circ*pct/100));
-}
-
-function buildNav(){
-  const nav=document.getElementById('phase-nav');
-  nav.innerHTML='';
-  PHASES.forEach(p=>{
-    const btn=document.createElement('button');
-    btn.className='phase-btn '+p.cls+(p.id===activePhase?' active':'');
-    btn.innerHTML=`<span class="phase-dot" style="background:${p.color}"></span>${p.label} — ${p.name}`;
-    btn.addEventListener('click',()=>{ activePhase=p.id; openTopics=new Set(); render(); });
-    nav.appendChild(btn);
-  });
-}
-
-function buildPhaseHeader(ph){
-  const chkInPhase=ph.topics.reduce((a,t)=>a+Object.values(state[t.n].checked).filter(Boolean).length,0);
-  const totalInPhase=ph.topics.reduce((a,t)=>a+t.concepts.length,0);
-  const phasePct=Math.round(chkInPhase/totalInPhase*100);
-  const doneInPhase=ph.topics.filter(t=>state[t.n].status===2).length;
-  const div=document.createElement('div');
-  div.className='phase-header';
-  div.innerHTML=`
+    function buildPhaseHeader(ph) {
+      const chkInPhase = ph.topics.reduce((a, t) => a + Object.values(state[t.n].checked).filter(Boolean).length, 0);
+      const totalInPhase = ph.topics.reduce((a, t) => a + t.concepts.length, 0);
+      const phasePct = Math.round(chkInPhase / totalInPhase * 100);
+      const doneInPhase = ph.topics.filter(t => state[t.n].status === 2).length;
+      const div = document.createElement('div');
+      div.className = 'phase-header';
+      div.innerHTML = `
     <div class="phase-icon" style="background:${ph.bg};border:1px solid ${ph.bd}">
       <span style="color:${ph.color};font-family:'Syne',sans-serif;font-size:15px;font-weight:800">${ph.id}</span>
     </div>
@@ -588,24 +1189,24 @@ function buildPhaseHeader(ph){
       <div class="phase-prog-num">${phasePct}%</div>
       <div class="phase-prog-bar"><div class="phase-prog-fill" style="width:${phasePct}%;background:${ph.color}"></div></div>
     </div>`;
-  return div;
-}
+      return div;
+    }
 
-function buildTopicCard(t, ph){
-  const s=state[t.n];
-  const isOpen=openTopics.has(t.n);
-  const statusLabels=['To do','In progress','Done'];
-  const statusCls=['active-todo','active-prog','active-done'];
-  const chkCount=Object.values(s.checked).filter(Boolean).length;
-  const pct=Math.round(chkCount/t.concepts.length*100);
+    function buildTopicCard(t, ph) {
+      const s = state[t.n];
+      const isOpen = openTopics.has(t.n);
+      const statusLabels = ['To do', 'In progress', 'Done'];
+      const statusCls = ['active-todo', 'active-prog', 'active-done'];
+      const chkCount = Object.values(s.checked).filter(Boolean).length;
+      const pct = Math.round(chkCount / t.concepts.length * 100);
 
-  const card=document.createElement('div');
-  card.className='topic-card'+(isOpen?' open':'');
+      const card = document.createElement('div');
+      card.className = 'topic-card' + (isOpen ? ' open' : '');
 
-  const pips=Array.from({length:5},(_,i)=>`<div class="depth-pip" style="background:${i<t.depth?ph.color:'rgba(255,255,255,0.08)'}"></div>`).join('');
-  const chips=t.concepts.map((c,ci)=>`<span class="chip${s.checked[ci]?' on':''}" data-t="${t.n}" data-ci="${ci}">${c}</span>`).join('');
-  const staffQs=t.staffQs.map(q=>`<div class="staff-q"><div class="sq-label">Staff question</div>${q}</div>`).join('');
-  const vids=t.videos.map(v=>`<div class="yt-item">
+      const pips = Array.from({ length: 5 }, (_, i) => `<div class="depth-pip" style="background:${i < t.depth ? ph.color : 'rgba(255,255,255,0.08)'}"></div>`).join('');
+      const chips = t.concepts.map((c, ci) => `<span class="chip${s.checked[ci] ? ' on' : ''}" data-t="${t.n}" data-ci="${ci}">${c}</span>`).join('');
+      const staffQs = t.staffQs.map(q => `<div class="staff-q"><div class="sq-label">Staff question</div>${q}</div>`).join('');
+      const vids = t.videos.map(v => `<div class="yt-item">
     <div class="yt-ico"><div class="yt-tri"></div></div>
     <div class="yt-info">
       <div class="yt-title">${v.t}</div>
@@ -614,7 +1215,7 @@ function buildTopicCard(t, ph){
     <a class="yt-watch" href="${v.url}" target="_blank">Watch</a>
   </div>`).join('');
 
-  card.innerHTML=`
+      card.innerHTML = `
     <div class="tc-progress-strip"><div class="tc-progress-fill" style="width:${pct}%;background:${ph.color}"></div></div>
     <div class="tc-head">
       <div class="tc-row1">
@@ -626,17 +1227,17 @@ function buildTopicCard(t, ph){
       <div class="tc-footer">
         <div class="depth-wrap">${pips}<span class="depth-label">${t.depth}/5</span></div>
         <div class="s-btns">
-          ${statusLabels.map((l,si)=>`<button class="s-btn ${s.status===si?statusCls[si]:''}" data-t="${t.n}" data-si="${si}">${l}</button>`).join('')}
+          ${statusLabels.map((l, si) => `<button class="s-btn ${s.status === si ? statusCls[si] : ''}" data-t="${t.n}" data-si="${si}">${l}</button>`).join('')}
         </div>
       </div>
     </div>
     <div class="tc-body">
       <div class="tc-tabs">
-        <button class="tc-tab ${s.tab==='concepts'?'active':''}" data-t="${t.n}" data-tab="concepts">Concepts</button>
-        <button class="tc-tab ${s.tab==='questions'?'active':''}" data-t="${t.n}" data-tab="questions">Interview Qs</button>
-        <button class="tc-tab ${s.tab==='videos'?'active':''}" data-t="${t.n}" data-tab="videos">Videos</button>
+        <button class="tc-tab ${s.tab === 'concepts' ? 'active' : ''}" data-t="${t.n}" data-tab="concepts">Concepts</button>
+        <button class="tc-tab ${s.tab === 'questions' ? 'active' : ''}" data-t="${t.n}" data-tab="questions">Interview Qs</button>
+        <button class="tc-tab ${s.tab === 'videos' ? 'active' : ''}" data-t="${t.n}" data-tab="videos">Videos</button>
       </div>
-      <div class="tc-panel ${s.tab==='concepts'?'active':''}" data-panel="${t.n}-concepts">
+      <div class="tc-panel ${s.tab === 'concepts' ? 'active' : ''}" data-panel="${t.n}-concepts">
         <div class="sec-lbl">Key concepts — click to check off</div>
         <div class="chips">${chips}</div>
         <div class="chip-count" id="cc-${t.n}">${chkCount}/${t.concepts.length} checked</div>
@@ -645,60 +1246,82 @@ function buildTopicCard(t, ph){
           <button class="act-btn" onclick="window.open('https://claude.ai','_blank')">Mock interview ↗</button>
         </div>
       </div>
-      <div class="tc-panel ${s.tab==='questions'?'active':''}" data-panel="${t.n}-questions">
+      <div class="tc-panel ${s.tab === 'questions' ? 'active' : ''}" data-panel="${t.n}-questions">
         <div class="sec-lbl">Staff interview targets</div>
         ${staffQs}
       </div>
-      <div class="tc-panel ${s.tab==='videos'?'active':''}" data-panel="${t.n}-videos">
+      <div class="tc-panel ${s.tab === 'videos' ? 'active' : ''}" data-panel="${t.n}-videos">
         <div class="sec-lbl">Curated YouTube resources</div>
         ${vids}
       </div>
     </div>`;
 
-  card.querySelector('.tc-row1').addEventListener('click',()=>{
-    if(openTopics.has(t.n)) openTopics.delete(t.n); else openTopics.add(t.n);
-    render();
-  });
-  card.querySelectorAll('.s-btn').forEach(btn=>btn.addEventListener('click',e=>{
-    e.stopPropagation();
-    state[parseInt(btn.dataset.t)].status=parseInt(btn.dataset.si);
-    render();
-  }));
-  card.querySelectorAll('.tc-tab').forEach(tab=>tab.addEventListener('click',e=>{
-    e.stopPropagation();
-    state[parseInt(tab.dataset.t)].tab=tab.dataset.tab;
-    render();
-  }));
-  card.querySelectorAll('.chip').forEach(chip=>chip.addEventListener('click',e=>{
-    e.stopPropagation();
-    const tn=parseInt(chip.dataset.t), ci=parseInt(chip.dataset.ci);
-    state[tn].checked[ci]=!state[tn].checked[ci];
-    chip.classList.toggle('on');
-    const cnt=Object.values(state[tn].checked).filter(Boolean).length;
-    const cc=document.getElementById('cc-'+tn);
-    if(cc) cc.textContent=cnt+'/'+t.concepts.length+' checked';
-    const strip=card.querySelector('.tc-progress-fill');
-    if(strip) strip.style.width=Math.round(cnt/t.concepts.length*100)+'%';
-    updateStats();
-  }));
+      card.querySelector('.tc-row1').addEventListener('click', () => {
+        if (openTopics.has(t.n)) openTopics.delete(t.n); else openTopics.add(t.n);
+        render();
+      });
+      card.querySelectorAll('.s-btn').forEach(btn => btn.addEventListener('click', e => {
+        e.stopPropagation();
+        state[parseInt(btn.dataset.t)].status = parseInt(btn.dataset.si);
+        render();
+      }));
+      card.querySelectorAll('.tc-tab').forEach(tab => tab.addEventListener('click', e => {
+        e.stopPropagation();
+        state[parseInt(tab.dataset.t)].tab = tab.dataset.tab;
+        render();
+      }));
+      card.querySelectorAll('.chip').forEach(chip => chip.addEventListener('click', e => {
+        e.stopPropagation();
+        const tn = parseInt(chip.dataset.t), ci = parseInt(chip.dataset.ci);
+        state[tn].checked[ci] = !state[tn].checked[ci];
+        chip.classList.toggle('on');
+        const cnt = Object.values(state[tn].checked).filter(Boolean).length;
+        const cc = document.getElementById('cc-' + tn);
+        if (cc) cc.textContent = cnt + '/' + t.concepts.length + ' checked';
+        const strip = card.querySelector('.tc-progress-fill');
+        if (strip) strip.style.width = Math.round(cnt / t.concepts.length * 100) + '%';
+        updateStats();
+      }));
 
-  return card;
-}
+      return card;
+    }
 
-function render(){
-  buildNav();
-  const content=document.getElementById('phase-content');
-  content.innerHTML='';
-  const ph=getPhase(activePhase);
-  content.appendChild(buildPhaseHeader(ph));
-  const grid=document.createElement('div');
-  grid.className='topics-grid';
-  ph.topics.forEach(t=>grid.appendChild(buildTopicCard(t,ph)));
-  content.appendChild(grid);
-  updateStats();
-}
+    function render() {
+      buildNav();
+      const content = document.getElementById('phase-content');
+      content.innerHTML = '';
+      const ph = getPhase(activePhase);
+      content.appendChild(buildPhaseHeader(ph));
+      const grid = document.createElement('div');
+      grid.className = 'topics-grid';
+      ph.topics.forEach(t => grid.appendChild(buildTopicCard(t, ph)));
+      content.appendChild(grid);
+      updateStats();
+    }
 
-render();
-</script>
+    render();
+  </script>
+
+  <hr>
+  <button onclick="markComplete()">Mark as Completed ✅</button>
+
+  <script>
+    function markComplete() {
+
+      let module = localStorage.getItem("currentModule");
+
+      let modules = JSON.parse(localStorage.getItem("modules")) || {};
+
+      modules[module] = true;
+
+      localStorage.setItem("modules", JSON.stringify(modules));
+
+      alert("Module Completed!");
+
+      window.location.href = "../../index.html";
+    }
+  </script>
+
 </body>
+
 </html>
